@@ -1,9 +1,13 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Tạo mới thương hiệu
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
-        </div><!-- /.row -->
+        </div>
     </div>
 @endsection
 
@@ -14,11 +18,9 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Tạo mới danh mục</h3>
                     </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
                     <form role="form" action="{{ route('backend.trademark.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="card-body">

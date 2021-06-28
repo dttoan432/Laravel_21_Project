@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Danh sách thương hiệu
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -13,7 +17,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Thương hiệu</h3>
 
                         {{--                        <div class="card-tools">--}}
@@ -67,7 +71,7 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                <button type="submit" class="btn btn-danger btn-sm delete-confirm">
                                                     <i class="fas fa-eraser"></i> Xóa
                                                 </button>
                                             </form>
@@ -95,4 +99,25 @@
             toastr.error("{!! Session::get('error') !!}");
         </script>
     @endif
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        $('.delete-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Bạn có muốn xóa không?`,
+                text: "Nếu bạn xóa nó, bạn sẽ không thể khôi phục lại được",
+                icon: "error",
+                buttons: ["Không", "Đồng ý"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
 @endsection

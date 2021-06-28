@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Thay đổi thông tin danh mục
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,7 +18,7 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Thay đổi danh mục</h3>
                     </div>
                     <!-- /.card-header -->
@@ -67,7 +71,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-danger">Huỷ bỏ</button>
+                            <a href="{{ route('backend.category.index') }}" class="btn btn-danger">Huỷ bỏ</a>
                             <button type="submit" class="btn btn-success">Thay đổi</button>
                         </div>
                     </form>

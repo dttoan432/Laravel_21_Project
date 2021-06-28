@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTrademarkRequest;
 use App\Http\Requests\UpdateTrademarkRequest;
+use App\Models\Product;
 use App\Models\Trademark;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -51,8 +53,10 @@ class TrademarkController extends Controller
 
         $trademark = Trademark::create($data);
 
+        Cache::forget('listTrademarks');
+
         if ($trademark) {
-            return redirect()->route('backend.trademark.index')->with("success",'Tạo mới thành công');
+            return redirect()->route('backend.trademark.index')->with("success", 'Tạo mới thành công');
         }
         return redirect()->route('backend.trademark.index')->with("error", 'Tạo mới thất bại');
 
@@ -100,10 +104,12 @@ class TrademarkController extends Controller
         $data['updated_at'] = Carbon::now();
         $trademark->update($data);
 
-        if ($trademark){
-            return redirect()->route('backend.trademark.index')->with("success",'Thay đổi thành công');
+        Cache::forget('listTrademarks');
+
+        if ($trademark) {
+            return redirect()->route('backend.trademark.index')->with("success", 'Thay đổi thành công');
         }
-        return redirect()->route('backend.trademark.index')->with("error",'Thay đổi thất bại');
+        return redirect()->route('backend.trademark.index')->with("error", 'Thay đổi thất bại');
     }
 
     /**
@@ -115,10 +121,21 @@ class TrademarkController extends Controller
     public function destroy(Trademark $trademark)
     {
         $this->authorize('delete', $trademark);
-        if ($trademark->delete()){
-            return redirect()->route('backend.trademark.index')->with("success",'Xóa thành công');
+        $products = Product::where('trademark_id', $trademark->id)->get();
+        if (count($products) > 0) {
+            foreach ($products as $product) {
+                $product->trademark_id = 0;
+                $product->save();
+            }
+        }
+        $trademark->delete();
+
+        Cache::forget('listTrademarks');
+
+        if ($trademark) {
+            return redirect()->route('backend.trademark.index')->with("success", 'Xóa thành công');
         } else {
-            return redirect()->route('backend.trademark.index')->with("error",'Xóa thất bại');
+            return redirect()->route('backend.trademark.index')->with("error", 'Xóa thất bại');
         }
     }
 }

@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Trang chủ
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -94,6 +98,18 @@
                                 <th>Trạng thái</th>
                             </tr>
                             </thead>
+                            <style>
+                                td {
+                                    vertical-align: middle !important;
+                                }
+
+                                .widspan {
+                                    width: 90px;
+                                    font-size: 14px;
+                                    font-weight: normal;
+                                    color: white !important;
+                                }
+                            </style>
                             <tbody>
                             @php
                                 $i = 0;
@@ -109,51 +125,27 @@
                                     <td>{{ number_format($product->origin_price) }}</td>
                                     <td>{{ number_format($product->sale_price) }}</td>
                                     <td>{{ $product->category->name }}</td>
-                                    <td>{{ $product->status_text }}</td>
+                                    <td>
+                                        @if($product->status == 0)
+                                            <span
+                                                class="badge badge-pill bg-warning widspan">{{ $product->status_text }}</span>
+                                        @elseif($product->status == 1)
+                                            <span
+                                                class="badge badge-pill bg-success widspan">{{ $product->status_text }}</span>
+                                        @else
+                                            <span
+                                                class="badge badge-pill bg-danger widspan">{{ $product->status_text }}</span>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
 
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin: 0px auto; margin-top: 30px;">{!!$products->links()!!}</div>
+{{--                    <div style="margin: 0px auto; margin-top: 30px;">{!!$products->links()!!}</div>--}}
                 </div>
             </div>
         </div>
     </div>
-
-
-    <script>
-        $(document).ready(function () {
-            var i = 0;
-            $("#tes").click(function () {
-                i++;
-                $("#cole1").append(function (){
-                    return '<input type="text" class="form-control" id="" name="key[]" value="{{ old('name') }}">';
-                });
-                $("#cole2").append(function (){
-                    return '<input type="text" class="form-control" id="" name="val[]" value="{{ old('name') }}">';
-                });
-            });
-        });
-    </script>
-    <form action="{{ route('backend.option') }}" method="POST" id="boxform">
-        @csrf
-        <div class="row" id="clone">
-            <div class="col-4" id="cole1">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="" name="key[]" value="{{ old('name') }}">
-                </div>
-            </div>
-            <div class="col-8" id="cole2">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="" name="val[]" value="{{ old('name') }}">
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-success" type="submit">Add</button>
-    </form>
-    <button id="tes">Click</button>
-
-
 @endsection

@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        App\Providers\CategoryServiceProvider::class,
+        App\Providers\TrademarkServiceProvider::class,
 
     ],
 

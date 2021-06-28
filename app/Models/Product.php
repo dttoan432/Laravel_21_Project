@@ -48,8 +48,13 @@ class Product extends Model
         }
     }
 
+    public function getContentMoreJsonAttribute(){
+        $content_json = json_decode($this->content_more, true);
+        return $content_json;
+    }
+
     protected $casts = [
-        'sale_price' => 'float'
+//        'content_more' => 'array'
     ];
 
     public function category()
@@ -79,8 +84,8 @@ class Product extends Model
 
     public function scopeSearch($query, $request)
     {
-        if ($request->has('key_search')) {
-            $query->where('name', 'LIKE', '%'.$request->key_search.'%')->orderBy('created_at', 'DESC');
+        if ($request->has('q')) {
+            $query->where('name', 'LIKE', '%'.$request->q.'%')->orderBy('created_at', 'DESC');
         }
 
         return $query;

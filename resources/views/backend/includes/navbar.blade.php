@@ -16,7 +16,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="{{ route('backend.user.edit', \Illuminate\Support\Facades\Auth::user()->id) }}" class="nav-link">
+            <a href="{{ route('backend.user.show', \Illuminate\Support\Facades\Auth::user()->id) }}" class="nav-link">
                 <i class="fas fa-user"></i>
             </a>
         </li>

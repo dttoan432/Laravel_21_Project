@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Tạo mới sản phẩm
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,7 +18,7 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Tạo mới sản phẩm</h3>
                     </div>
                     <!-- /.card-header -->
@@ -36,6 +40,7 @@
                             <div class="form-group">
                                 <label>Danh mục sản phẩm</label>
                                 <select class="form-control select2" name="category_id" style="width: 100%;">
+                                    <option value="0">-- Chọn danh mục --</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -44,6 +49,7 @@
                             <div class="form-group">
                                 <label>Thương hiệu sản phẩm</label>
                                 <select class="form-control select2" name="trademark_id" style="width: 100%;">
+                                    <option value="0">-- Chọn thương hiệu --</option>
                                     @foreach($trademarks as $trademark)
                                         <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
                                     @endforeach
@@ -122,6 +128,12 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div id="clone">
+                                <label for="">Thông số kỹ thuật</label>
+                                <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
+
+                            </div>
                         </div>
                         <!-- /.card-body -->
 
@@ -133,7 +145,29 @@
                 </div>
             </div>
         </div>
-        <!-- /.row (main row) -->
+
+        <script>
+            $(document).ready(function () {
+                var i = 1;
+                $("#tes").click(function () {
+                    i++;
+                    $('#clone').append('<div class="row" id="row' + i + '">' +
+                        '<div class="col-4 col-lg-2"><div class="form-group">' +
+                        '<input type="text" class="form-control" id="" name="key[]" value="">' +
+                        '</div></div><div class="col-8 col-lg-10">' +
+                        '<div class="form-group" style="position: relative;">' +
+                        '<input type="text" class="form-control" id="" name="val[]" value="">' +
+                        '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>' +
+                        '</div></div></div>')
+                });
+
+                $(document).on('click', '.closee', function () {
+                    var button_id = $(this).attr("id");
+                    $('#row' + button_id + '').remove();
+                });
+            });
+        </script>
+
         <script>
             function previewImages() {
                 var preview = document.querySelector('.gallery');

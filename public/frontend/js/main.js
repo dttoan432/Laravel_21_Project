@@ -16,10 +16,10 @@
   3. Category Menu Active
   4. Nivo slider Active
   5. Owl Carousel Active
-    5.1 All Product Slider Active 
+    5.1 All Product Slider Active
     5.2 Related Product slider Active
     5.3 All-List-Product Slider Active
-    5.4 Brand Active 
+    5.4 Brand Active
     5.5 Our Blog Active Home 2
     5.6 Hot Deal Product  Home 3
     5.7 Bestseller Product3 Active Home 3
@@ -28,13 +28,13 @@
     5.10 Latest Blog Active Home 3
     5.11 Blog Post Slider Active
     5.12 Product Tab Menu Active
-  6. Slick Slider Active 
+  6. Slick Slider Active
     6.1 hot deal Slider Active
     6.2 Slide Active2 Left Side Slider Active
     6.3 Slide Active3 Slider Active
     6.4 Slide Active Home 2
     6.5 Modal Slider Active
-  7. Count Down Active 
+  7. Count Down Active
   8. Tooltip Active
   9. ScrollUp Active
   10. Counter Up
@@ -48,9 +48,9 @@
     15.3 Create An Account Toggle Function
     15.4 Create An Account Toggle Function
     15.5 Pyment Toggle Function
-  16. Chosen Active 
+  16. Chosen Active
   17. Instafeed active
-  18. Price Slider Active 
+  18. Price Slider Active
   19. EasyZoom Active
 ================================================*/
 
@@ -67,7 +67,7 @@ jQuery('.mobile-menu-area nav').meanmenu({
     2. Sticky Menu Active
 -----------------------------------*/
 $(window).scroll(function() {
-if ($(this).scrollTop() >150){  
+if ($(this).scrollTop() >150){
     $('.header-sticky').addClass("sticky");
   }
   else{
@@ -76,7 +76,7 @@ if ($(this).scrollTop() >150){
 });
 /*--------------------------
 	3. Category Menu Active
----------------------------- */	
+---------------------------- */
  $('.rx-parent').on('click', function(){
     $('.rx-child').slideToggle();
     $(this).toggleClass('rx-change');
@@ -86,7 +86,7 @@ $(".carousel-inner .item:first-child").addClass("active");
 //    category heading
 $('.category-heading').on('click', function(){
     $('.category-menu-list').slideToggle(300);
-});	  
+});
 
 /*-- Category Menu Toggles --*/
 function categorySubMenuToggle() {
@@ -124,10 +124,10 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
         return false;
     }
 });
-    
+
 /*----------------------------------
     4. Nivo slider Active
------------------------------------*/ 
+-----------------------------------*/
  $('#slider').nivoSlider({
      manualAdvance:true,
      directionNav: false,
@@ -137,16 +137,16 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
      pauseTime: 5000,
      controlNav: true,
      pauseOnHover: false,
-     prevText: '<i class="ion-chevron-left"></i>', 
+     prevText: '<i class="ion-chevron-left"></i>',
      nextText: '<i class="ion-chevron-right"></i>',
  });
 /*==================================
    5. Owl Carousel Active
 ====================================*/
-    
 
-/*----------------------------------- 
-  5.1 All Product Slider Active 
+
+/*-----------------------------------
+  5.1 All Product Slider Active
 ----------------------------------*/
  $('.all-product')
         .on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -174,9 +174,9 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
                 items: 4
             }
         }
-    })     
-/*----------------------------------- 
-  5.2 Related Product slider Active 
+    })
+/*-----------------------------------
+  5.2 Related Product slider Active
 ----------------------------------*/
  $('.related-products')
         .on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -205,8 +205,8 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
             }
         }
     })
-/*----------------------------------- 
-  5.3 All-List-Product Slider Active 
+/*-----------------------------------
+  5.3 All-List-Product Slider Active
 ----------------------------------*/
  $('.all-list-product')
      .on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -231,9 +231,9 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
                 items: 2
             }
         }
-    })     
-/*----------------------------------- 
-  5.4 Brand Active 
+    })
+/*-----------------------------------
+  5.4 Brand Active
 ----------------------------------*/
  $('.brand-active').owlCarousel({
         smartSpeed: 1000,
@@ -256,7 +256,7 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
             }
         }
     })
-/*----------------------------------- 
+/*-----------------------------------
   5.5 Our Blog Active Home 2
 ----------------------------------*/
  $('.our-blog-active').owlCarousel({
@@ -278,7 +278,7 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
             }
         }
     })
- /*----------------------------------- 
+ /*-----------------------------------
   5.6 Hot Deal Product  Home 3
 ----------------------------------*/
  $('.hot-deal-of-product')
@@ -336,7 +336,7 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
         }
     })
 /*----------------------------------------------
-  5.8 New Arrival List Product Active Home 3 
+  5.8 New Arrival List Product Active Home 3
 ------------------------------------------------*/
  $('.new-arrival-list-product')
      .on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -364,8 +364,8 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
                 items: 3
             }
         }
-    }) 
-/*--------------------------------------- 
+    })
+/*---------------------------------------
   5.9 Electronic Product3 Active Home 3
 -----------------------------------------*/
  $('.electronic-product3')
@@ -395,7 +395,7 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
             }
         }
     })
- /*----------------------------------- 
+ /*-----------------------------------
   5.10 Latest Blog Active Home 3
 ----------------------------------*/
  $('.latest-blog-active').owlCarousel({
@@ -441,8 +441,8 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
             }
         }
     })
-/*----------------------------------- 
-    5.12 Product Tab Menu Active 
+/*-----------------------------------
+    5.12 Product Tab Menu Active
 ----------------------------------*/
  $('.single-product-tab-menu').owlCarousel({
         smartSpeed: 1000,
@@ -464,15 +464,15 @@ $('.category-menu-list').on('click', 'li a, li a .menu-expand', function(e) {
                 items: 4
             }
         }
-    }) 
+    })
 /*==================================
    6. Slick Slider Active
 ====================================*/
-    
-    
-/*----------------------------------- 
+
+
+/*-----------------------------------
   6.1 hot deal Slider Active
--------------------------------------*/   
+-------------------------------------*/
 $('.slide-active').slick({
         vertical: true,
 		prevArrow: '<i class="fa fa-angle-left"></i>',
@@ -502,9 +502,9 @@ $('.slide-active').slick({
             }
           ]
 	});
-/*----------------------------------------- 
-  6.2 Slide Active2 Left Side Slider Active 
--------------------------------------------*/   
+/*-----------------------------------------
+  6.2 Slide Active2 Left Side Slider Active
+-------------------------------------------*/
 $('.slide-active2').slick({
 		rows: 5,
         vertical: false,
@@ -531,9 +531,9 @@ $('.slide-active2').slick({
             }
           ]
 	});
-/*----------------------------------- 
-  6.3 Slide Active3 Slider Active 
-----------------------------------*/   
+/*-----------------------------------
+  6.3 Slide Active3 Slider Active
+----------------------------------*/
 $('.slide-active3').slick({
 		slidesToShow: 3,
         vertical: true,
@@ -563,17 +563,17 @@ $('.slide-active3').slick({
             }
           ]
 	});
-/*----------------------------------- 
+/*-----------------------------------
   6.4 Slide Active Home 2
-----------------------------------*/   
+----------------------------------*/
 $('.slide-active-home-2').slick({
 		slidesToShow: 1,
 		prevArrow: '<i class="fa fa-angle-left"></i>',
 		nextArrow: '<i class="fa fa-angle-right slick-next-btn"></i>',
 	});
-/*----------------------------------- 
-  6.5 Modal Slider Active 
-----------------------------------*/   
+/*-----------------------------------
+  6.5 Modal Slider Active
+----------------------------------*/
 $('.modal-tab-menu-active').slick({
 		slidesToShow: 4,
 		arrows: false,
@@ -582,9 +582,9 @@ $('.modal-tab-menu-active').slick({
 $('.modal').on('shown.bs.modal', function (e) {
     $('.modal-tab-menu-active').resize();
 })
-/*----------------------------------- 
-  7. Count Down Active 
-----------------------------------*/ 
+/*-----------------------------------
+  7. Count Down Active
+----------------------------------*/
 $('[data-countdown]').each(function() {
 	var $this = $(this), finalDate = $(this).data('countdown');
 	$this.countdown(finalDate, function(event) {
@@ -617,14 +617,14 @@ $.scrollUp({
     });
 /* ---------------------------
 	11. FAQ Accordion Active
-* ---------------------------*/ 
+* ---------------------------*/
   $('.card-header a').on('click', function() {
     $('.card').removeClass('active');
     $(this).parents('.card').addClass('active');
   });
 /*--------------------------
    12.  Wow Active
----------------------------- */    
+---------------------------- */
 new WOW().init();
 /*--------------------------
    13. Isotope Active
@@ -651,7 +651,7 @@ $('.protfolio-active').imagesLoaded( function() {
 ---------------------------- */
 $(".fancybox").fancybox({
      padding: 0,
-});  
+});
 /*==================================
    15. All Toggle Active
 ====================================*/
@@ -660,7 +660,7 @@ $(".fancybox").fancybox({
 -----------------------------------*/
 $( '#showlogin' ).on('click', function() {
     $( '#checkout-login' ).slideToggle(900);
-});    
+});
 /*----------------------------------
 	15.2 Showcoupon Toggle Function
 ------------------------------------*/
@@ -691,11 +691,11 @@ $(".payment_method_paypal-li").on('click', function(){
   $(".payment_method_cheque").hide(500);
 });
 /*----------------------------------
-	16. Chosen Active 
+	16. Chosen Active
 ------------------------------------*/
 $(".chosen-select").chosen({disable_search_threshold: 10});
 /*----------------------------------
-	17. Instafeed active 
+	17. Instafeed active
 ------------------------------------*/
 if($('#Instafeed').length) {
     var feed = new Instafeed({
@@ -707,16 +707,16 @@ if($('#Instafeed').length) {
         limit: 6,
         template: '<li><a href="{{link}}" target="_new"><img src="{{image}}" /></a></li>',
     });
-    feed.run(); 
+    feed.run();
 }
 /*----------------------------------
-    18. Price Slider Active       
+    18. Price Slider Active
 ------------------------------------*/
 $( "#slider-range" ).slider({
       range: true,
-      min:  33,
-      max: 145,
-      values: [ 33, 145 ],
+      min:  10,
+      max: 200,
+      values: [ 10, 200 ],
       slide: function( event, ui ) {
         $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
       }
@@ -724,8 +724,8 @@ $( "#slider-range" ).slider({
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
       " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 /*----------------------------------
-    19. EasyZoom Active       
-------------------------------------*/   
+    19. EasyZoom Active
+------------------------------------*/
 var $easyzoom = $('.easyzoom').easyZoom();
-        
+
 })(jQuery);

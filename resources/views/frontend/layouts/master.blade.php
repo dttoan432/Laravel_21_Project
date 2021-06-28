@@ -12,8 +12,8 @@
 	<!-- Ionicons Font CSS-->
     <link rel="stylesheet" href="/frontend/css/ionicons.min.css">
 	<!-- font awesome CSS-->
-    <link rel="stylesheet" href="/frontend/css/font-awesome.min.css">
-
+{{--    <link rel="stylesheet" href="/frontend/css/font-awesome.min.css">--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<!-- Animate CSS-->
 	<link rel="stylesheet" href="/frontend/css/animate.css">
 	<!-- UI CSS-->
@@ -103,6 +103,7 @@
 	<!--Plugins-->
 	<script src="/frontend/js/plugins.js"></script>
 	<!--Main Js-->
-	<script src="/frontend/js/main.js"></script>
+{{--	<script src="/frontend/js/main.js"></script>--}}
+	<script src="/frontend/js/mean.js"></script>
 </body>
 </html>

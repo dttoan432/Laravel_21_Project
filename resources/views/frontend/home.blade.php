@@ -78,8 +78,8 @@
                     <div class="single-about">
                         <div class="block-wrapper">
                             <div class="about-content">
-                                <h5>Free Delivery</h5>
-                                <p>Free shipping on all order</p>
+                                <h5>Giao hàng nhanh</h5>
+                                <p>Mọi lúc, mọi nơi</p>
                             </div>
                         </div>
                     </div>
@@ -88,8 +88,8 @@
                     <div class="single-about">
                         <div class="block-wrapper2">
                             <div class="about-content">
-                                <h5>Free Delivery</h5>
-                                <p>Free shipping on all order</p>
+                                <h5>Tư vấn</h5>
+                                <p>24/7</p>
                             </div>
                         </div>
                     </div>
@@ -98,8 +98,8 @@
                     <div class="single-about">
                         <div class="block-wrapper3">
                             <div class="about-content">
-                                <h5>Free Delivery</h5>
-                                <p>Free shipping on all order</p>
+                                <h5>Tiết kiệm</h5>
+                                <p>Tích lũy xu</p>
                             </div>
                         </div>
                     </div>
@@ -108,8 +108,8 @@
                     <div class="single-about not-border">
                         <div class="block-wrapper4">
                             <div class="about-content">
-                                <h5>Free Delivery</h5>
-                                <p>Free shipping on all order</p>
+                                <h5>Giảm giá</h5>
+                                <p>Khách hàng thân thiết</p>
                             </div>
                         </div>
                     </div>
@@ -148,11 +148,11 @@
                                     <div class="all-product mb-85  owl-carousel">
                                         <!--Single Product Start-->
                                         @foreach($products as $product)
-                                            @if($product->category_id == 1 && count($product->images))
+                                            @if($product->category_id == 1 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
-                                                            <a href="{{ route('frontend.product.show', $product->id) }}"
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
                                                                 <img class="first-img"
                                                                      src="{{ $product->images[0]->image_url }}"
@@ -162,7 +162,7 @@
                                                         </div>
                                                         <div class="product-content" style="height: 80px;">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
-                                                                <a href="{{ route('frontend.product.show', $product->id) }}">{{ $product->name }}</a>
+                                                                <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                             </h2>
 
                                                             <style>
@@ -174,8 +174,8 @@
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->id) }}"
-                                                                   data-toggle="tooltip">Quick View</a>
+                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
+                                                                   data-toggle="tooltip">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,7 +192,7 @@
                             <div class="col-lg-12">
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="#"><img src="frontend/images/3_2.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/3_2.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -219,11 +219,11 @@
                                     <div class="all-product mb-85  owl-carousel">
                                         <!--Single Product Start-->
                                         @foreach($products as $product)
-                                            @if($product->category_id == 2 && count($product->images))
+                                            @if($product->category_id == 2 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
-                                                            <a href="{{ route('frontend.product.show', $product->id) }}"
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
                                                                 <img class="first-img"
                                                                      src="{{ $product->images[0]->image_url }}"
@@ -233,7 +233,7 @@
                                                         </div>
                                                         <div class="product-content" style="height: 80px;">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
-                                                                <a href="{{ route('frontend.product.show', $product->id) }}">{{ $product->name }}</a>
+                                                                <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                             </h2>
 
                                                             <style>
@@ -245,7 +245,7 @@
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->id) }}"
+                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Quick View</a>
                                                             </div>
                                                         </div>
@@ -263,7 +263,7 @@
                             <div class="col-lg-12">
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="#"><img src="frontend/images/4_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/4_1.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -290,11 +290,11 @@
                                     <div class="all-product mb-85  owl-carousel">
                                         <!--Single Product Start-->
                                         @foreach($products as $product)
-                                            @if($product->category_id == 3 && count($product->images))
+                                            @if($product->category_id == 3 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
-                                                            <a href="{{ route('frontend.product.show', $product->id) }}"
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
                                                                 <img class="first-img"
                                                                      src="{{ $product->images[0]->image_url }}"
@@ -304,7 +304,7 @@
                                                         </div>
                                                         <div class="product-content" style="height: 80px;">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
-                                                                <a href="{{ route('frontend.product.show', $product->id) }}">{{ $product->name }}</a>
+                                                                <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                             </h2>
 
                                                             <style>
@@ -316,7 +316,7 @@
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->id) }}"
+                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Quick View</a>
                                                             </div>
                                                         </div>
@@ -334,7 +334,7 @@
                             <div class="col-lg-12">
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="#"><img src="frontend/images/5_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'tablet') }}"><img src="frontend/images/5_1.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -361,11 +361,11 @@
                                     <div class="all-product mb-85  owl-carousel">
                                         <!--Single Product Start-->
                                         @foreach($products as $product)
-                                            @if($product->category_id == 5 && count($product->images))
+                                            @if($product->category_id == 5 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
-                                                            <a href="{{ route('frontend.product.show', $product->id) }}"
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
                                                                 <img class="first-img"
                                                                      src="{{ $product->images[0]->image_url }}"
@@ -387,7 +387,7 @@
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->id) }}"
+                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Quick View</a>
                                                             </div>
                                                         </div>
@@ -412,41 +412,39 @@
                                 <div class="new-arrivals-product-title">
                                     <!--Section Title2 Start-->
                                     <div class="section-title2">
-                                        <h3>Tai nghe</h3>
+                                        <h3>Sản phẩm mới</h3>
                                     </div>
 
                                     <div class="hot-del-single-product">
                                         <div class="row slide-active2">
                                             <!--Single Product Start-->
-                                            @for($i = 0; $i < 10; $i++)
-                                                @if($i < count($headphones))
-                                                <div class="col-lg-12">
-                                                    <div class="row no-gutters single-product style-2 list">
-                                                        <div class="col-4">
-                                                            <div class="product-img">
-                                                                <a href="{{ route('frontend.product.show', $headphones[$i]->id) }}">
-                                                                    @if(count($headphones[$i]->images)>0)
+                                            @foreach($products as $product)
+                                                @if(count($product->images)>0)
+                                                    <div class="col-lg-12">
+                                                        <div class="row no-gutters single-product style-2 list">
+                                                            <div class="col-4">
+                                                                <div class="product-img">
+                                                                    <a href="{{ route('frontend.product.show', $product->slug) }}">
                                                                         <img class="first-img"
-                                                                             src="{{ $headphones[$i]->images[0]->image_url }}"
+                                                                             src="{{ $product->images[0]->image_url }}"
                                                                              alt>
-                                                                    @endif
-                                                                </a>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="product-content">
-                                                                <h2>
-                                                                    <a href="{{ route('frontend.product.show', $headphones[$i]->id) }}">{{ $headphones[$i]->name }}</a>
-                                                                </h2>
-                                                                <div class="product-price">
-                                                                    <span class="new-price">{{ number_format($headphones[$i]->sale_price) }} <b>₫</b></span>
+                                                            <div class="col-6">
+                                                                <div class="product-content">
+                                                                    <h2>
+                                                                        <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
+                                                                    </h2>
+                                                                    <div class="product-price">
+                                                                        <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @endif
-                                            @endfor
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -458,17 +456,17 @@
                             <div class="col-lg-12">
                                 <div class="single-offer mb-20">
                                     <div class="offer-img img-full">
-                                        <a href="#"><img src="frontend/images/8_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'tablet') }}"><img src="frontend/images/8_1.jpg" alt></a>
                                     </div>
                                 </div>
                                 <div class="single-offer mb-20">
                                     <div class="offer-img img-full">
-                                        <a href="#"><img src="frontend/images/9_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'dong-ho') }}"><img src="frontend/images/9_1.jpg" alt></a>
                                     </div>
                                 </div>
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="#"><img src="frontend/images/10.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/10.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -486,14 +484,14 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-offer">
                         <div class="offer-img img-full">
-                            <a href="#"><img src="frontend/images/6_1.jpg" alt></a>
+                            <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/6_1.jpg" alt></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single-offer">
                         <div class="offer-img img-full">
-                            <a href="#"><img src="frontend/images/7_1.jpg" alt></a>
+                            <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/7_1.jpg" alt></a>
                         </div>
                     </div>
                 </div>
@@ -524,33 +522,33 @@
                         <div class="row">
                             <div class="slide-active3">
                                 <!--Single Product Start-->
-                                @for($i = 0; $i < 10; $i++)
-                                    @if($i < count($batterys))
+                                @foreach($products as $product)
+                                    @if($product->category_id == 7 && count($product->images)>0)
                                         <div class="col-lg-12">
                                             <div class="row no-gutters single-product style-2 list">
                                                 <div class="col-4">
                                                     <div class="product-img">
-                                                        <a href="{{ route('frontend.product.show', $batterys[$i]->id) }}">
-                                                            @if(count($batterys[$i]->images)>0)
-                                                                <img class="first-img" src="{{ $batterys[$i]->images[0]->image_url }}"
+                                                        <a href="{{ route('frontend.product.show', $product->slug) }}">
+                                                                <img class="first-img"
+                                                                     src="{{ $product->images[0]->image_url }}"
                                                                      alt>
-                                                            @endif
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="product-content">
-                                                        <h2><a href="{{ route('frontend.product.show', $batterys[$i]->id) }}">{{ $batterys[$i]->name }}</a>
+                                                        <h2>
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                         </h2>
                                                         <div class="product-price">
-                                                            <span class="new-price">{{ number_format($batterys[$i]->sale_price) }} <b>₫</b></span>
+                                                            <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
-                                @endfor
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -573,33 +571,33 @@
                         <div class="row">
                             <div class="slide-active3">
                                 <!--Single Product Start-->
-                                @for($i = 0; $i < 10; $i++)
-                                    @if($i < count($chargings))
-                                    <div class="col-lg-12">
-                                        <div class="row no-gutters single-product style-2 list">
-                                            <div class="col-4">
-                                                <div class="product-img">
-                                                    <a href="{{ route('frontend.product.show', $chargings[$i]->id) }}">
-                                                        @if(count($chargings[$i]->images)>0)
-                                                            <img class="first-img" src="{{ $chargings[$i]->images[0]->image_url }}"
-                                                                 alt>
-                                                        @endif
-                                                    </a>
+                                @foreach($products as $product)
+                                    @if($product->category_id == 10 && count($product->images)>0)
+                                        <div class="col-lg-12">
+                                            <div class="row no-gutters single-product style-2 list">
+                                                <div class="col-4">
+                                                    <div class="product-img">
+                                                        <a href="{{ route('frontend.product.show', $product->slug) }}">
+                                                                <img class="first-img"
+                                                                     src="{{ $product->images[0]->image_url }}"
+                                                                     alt>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="product-content">
-                                                    <h2><a href="{{ route('frontend.product.show', $chargings[$i]->id) }}">{{ $chargings[$i]->name }}</a>
-                                                    </h2>
-                                                    <div class="product-price">
-                                                        <span class="new-price">{{ number_format($chargings[$i]->sale_price) }} <b>₫</b></span>
+                                                <div class="col-6">
+                                                    <div class="product-content">
+                                                        <h2>
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
+                                                        </h2>
+                                                        <div class="product-price">
+                                                            <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     @endif
-                                @endfor
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -622,33 +620,33 @@
                         <div class="row">
                             <div class="slide-active3">
                                 <!--Single Product Start-->
-                                @for($i = 0; $i < 10; $i++)
-                                    @if($i < count($sounds))
+                                @foreach($products as $product)
+                                    @if($product->category_id == 11 && count($product->images)>0)
                                         <div class="col-lg-12">
                                             <div class="row no-gutters single-product style-2 list">
                                                 <div class="col-4">
                                                     <div class="product-img">
-                                                        <a href="{{ route('frontend.product.show', $sounds[$i]->id) }}">
-                                                            @if(count($sounds[$i]->images)>0)
-                                                                <img class="first-img" src="{{ $sounds[$i]->images[0]->image_url }}"
+                                                        <a href="{{ route('frontend.product.show', $product->slug) }}">
+                                                                <img class="first-img"
+                                                                     src="{{ $product->images[0]->image_url }}"
                                                                      alt>
-                                                            @endif
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="product-content">
-                                                        <h2><a href="{{ route('frontend.product.show', $sounds[$i]->id) }}">{{ $sounds[$i]->name }}</a>
+                                                        <h2>
+                                                            <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                         </h2>
                                                         <div class="product-price">
-                                                            <span class="new-price">{{ number_format($sounds[$i]->sale_price) }} <b>₫</b></span>
+                                                            <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
-                                @endfor
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -665,31 +663,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="brand-active owl-carousel">
-                        <!--Single Brand Start-->
-                        <div class="single-brand img-full">
-                            <a href="#"><img src="frontend/images/1.png" alt></a>
-                        </div>
-                        <!--Single Brand End-->
-                        <!--Single Brand Start-->
-                        <div class="single-brand img-full">
-                            <a href="#"><img src="frontend/images/2.png" alt></a>
-                        </div>
-                        <!--Single Brand End-->
-                        <!--Single Brand Start-->
-                        <div class="single-brand img-full">
-                            <a href="#"><img src="frontend/images/3.png" alt></a>
-                        </div>
-                        <!--Single Brand End-->
-                        <!--Single Brand Start-->
-                        <div class="single-brand img-full">
-                            <a href="#"><img src="frontend/images/4.png" alt></a>
-                        </div>
-                        <!--Single Brand End-->
-                        <!--Single Brand Start-->
-                        <div class="single-brand img-full">
-                            <a href="#"><img src="frontend/images/5.png" alt></a>
-                        </div>
-                        <!--Single Brand End-->
+
                     </div>
                 </div>
             </div>

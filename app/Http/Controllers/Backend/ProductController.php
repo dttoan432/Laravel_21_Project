@@ -24,16 +24,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $trademarks = Trademark::all();
-        $categories = Category::all();
-        $products = Product::orderBy('created_at', 'DESC')->paginate(25);
+        $keyW = '';
+        if ($request->has('q')) {
+            $keyW = $request->get('q');
+            $products = Product::search($request)->paginate(25);
+        } else {
+            $products = Product::orderBy('created_at', 'DESC')->paginate(25);
+        }
 
         return view('backend.products.index')->with([
             'products' => $products,
-            'trademarks' => $trademarks,
-            'categories' => $categories
+            'keyW' => $keyW
         ]);
     }
 
@@ -44,23 +47,30 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $trademarks = Trademark::all();
-        return view('backend.products.create')->with([
-            'categories' => $categories,
-            'trademarks'    => $trademarks
-        ]);
+        return view('backend.products.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreProductRequest $request)
     {
         $data = $request->except('_token');
+
+        if ($request->has('key') || $request->has('val')) {
+            $key = $request->get('key');
+            $val = $request->get('val');
+            $list = [];
+            $merge = [];
+            for ($i = 0; $i < count($key); $i++) {
+                $list = [$key[$i] => $val[$i]];
+                $merge = array_merge($merge, $list);
+            }
+            $data['content_more'] = json_encode($merge, JSON_UNESCAPED_UNICODE);
+        }
 
         $data['slug'] = Str::slug($request->get('name'));
         $data['user_id'] = Auth::user()->id;
@@ -68,10 +78,10 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $files = $request->file('image');
 
-            foreach ($files as $file){
+            foreach ($files as $file) {
                 $name = $file->getClientOriginalName();
                 $disk = 'public';
                 $path = Storage::disk($disk)->putFileAs('images', $file, $name);
@@ -83,19 +93,18 @@ class ProductController extends Controller
                 $image->product_id = $product->id;
                 $image->save();
             }
-
         }
 
-        if ($product && $image){
-            return redirect()->route('backend.product.index')->with("success",'Tạo mới thành công');
+        if ($product && $image) {
+            return redirect()->route('backend.product.index')->with("success", 'Tạo mới thành công');
         }
-        return redirect()->route('backend.product.index')->with("error",'Tạo mới thất bại');
+        return redirect()->route('backend.product.index')->with("error", 'Tạo mới thất bại');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -109,26 +118,22 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
         $this->authorize('update', $product);
-        $categories = Category::all();
-        $trademarks = Trademark::all();
         return view('backend.products.edit')->with([
-            'product'       => $product,
-            'categories'    => $categories,
-            'trademarks'    => $trademarks
+            'product' => $product,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProductRequest $request, $id)
@@ -137,15 +142,30 @@ class ProductController extends Controller
         $this->authorize('update', $product);
 
         $data = $request->except('_token');
+
+        if ($request->has('key')) {
+            $key = $request->get('key');
+            $val = $request->get('val');
+            $list = [];
+            $merge = [];
+            for ($i = 0; $i < count($key); $i++) {
+                $list = [$key[$i] => $val[$i]];
+                $merge = array_merge($merge, $list);
+            }
+            $data['content_more'] = json_encode($merge, JSON_UNESCAPED_UNICODE);
+        } else {
+            $data['content_more'] = null;
+        }
+
         $data['slug'] = Str::slug($request->get('name'));
         $data['updated_at'] = Carbon::now();
 
         $product->update($data);
 
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $files = $request->file('image');
 
-            foreach ($files as $file){
+            foreach ($files as $file) {
                 $name = $file->getClientOriginalName();
                 $disk = 'public';
                 $path = Storage::disk($disk)->putFileAs('images', $file, $name);
@@ -159,7 +179,7 @@ class ProductController extends Controller
             }
         }
         $deleteImg = $request->delete_img;
-        if (!empty($deleteImg)){
+        if (!empty($deleteImg)) {
             foreach ($deleteImg as $dete) {
                 $imgDelete = Image::find($dete);
                 Storage::disk('public')->delete($imgDelete->path);
@@ -167,23 +187,23 @@ class ProductController extends Controller
             }
         }
 
-        if ($product){
-            return redirect()->route('backend.product.index')->with("success",'Thay đổi thành công');
+        if ($product) {
+            return redirect()->route('backend.product.index')->with("success", 'Thay đổi thành công');
         }
-        return redirect()->route('backend.product.index')->with("error",'Thay đổi thất bại');
+        return redirect()->route('backend.product.index')->with("error", 'Thay đổi thất bại');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
         $this->authorize('update', $product);
         $deleteImg = Image::where('product_id', $product->id)->get();
-        if (!empty($deleteImg)){
+        if (!empty($deleteImg)) {
             foreach ($deleteImg as $dete) {
                 Storage::disk('public')->delete($dete->path);
                 $dete->delete();
@@ -191,28 +211,15 @@ class ProductController extends Controller
         }
         $product->delete();
 
-        if ($product){
-            return redirect()->route('backend.product.index')->with("success",'Xóa thành công');
+        if ($product) {
+            return redirect()->route('backend.product.index')->with("success", 'Xóa thành công');
         }
-        return redirect()->route('backend.product.index')->with("error",'Xóa thất bại');
+        return redirect()->route('backend.product.index')->with("error", 'Xóa thất bại');
     }
 
-    public function search(Request $request){
-        $trademarks = Trademark::all();
-        $categories = Category::all();
-        $products = Product::search($request)->paginate(25);
-
-        return view('backend.products.index')->with([
-            'products' => $products,
-            'trademarks' => $trademarks,
-            'categories' => $categories
-        ]);
-    }
-
-    public function filter(Request $request){
-        $trademarks = Trademark::all();
-        $categories = Category::all();
-        if ($request->get('trademark') == -1 && $request->get('category') == -1 && $request->get('status') == -1){
+    public function filter(Request $request)
+    {
+        if ($request->get('trademark') == -1 && $request->get('category') == -1 && $request->get('status') == -1) {
             return redirect()->route('backend.product.index');
         }
         $products = Product::query()
@@ -223,8 +230,6 @@ class ProductController extends Controller
 
         return view('backend.products.index')->with([
             'products' => $products,
-            'trademarks' => $trademarks,
-            'categories' => $categories
         ]);
     }
 }

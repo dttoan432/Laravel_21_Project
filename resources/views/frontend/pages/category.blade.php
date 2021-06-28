@@ -13,6 +13,14 @@
                             </ul>
                         </div>
                     </div>
+                    <div>
+                        @if(!empty($category->trademarks))
+                            @foreach($category->trademarks as $trademark)
+                                <a href="{{ request()->fullUrlWithQuery(['trademark' => $trademark->slug]) }}"
+                                   class="btn btn-sm btn-danger">{{ $trademark->name }}</a>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,28 +44,24 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!--List & Grid View Menu End-->
-                            <!-- View Mode Start-->
+
+                            <style>
+                                .toolbar-select a:hover > i {
+                                    text-decoration: underline;
+                                }
+                            </style>
                             <div class="col-lg-7 col-md-7 col-xl-6 col-12">
-                                <div class="toolbar-form">
-                                    <form action="#">
-                                        <div class="toolbar-select">
-                                            <span>Short by:</span>
-                                            <select data-placeholder="Choose a Country..." class="order-by"
-                                                    tabindex="1">
-                                                <option value="Default sorting">Default sorting</option>
-                                                <option value="United States">United States</option>
-                                                <option value="United Kingdom">United Kingdom</option>
-                                                <option value="Afghanistan">Afghanistan</option>
-                                                <option value="Aland Islands">Aland Islands</option>
-                                                <option value="Albania">Albania</option>
-                                                <option value="Algeria">Algeria</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="show-result">
-                                    <p>Showing 1–16 of 56 results</p>
+                                <div class="toolbar-form float-right float-right" style="width: unset;">
+                                    <div class="toolbar-select">
+                                        <span>Sắp xếp:</span>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'asc']) }}"
+                                           style="margin: 0 5px;">
+                                            <i class="fas fa-sort-amount-up text-danger"> Tăng dần</i>
+                                        </a>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'desc']) }}">
+                                            <i class="fas fa-sort-amount-down text-danger"> Giảm dần</i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- View Mode End-->
@@ -74,77 +78,97 @@
                                     @foreach($products as $product)
                                         <div class="col-lg-3 col-md-3 item-col2">
                                             <div class="single-product" style="height: 100%;">
-                                                <div class="product-img" style="height: 70%;">
-                                                    <a href="{{ route('frontend.product.show', 1) }}" style="height: 100%;">
+                                                <div class="product-img" style="height: 65%;">
+                                                    <a href="{{ route('frontend.product.show', $product->slug) }}"
+                                                       style="height: 100%;">
                                                         @if(count($product->images))
-                                                            <img class="first-img" src="{{ $product->images[0]->image_url }}" alt="anh" style="height: 100%; width: 80%; margin-left: 10%;">
+                                                            <img class="first-img"
+                                                                 src="{{ $product->images[0]->image_url }}" alt="anh"
+                                                                 style="height: 100%; width: 80%; margin-left: 10%;">
                                                         @endif
                                                     </a>
-{{--                                                    <ul class="product-action">--}}
-{{--                                                        <li><a href="#" data-toggle="tooltip" title="Add to Wishlist"><i--}}
-{{--                                                                    class="ion-android-favorite-outline"></i></a></li>--}}
-{{--                                                        <li><a href="#" data-toggle="tooltip" title="Compare"><i--}}
-{{--                                                                    class="ion-ios-shuffle-strong"></i></a></li>--}}
-{{--                                                        <li><a href="#" data-toggle="modal" title="Quick View"--}}
-{{--                                                               data-target="#myModal"><i class="ion-android-expand"></i></a>--}}
-{{--                                                        </li>--}}
-{{--                                                    </ul>--}}
                                                 </div>
-                                                <div class="product-content" style="height: 30%;">
+                                                <div class="product-content" style="height: 35%;">
                                                     <h2 style="height: 65%; width: 90%; margin: 0 auto;">
-                                                        <a href="{{ route('frontend.product.show', $product->id) }}">{{ $product->name }}</a>
+                                                        <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                     </h2>
 
                                                     <style>
-                                                        a.button.add-btn,a.button.add-btn.big{
+                                                        a.button.add-btn, a.button.add-btn.big {
                                                             top: auto;
                                                             bottom: 0;
                                                         }
                                                     </style>
                                                     <div class="product-price" style="height: 35%;">
                                                         <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
-                                                        <a class="button add-btn" href="{{ route('frontend.product.show', $product->id) }}" data-toggle="tooltip">Quick View</a>
+                                                        <a class="button add-btn"
+                                                           href="{{ route('frontend.product.show', $product->slug) }}"
+                                                           data-toggle="tooltip">Xem chi tiết</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                     {!! $products->links() !!}
                 </div>
-                <!--Shop Product Area End-->
-                <!--Left Sidebar Start-->
+
+
                 <div class="col-lg-3 order-lg-2 order-2">
                     <!--Widget Shop Categories End-->
                     <!--Widget Price Slider Start-->
                     <div class="widget widget-price-slider">
-                        <h3 class="widget-title">Filter by price</h3>
+                        <h3 class="widget-title">Lọc theo giá</h3>
                         <div class="widget-content">
                             <div class="price-filter">
-                                <form action="#">
+                                <form action="{{ route('frontend.category', $category->id) }}" method="GET">
                                     <div id="slider-range"></div>
-                                    <span>Price:<input id="amount" class="amount" readonly type="text"></span>
-                                    <input class="price-button" value="Filter" type="button">
+                                    <span><input id="amount" class="amount" readonly type="text"
+                                                 style="width: 100%;"></span>
+                                    <input type="hidden" id="start_price" name="start_price" value="1000000">
+                                    <input type="hidden" id="end_price" name="end_price" value="50000000">
+                                    <input class="price-button" value="Filter" type="submit">
                                 </form>
                             </div>
                         </div>
                     </div>
+
                     <!--Widget Price Slider End-->
-                    <!--Widget Brand Start-->
                     <div class="widget widget-brand">
-                        <h3 class="widget-title">Brands</h3>
+                        <h3 class="widget-title">Brand</h3>
                         <div class="widget-content">
                             <ul class="brand-menu">
-                                <li><input type="checkbox"><a href="#">Brand2</a> <span class="pull-right">(1)</span>
+                                <li class="priceui">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <a href="{{ request()->fullUrlWithQuery(['price' => '5']) }}">Dưới 5 triệu</a>
+                                </li>
+                                <li class="priceui">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <a href="{{ request()->fullUrlWithQuery(['price' => '5-10']) }}">5 - 10 triệu</a>
+                                </li>
+                                <li class="priceui">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <a href="{{ request()->fullUrlWithQuery(['price' => '10-15']) }}">10 - 15 triệu</a>
+                                </li>
+                                <li class="priceui">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <a href="{{ request()->fullUrlWithQuery(['price' => '15-20']) }}">15 - 20 triệu</a>
+                                </li>
+                                <li class="priceui">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <a href="{{ request()->fullUrlWithQuery(['price' => '20-25']) }}">20 - 25 triệu</a>
+                                </li>
+                                <li class="priceui">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <a href="{{ request()->fullUrlWithQuery(['price' => '25']) }}">Trên 25 triệu</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <!--Widget Brand End-->
-                    <!--Widget Manufacture Start-->
+
                     <div class="widget widget-manufacture">
                         <h3 class="widget-title">MANUFACTURER</h3>
                         <div class="widget-content">
@@ -192,4 +216,17 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .priceui>i{
+            font-size: 14px;
+            color: #eb3e32;
+        }
+        .priceui>a{
+            font-size: 14px;
+        }
+        .priceui>a:hover{
+            text-decoration: underline;
+        }
+    </style>
 @endsection

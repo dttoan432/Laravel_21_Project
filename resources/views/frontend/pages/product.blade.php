@@ -23,13 +23,6 @@
                                 </div>
                             @endfor
                         @endif
-{{--                        <div id="w2" class="tab-pane fade">--}}
-{{--                            <div class="easyzoom easyzoom--overlay">--}}
-{{--                                <a href="img/single-product/large/2.jpg">--}}
-{{--                                    <img src="/frontend/images/clock3_600.jpg" alt>--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
                     <!--Product Tab Content End-->
                     <!--Single Product Tab Menu Start-->
@@ -51,12 +44,6 @@
                                     <a data-toggle="tab" href="{{'#w'.$i}}"><img src="{{ $image->image_url }}" alt></a>
                                 @endforeach
                             @endif
-{{--                            <a data-toggle="tab" href="#w1"><img src="/frontend/images/clock1_100.jpg" alt></a>--}}
-{{--                            <a data-toggle="tab" href="#w2"><img src="/frontend/images/clock2_100.jpg" alt></a>--}}
-{{--                            <a data-toggle="tab" href="#w3"><img src="/frontend/images/clock3_100.jpg" alt></a>--}}
-{{--                            <a data-toggle="tab" href="#w4"><img src="/frontend/images/clock4_100.jpg" alt></a>--}}
-{{--                            <a data-toggle="tab" href="#w5"><img src="/frontend/images/clock1_100.jpg" alt></a>--}}
-{{--                            <a data-toggle="tab" href="#w6"><img src="/frontend/images/clock2_100.jpg" alt></a>--}}
                         </div>
                     </div>
                     <!--Single Product Tab Menu Start-->
@@ -65,22 +52,16 @@
                 <!--Single Product Content Start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="single-product-content">
-                        <!--Product Nav Start-->
-                        <div class="product-nav">
-                            <a href="#"><i class="fa fa-angle-left"></i></a>
-                            <a href="#"><i class="fa fa-angle-right"></i></a>
-                        </div>
-                        <!--Product Nav End-->
                         <h1 class="product-title">{{ $product->name }}</h1>
                         <!--Product Rating End-->
                         <!--Product Price Start-->
                         <div class="single-product-price">
-                            <span class="new-price">{{ number_format($product->sale_price) }} ₫</span>
+                            <span class="new-price">Giá: {{ number_format($product->sale_price) }} ₫</span>
                         </div>
                         <!--Product Price End-->
                         <!--Product Description Start-->
                         <div class="product-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p>
+
                         </div>
                         <!--Product Description End-->
                         <!--Product Quantity Start-->
@@ -111,16 +92,161 @@
                             <div class="discription-tab-menu">
                                 <ul class="nav">
                                     <li><a class="active" data-toggle="tab" href="#description">Mô tả sản phẩm</a></li>
+                                    <li><a data-toggle="tab" href="#specifications">Thông số kỹ thuật</a></li>
+                                    <li><a data-toggle="tab" href="#review">Đánh giá</a></li>
                                 </ul>
                             </div>
                             <!--Discription Tab Menu End-->
                             <!--Discription Tab Content Start-->
-                            <div class="discription-tab-content tab-content" id="contentttt">
+                            <div class="discription-tab-content tab-content">
                                 <div id="description" class="tab-pane fade show active">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="description-content">
-                                                {!! $product->content !!}
+                                            <div class="description-content position-relative">
+                                                @if(empty($product->content))
+                                                    <style>
+                                                        .description-content {
+                                                            display: none;
+                                                        }
+
+                                                        #show_description {
+                                                            display: none;
+                                                        }
+                                                    </style>
+                                                @else
+                                                    {!! $product->content !!}
+                                                @endif
+                                                <div class="bg-article"></div>
+                                            </div>
+                                        </div>
+                                        <p id="show_description" class="text-center text-danger hoshow">Xem thêm</p>
+                                    </div>
+                                </div>
+
+                                <div id="specifications" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="specifications-content position-relative">
+                                                @if(!empty($product->content_more_json))
+                                                    <table class="table">
+                                                        <tbody>
+                                                        @foreach($product->content_more_json as $key => $val)
+                                                            <tr>
+                                                                <td style="width: 30%;">{{ $key }}</td>
+                                                                <th>{{ $val }}</th>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @else
+                                                    <style>
+                                                        .specifications-content {
+                                                            display: none;
+                                                        }
+
+                                                        #show_specifications {
+                                                            display: none;
+                                                        }
+                                                    </style>
+                                                @endif
+                                                <div class="bg-article"></div>
+                                            </div>
+                                        </div>
+                                        <p id="show_specifications" class="text-center text-danger hoshow">Xem thêm</p>
+                                    </div>
+                                </div>
+
+                                <div id="specifications" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="review-page-comment">
+                                                @if(!empty($product->content_more_json))
+                                                    <table class="table">
+                                                        <tbody>
+                                                        @foreach($product->content_more_json as $key => $val)
+                                                            <tr>
+                                                                <td style="width: 30%;">{{ $key }}</td>
+                                                                <th>{{ $val }}</th>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="review" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="review-page-comment">
+                                                <div class="review-comment">
+                                                    <h2>1 review for typesetting animal</h2>
+                                                    <ul>
+                                                        <li>
+                                                            <div class="product-comment">
+                                                                <img src="images/2_1.png" alt>
+                                                                <div class="product-comment-content">
+                                                                    <p><strong>admin</strong>
+                                                                        -
+                                                                        <span>March 7, 2016:</span>
+                                                                        <span class="pro-comments-rating">
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="description">
+                                                                        <p>roadthemes</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="review-form-wrapper">
+                                                        <div class="review-form">
+                                                            <span class="comment-reply-title">Add a review </span>
+                                                            <form action="#">
+                                                                <p class="comment-notes">
+                                                                    <span id="email-notes">Your email address will not be published.</span>
+                                                                    Required fields are marked
+                                                                    <span class="required">*</span>
+                                                                </p>
+                                                                <div class="comment-form-rating">
+                                                                    <label>Your rating</label>
+                                                                    <div class="rating">
+                                                                        <i class="fa fa-star-o"></i>
+                                                                        <i class="fa fa-star-o"></i>
+                                                                        <i class="fa fa-star-o"></i>
+                                                                        <i class="fa fa-star-o"></i>
+                                                                        <i class="fa fa-star-o"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-element">
+                                                                    <div class="comment-form-comment">
+                                                                        <label>Comment</label>
+                                                                        <textarea name="message" cols="40"
+                                                                                  rows="8"></textarea>
+                                                                    </div>
+                                                                    <div class="review-comment-form-author">
+                                                                        <label>Name </label>
+                                                                        <input required="required" type="text">
+                                                                    </div>
+                                                                    <div class="review-comment-form-email">
+                                                                        <label>Email </label>
+                                                                        <input required="required" type="text">
+                                                                    </div>
+                                                                    <div class="comment-submit">
+                                                                        <button type="submit" class="form-button">
+                                                                            Submit
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +289,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -188,7 +315,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -213,7 +341,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -238,7 +367,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -263,7 +393,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -288,7 +419,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -313,7 +445,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -338,7 +471,8 @@
                                 <ul class="product-action">
                                     <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i class="ion-android-expand"></i></a></li>
+                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
+                                                class="ion-android-expand"></i></a></li>
                                 </ul>
                             </div>
                             <div class="product-content">
@@ -355,4 +489,51 @@
             </div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#show_description').click(function () {
+                $('.description-content').css({
+                    'height': '100%'
+                }, $('#show').hide(), $('.bg-article').hide(), $('#show_description').hide())
+            })
+            $('#show_specifications').click(function () {
+                $('.specifications-content').css({
+                    'height': '100%'
+                }, $('#show').hide(), $('.bg-article').hide(), $('#show_specifications').hide())
+            })
+        });
+    </script>
+
+    <style>
+        .description-content {
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .specifications-content {
+            height: 500px;
+            overflow: hidden;
+        }
+
+        #show_description, #show_specifications {
+            margin-top: 15px;
+            z-index: 2;
+            margin: 0 auto;
+        }
+
+        .hoshow:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .bg-article {
+            background: linear-gradient(to bottom, rgba(255 255 255/0), rgba(255 255 255/62.5), rgba(255 255 255/1));
+            bottom: 0;
+            height: 105px;
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
+    </style>
 @endsection

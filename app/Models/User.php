@@ -95,4 +95,24 @@ class User extends Authenticatable
     public function trademarks(){
         return $this->hasMany(Trademark::class);
     }
+
+    public function scopeSearch($query, $request)
+    {
+        if ($request->has('q')) {
+            $query
+                ->where('name', 'LIKE', '%'.$request->q.'%')
+                ->orWhere('phone', 'LIKE', '%'.$request->q.'%')
+                ->orWhere('email', 'LIKE', '%'.$request->q.'%')
+                ->orderBy('role', 'ASC');
+        }
+
+        return $query;
+    }
+
+    public static function updateAfterDelete($datas){
+        foreach ($datas as $data) {
+            $data->user_id = 1;
+            $data->save();
+        }
+    }
 }

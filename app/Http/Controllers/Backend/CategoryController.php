@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Trademark;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -36,11 +38,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $trademarks = Trademark::all();
         $categories = Category::where('parent_id', 0)->get();
         return view('backend.categories.create')->with([
-            'categories' => $categories,
-            'trademarks' => $trademarks
+            'categories' => $categories
         ]);
     }
 
@@ -58,6 +58,9 @@ class CategoryController extends Controller
         $category = Category::create($data);
 
         $category->trademarks()->attach($request->get('trademark_id'));
+
+        Cache::forget('menuCategories');
+        Cache::forget('listCategories');
 
         if ($category){
             return redirect()->route('backend.category.index')->with("success",'Tạo mới thành công');
@@ -85,13 +88,9 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $this->authorize('update', $category);
-        $categories = Category::all();
-        $trademarks = Trademark::all();
 
         return view('backend.categories.edit')->with([
             'category' => $category,
-            'categories' => $categories,
-            'trademarks'    => $trademarks
         ]);
     }
 
@@ -114,6 +113,9 @@ class CategoryController extends Controller
         $category->update($data);
         $category->trademarks()->sync($request->get('trademark_id'));
 
+        Cache::forget('menuCategories');
+        Cache::forget('listCategories');
+
         if ($category){
             return redirect()->route('backend.category.index')->with("success",'Thay đổi thành công');
         }
@@ -129,8 +131,26 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $this->authorize('delete', $category);
-        $category->delete();
+        $children = Category::where('parent_id', $category->id)->get();
+        $products = Product::where('category_id', $category->id)->get();
+        if (count($children)>0){
+            foreach ($children as $child) {
+                $child->parent_id = 0;
+                $child->save();
+            }
+        }
+
+        if (count($products)>0){
+            foreach ($products as $product) {
+                $product->category_id = 0;
+                $product->save();
+            }
+        }
         $category->trademarks()->detach();
+        $category->delete();
+
+        Cache::forget('menuCategories');
+        Cache::forget('listCategories');
 
         if ($category){
             return redirect()->route('backend.category.index')->with("success",'Xóa thành công');

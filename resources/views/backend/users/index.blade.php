@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Danh sách người dùng
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,18 +18,20 @@
 
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Danh sách người dùng</h3>
-
                         <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right"
-                                       placeholder="Search">
+                            <form action="{{ route('backend.user.index') }}" method="GET">
+                                <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
+                                    <input type="text" name="q" class="form-control float-right"
+                                           placeholder="Tìm kiếm" value="{{ old('q') }}">
 
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -76,7 +82,7 @@
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
 
-                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                    <button type="submit" class="btn btn-danger btn-sm delete-confirm">
                                                         <i class="fas fa-eraser"></i> Xóa
                                                     </button>
                                                 </form>
@@ -88,7 +94,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
+                    <div style="margin: 0 auto; margin-top: 20px;">{!! $users->links() !!}</div>
                 </div>
                 <!-- /.card -->
             </div>
@@ -105,4 +111,31 @@
             toastr.error("{!! Session::get('error') !!}");
         </script>
     @endif
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        $('.delete-confirm').click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Bạn có muốn xóa không?`,
+                text: "Nếu bạn xóa nó, bạn sẽ không thể khôi phục lại được",
+                icon: "error",
+                buttons: ["Không", "Đồng ý"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
+
+    <style>
+        .table>:not(:last-child)>:last-child>*{
+            border-bottom-color: #dee2e6;
+        }
+    </style>
 @endsection

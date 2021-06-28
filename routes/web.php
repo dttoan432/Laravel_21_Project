@@ -18,12 +18,14 @@ Route::group([
     'prefix' => '/',
 ], function () {
     Route::get('/', 'HomeController@index')->name('frontend.index');
-    Route::get('product/{id}', 'ProductController@show')->name('frontend.product.show');
-    Route::get('category/{id}', 'CategoryController@show')->name('frontend.category');
+    Route::get('product/{slug}', 'ProductController@show')->name('frontend.product.show');
+    Route::get('category/{slug}', 'CategoryController@show')->name('frontend.category');
     Route::get('cart', 'CartController@index')->name('frontend.cart');
     Route::get('checkout', 'CartController@checkout')->name('frontend.checkout');
     Route::get('account', 'UserController@edit')->name('frontend.account');
     Route::get('order', 'UserController@order')->name('frontend.order');
+    Route::get('/search', 'ProductController@search')->name('frontend.product.search');
+    Route::post('/autocomplete-ajax', 'ProductController@autocomplete_ajax')->name('frontend.product.searchauto');
 });
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login.form');
@@ -47,7 +49,6 @@ Route::group([
         Route::get('/', 'ProductController@index')->name('backend.product.index');
         Route::get('/create', 'ProductController@create')->name('backend.product.create');
         Route::post('/', 'ProductController@store')->name('backend.product.store');
-        Route::get('/search', 'ProductController@search')->name('backend.product.search');
         Route::get('/filter', 'ProductController@filter')->name('backend.product.filter');
 
         Route::get('/edit/{product}', 'ProductController@edit')

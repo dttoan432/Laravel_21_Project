@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Thay đổi thông tin thương hiệu
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,7 +18,7 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Thay đổi danh mục</h3>
                     </div>
                     <!-- /.card-header -->

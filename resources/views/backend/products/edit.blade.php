@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Thay đổi thông tin sản phẩm
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,7 +18,7 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Thay đổi thông tin sản phẩm</h3>
                     </div>
                     <!-- /.card-header -->
@@ -35,6 +39,7 @@
                             <div class="form-group">
                                 <label>Danh mục sản phẩm</label>
                                 <select class="form-control select2" name="category_id" style="width: 100%;">
+                                    <option value="0">-- Chọn danh mục --</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}"
                                         @if($category->id == $product->category_id)
@@ -47,6 +52,7 @@
                             <div class="form-group">
                                 <label>Thương hiệu</label>
                                 <select class="form-control select2" name="trademark_id" style="width: 100%;">
+                                    <option value="0">-- Chọn thương hiệu --</option>
                                     @foreach($trademarks as $trademark)
                                         <option value="{{ $trademark->id }}"
                                         @if($trademark->id == $product->trademark_id)
@@ -99,22 +105,25 @@
                                 @enderror
                             </div>
                             <style>
-                                #buu{
+                                #buu {
                                     display: flex;
                                     flex-wrap: wrap;
                                     flex-direction: column;
                                 }
-                                #buu>img {
+
+                                #buu > img {
                                     width: 250px;
                                     height: 200px;
                                     margin-right: 20px;
                                 }
-                                #boxImg{
+
+                                #boxImg {
                                     display: flex;
                                     flex-wrap: wrap;
                                     flex-direction: row;
                                 }
-                                .gallery>img{
+
+                                .gallery > img {
                                     width: 250px;
                                     margin-right: 20px;
                                 }
@@ -122,14 +131,16 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1" class="d-block">Xóa hình ảnh</label>
                                 <div id="boxImg">
-                                @foreach($product->images as $image)
-                                    <div id="buu">
-                                        <img src="{{ $image->image_url}}" class="rounded float-start d-block" alt="...">
-                                        <div class="d-flex justify-content-center" style="margin-top: 10px;">
-                                            <input class="" type="checkbox" name="delete_img[]" value="{{ $image->id }}">
+                                    @foreach($product->images as $image)
+                                        <div id="buu">
+                                            <img src="{{ $image->image_url}}" class="rounded float-start d-block"
+                                                 alt="...">
+                                            <div class="d-flex justify-content-center" style="margin-top: 10px;">
+                                                <input class="" type="checkbox" name="delete_img[]"
+                                                       value="{{ $image->id }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="form-group">
@@ -161,6 +172,39 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div id="clone">
+                                <label for="">Thông số kỹ thuật</label>
+                                <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
+                                @if(!empty($product->content_more_json))
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach($product->content_more_json as $key => $value)
+                                        @php
+                                            $i++;
+                                        @endphp
+                                        <div class="row" id="row{{ $i }}">
+                                            <div class="col-4 col-lg-2">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="" name="key[]"
+                                                           value="{{ $key }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-8 col-lg-10">
+                                                <div class="form-group" style="position: relative;">
+                                                    <input type="text" class="form-control" id="" name="val[]"
+                                                           value="{{ $value }}">
+                                                    <span
+                                                        class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center"
+                                                        id="{{ $i }}"
+                                                        style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                         <!-- /.card-body -->
 
@@ -172,7 +216,35 @@
                 </div>
             </div>
         </div>
-        <!-- /.row (main row) -->
+
+
+        <script>
+            $(document).ready(function () {
+                @if(!empty($product->content_more_json))
+                var i = {{ count($product->content_more_json) }};
+                @else
+                var i = 0;
+                @endif
+
+                $("#tes").click(function () {
+                    i++;
+                    $('#clone').append('<div class="row" id="row' + i + '">' +
+                        '<div class="col-4 col-lg-2"><div class="form-group">' +
+                        '<input type="text" class="form-control" id="" name="key[]" value="">' +
+                        '</div></div><div class="col-8 col-lg-10">' +
+                        '<div class="form-group" style="position: relative;">' +
+                        '<input type="text" class="form-control" id="" name="val[]" value="">' +
+                        '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>' +
+                        '</div></div></div>')
+                });
+
+                $(document).on('click', '.closee', function () {
+                    var button_id = $(this).attr("id");
+                    $('#row' + button_id + '').remove();
+                });
+            });
+        </script>
+
         <script>
             function previewImages() {
                 var preview = document.querySelector('.gallery');

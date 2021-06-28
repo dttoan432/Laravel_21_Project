@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Trademark;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,10 +19,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $this->authorize('viewAny',User::class);
-        $users = User::orderBy('role', 'ASC')->get();
+        $this->authorize('viewAny', User::class);
+        if ($request->has('q')) {
+            $users = User::search($request)->paginate(25);
+        } else {
+            $users = User::orderBy('role', 'ASC')->paginate(25);
+        }
         return view('backend.users.index')->with([
             'users' => $users
         ]);
@@ -31,49 +39,57 @@ class UserController extends Controller
      */
     public function create()
     {
-        $this->authorize('create',User::class);
+        $this->authorize('create', User::class);
         return view('backend.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUserRequest $request)
     {
-        $this->authorize('create',User::class);
+        $this->authorize('create', User::class);
         $data = $request->except('_token');
         $data['password'] = bcrypt($request->get('password'));
         $user = User::create($data);
 
-        if ($user){
-            return redirect()->route('backend.user.index')->with("success",'Tạo mới thành công');
+        if ($user) {
+            return redirect()->route('backend.user.index')->with("success", 'Tạo mới thành công');
         }
-        return redirect()->route('backend.user.index')->with("error",'Tạo mới thất bại');
+        return redirect()->route('backend.user.index')->with("error", 'Tạo mới thất bại');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $user = User::find($id);
-        $this->authorize('view', $user);
+        $products = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(11);
+        $trademarks = Trademark::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
+        $categories = Category::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
+        $parents = Category::where('parent_id', 0)->get();
+        $this->authorize('update', $user);
 
         return view('backend.users.show')->with([
-            'user' => $user
+            'user' => $user,
+            'products' => $products,
+            'trademarks' => $trademarks,
+            'categories' => $categories,
+            'parents' => $parents
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -88,8 +104,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, $id)
@@ -98,33 +114,47 @@ class UserController extends Controller
         $user = User::find($id);
         $this->authorize('update', $user);
 
-        if ($data['password'] == null){
+        if ($data['password'] == null) {
             $data['password'] = $user->password;
         } else {
             $data['password'] = bcrypt($request->get('password'));
         }
         $user->update($data);
 
-        if ($user){
-            return redirect()->route('backend.user.index')->with("success",'Thay đổi thành công');
+        if ($user) {
+            if (Auth::user()->role == User::ROLE_MANAGE) {
+                return redirect()->route('backend.user.index')->with("success", 'Thay đổi thành công');
+            }
+            return back()->with("success", 'Thay đổi thành công');
+        } else {
+            if (Auth::user()->role == User::ROLE_MANAGE) {
+                return redirect()->route('backend.user.index')->with("error", 'Thay đổi thất bại');
+            }
+            return back()->with("error", 'Thay đổi thất bại');
         }
-        return redirect()->route('backend.user.index')->with("error",'Thay đổi thất bại');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
         $this->authorize('delete', $user);
+        $categories = Category::where('user_id', $user->id)->get();
+        $user->updateAfterDelete($categories);
+        $products = Product::where('user_id', $user->id)->get();
+        $user->updateAfterDelete($products);
+        $trademarks = Trademark::where('user_id', $user->id)->get();
+        $user->updateAfterDelete($trademarks);
+
         $user->delete();
 
-        if ($user){
-            return redirect()->route('backend.user.index')->with("success",'Xóa thành công');
+        if ($user) {
+            return redirect()->route('backend.user.index')->with("success", 'Xóa thành công');
         }
-        return redirect()->route('backend.user.index')->with("error",'Xóa thất bại');
+        return redirect()->route('backend.user.index')->with("error", 'Xóa thất bại');
     }
 }

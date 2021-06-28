@@ -28,7 +28,7 @@ class StoreProductRequest extends FormRequest
             'quantity'          => 'required|numeric|max:10000|integer',
             'origin_price'      => 'required|numeric|max:100000000|integer',
             'sale_price'        => 'required|numeric|max:100000000|integer',
-            'content'           => 'required',
+//            'content'           => 'required',
 //            'image[]'           => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:200000',
         ];
     }
@@ -56,7 +56,7 @@ class StoreProductRequest extends FormRequest
             'sale_price.max'            => ':attribute không nhập quá :max',
             'sale_price.integer'        => ':attribute phải là số nguyên',
 
-            'content.required'          => ':attribute không được để trống',
+//            'content.required'          => ':attribute không được để trống',
 
 //            'image[].required'          => 'Chưa chọn :attribute',
 //            'image[].file'              => 'Upload không thành công',
@@ -72,7 +72,7 @@ class StoreProductRequest extends FormRequest
             'quantity'          => 'Số lượng sản phẩm',
             'origin_price'      => 'Giá gốc',
             'sale_price'        => 'Giá bán',
-            'content'           => 'Nội dung',
+//            'content'           => 'Nội dung',
 //            'image[]'           => 'hình ảnh'
         ];
     }

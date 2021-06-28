@@ -1,5 +1,9 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Danh sách sản phẩm
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -11,23 +15,24 @@
     <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
-
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Sản phẩm mới</h3>
 
                         <div class="card-tools" style="display: flex">
                             <form action="{{ route('backend.product.filter') }}" method="GET" class="d-flex">
-                                <button type="submit" class="btn btn-sm btn-primary" style="margin-right: 10px;">Lọc</button>
+                                <button type="submit" class="btn btn-sm btn-warning" style="margin-right: 10px;">Lọc</button>
                                 <select class="form-select form-select-sm" aria-label="Default select example" name="trademark" style="margin-right: 10px;">
                                     <option selected value="-1">Chọn thương hiệu</option>
+                                    <option value="0">Không có thương hiệu</option>
                                     @foreach($trademarks as $trademark)
                                         <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
                                     @endforeach
                                 </select>
                                 <select class="form-select form-select-sm" aria-label="Default select example" name="category" style="margin-right: 10px;">
                                     <option selected value="-1">Chọn danh mục</option>
+                                    <option value="0">Không có danh mục</option>
                                     @foreach($categories as $categorie)
                                         <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
                                     @endforeach
@@ -39,10 +44,10 @@
                                     @endforeach
                                 </select>
                             </form>
-                            <form action="{{ route('backend.product.search') }}" method="GET">
+                            <form action="{{ route('backend.product.index') }}" method="GET">
                                 <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
-                                    <input type="text" name="key_search" class="form-control float-right"
-                                           placeholder="Tìm kiếm" value="{{ old('key_search') }}">
+                                    <input type="text" name="q" class="form-control float-right"
+                                           placeholder="Tìm kiếm" required value="{{ $keyW }}">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
@@ -66,17 +71,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <style>
-                                td {
-                                    vertical-align: middle !important;
-                                }
-
-                                .widspan {
-                                    width: 90px;
-                                    font-size: 14px;
-                                    font-weight: normal;
-                                }
-                            </style>
                             @php
                                 $i = 0;
                             @endphp
@@ -87,8 +81,16 @@
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->trademark->name }}</td>
-                                    <td>{{ $product->category->name }}</td>
+                                    @if($product->trademark !== null)
+                                        <td>{{ $product->trademark->name }}</td>
+                                    @else
+                                        <td>Không có</td>
+                                    @endif
+                                    @if($product->category !== null)
+                                        <td>{{ $product->category->name }}</td>
+                                    @else
+                                        <td>Không có</td>
+                                    @endif
                                     <td>
                                         @if($product->status == 0)
                                             <span
@@ -118,7 +120,7 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                <button type="submit" class="btn btn-danger btn-sm delete-confirm">
                                                     <i class="fas fa-eraser"></i> Xóa
                                                 </button>
                                             </form>
@@ -148,4 +150,40 @@
             toastr.error("{!! Session::get('error') !!}");
         </script>
     @endif
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        $('.delete-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Bạn có muốn xóa không?`,
+                text: "Nếu bạn xóa nó, bạn sẽ không thể khôi phục lại được",
+                icon: "error",
+                buttons: ["Không", "Đồng ý"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
+
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+        .widspan {
+            width: 90px;
+            font-size: 14px;
+            font-weight: normal;
+            color: white !important;
+        }
+        .table>:not(:last-child)>:last-child>*{
+            border-bottom-color: #dee2e6;
+        }
+    </style>
 @endsection

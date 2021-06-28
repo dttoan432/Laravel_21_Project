@@ -4,7 +4,7 @@
 @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a class="brand-link">
         <img src="/backend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Bee Shop</span>
     </a>
@@ -33,13 +33,12 @@
                                 </a>
                             </li>
 
-
-                            <li class="nav-header">QUẢN LÝ</li>
                             @can('viewAny', \App\Models\User::class)
+                            <li class="nav-header">NGƯỜI DÙNG</li>
                             <li class="nav-item {{ ($prefix == 'admin/user') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link  {{ ($prefix == 'admin/user') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user"></i>
-                                    <p>Người dùng <i class="fas fa-angle-left right"></i></p>
+                                    <p>Quản lý người dùng <i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -58,10 +57,11 @@
                             </li>
                             @endcan
 
+                            <li class="nav-header">SẢN PHẨM</li>
                             <li class="nav-item {{ ($prefix == 'admin/product') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link {{ ($prefix == 'admin/product') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-flag"></i>
-                                    <p>Sản phẩm <i class="fas fa-angle-left right"></i></p>
+                                    <p>Quản lý sản phẩm <i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -82,7 +82,7 @@
                             <li class="nav-item {{ ($prefix == 'admin/category') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link {{ ($prefix == 'admin/category') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-tree"></i>
-                                    <p>Danh mục <i class="fas fa-angle-left right"></i></p>
+                                    <p>Quản lý danh mục <i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -103,7 +103,7 @@
                             <li class="nav-item {{ ($prefix == 'admin/trademark') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link {{ ($prefix == 'admin/trademark') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-cloud"></i>
-                                    <p>Thương hiệu <i class="fas fa-angle-left right"></i></p>
+                                    <p>Quản lý thương hiệu <i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -121,10 +121,11 @@
                                 </ul>
                             </li>
 
+                            <li class="nav-header">ĐƠN HÀNG</li>
                             <li class="nav-item">
                                 <a href="{{ route('backend.trademark.index') }}" class="nav-link">
                                     <i class="nav-icon fas fa-drumstick-bite"></i>
-                                    <p>Đơn hàng</p>
+                                    <p>Quản lý đơn hàng</p>
                                 </a>
                             </li>
 
@@ -133,13 +134,13 @@
                             <li class="nav-item">
                                 <a href="iframe.html" class="nav-link">
                                     <i class="nav-icon fas fa-chart-pie"></i>
-                                    <p>Doanh thu</p>
+                                    <p>Thống kê doanh thu</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="https://adminlte.io/docs/3.1/" class="nav-link">
                                     <i class="nav-icon fab fa-hotjar"></i>
-                                    <p>Sản phẩm</p>
+                                    <p>Thống kê sản phẩm</p>
                                 </a>
                             </li>
                         </ul>
