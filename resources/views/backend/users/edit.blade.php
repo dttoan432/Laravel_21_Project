@@ -78,7 +78,6 @@
                                                         selected
                                                     @endif
                                                 >{{ $value }}</option>
-
                                             @endforeach
                                         </select>
                                     </div>

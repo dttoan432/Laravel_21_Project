@@ -67,8 +67,6 @@ class User extends Authenticatable
             return 'Quản lý';
         } elseif ($this->role == 1){
             return 'Nhân viên';
-        } elseif ($this->role == -1) {
-            return 'SAdmin';
         } else{
             return 'Khách hàng';
         }

@@ -57,7 +57,12 @@ class CategoryController extends Controller
         $data['user_id'] = Auth::user()->id;
         $category = Category::create($data);
 
-        $category->trademarks()->attach($request->get('trademark_id'));
+        if (!empty($data['trademark_id'])){
+            $category->trademarks()->attach($data['trademark_id'], [
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
 
         Cache::forget('menuCategories');
         Cache::forget('listCategories');
@@ -111,7 +116,13 @@ class CategoryController extends Controller
         $data['updated_at'] = Carbon::now();
 
         $category->update($data);
-        $category->trademarks()->sync($request->get('trademark_id'));
+        if (!empty($data['trademark_id'])){
+            $category->trademarks()->sync($data['trademark_id'], [
+                'updated_at' => Carbon::now(),
+            ]);
+        } else{
+            $category->trademarks()->detach();
+        }
 
         Cache::forget('menuCategories');
         Cache::forget('listCategories');

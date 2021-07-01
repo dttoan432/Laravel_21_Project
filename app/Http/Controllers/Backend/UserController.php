@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Trademark;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,14 +22,17 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $keyU = '';
         $this->authorize('viewAny', User::class);
         if ($request->has('q')) {
+            $keyU = $request->get('q');
             $users = User::search($request)->paginate(25);
         } else {
             $users = User::orderBy('role', 'ASC')->paginate(25);
         }
         return view('backend.users.index')->with([
-            'users' => $users
+            'users' => $users,
+            'keyU' => $keyU
         ]);
     }
 
@@ -71,11 +75,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $this->authorize('update', $user);
         $products = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(11);
         $trademarks = Trademark::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
         $categories = Category::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
         $parents = Category::where('parent_id', 0)->get();
-        $this->authorize('update', $user);
 
         return view('backend.users.show')->with([
             'user' => $user,
@@ -111,6 +115,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $data = $request->except('_token');
+        $data['updated_at'] = Carbon::now();
         $user = User::find($id);
         $this->authorize('update', $user);
 

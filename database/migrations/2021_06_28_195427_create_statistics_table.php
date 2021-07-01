@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateStatisticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('total_price');
-            $table->integer('status')->default(0); //0: Chờ xác nhận    1: Đã xác nhận      2: Đang giao hàng       3: Đã hoàn thành
             $table->date('order_date');
-            $table->timestamps();
+            $table->integer('sale');
+            $table->integer('profit');
+            $table->integer('quantity');
+            $table->integer('total_order');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('statistics');
     }
 }

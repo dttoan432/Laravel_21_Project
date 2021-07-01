@@ -18,7 +18,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{ $orders }}</h3>
 
                         <p>Đơn hàng</p>
                     </div>
@@ -33,7 +33,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>{{ count($countProducts) }}</h3>
+                        <h3>{{ $countProducts }}</h3>
 
                         <p>Sản phẩm</p>
                     </div>
@@ -49,7 +49,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>{{ count($users) }}</h3>
+                        <h3>{{ $users }}</h3>
 
                         <p>Người dùng</p>
                     </div>

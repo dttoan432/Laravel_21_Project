@@ -24,7 +24,7 @@
                             <form action="{{ route('backend.user.index') }}" method="GET">
                                 <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
                                     <input type="text" name="q" class="form-control float-right"
-                                           placeholder="Tìm kiếm" value="{{ old('q') }}">
+                                           placeholder="Tìm kiếm" value="{{ $keyU }}">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
@@ -122,7 +122,7 @@
                 title: `Bạn có muốn xóa không?`,
                 text: "Nếu bạn xóa nó, bạn sẽ không thể khôi phục lại được",
                 icon: "error",
-                buttons: ["Không", "Đồng ý"],
+                buttons: ["Không", "Xóa"],
                 dangerMode: true,
             })
                 .then((willDelete) => {

@@ -38,7 +38,7 @@ Route::post('register', 'Auth\RegisterController@register')->name('register.stor
 Route::group([
     'namespace' => 'Backend',
     'prefix' => 'admin',
-    'middleware' => ['auth', 'check_admin'],
+    'middleware' => ['auth', 'check_admin', 'preventBackHistory'],
 ], function () {
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('backend.dashboard');
@@ -115,6 +115,18 @@ Route::group([
         Route::delete('/{trademark}', 'TrademarkController@destroy')
             ->name('backend.trademark.destroy')
             ->middleware('can:delete,trademark');
+    });
+
+    //Quản lý đơn hàng
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('/', 'OrderController@index')->name('backend.order.index');
+    });
+
+    //Thống kê doanh thu
+    Route::group(['prefix' => 'statistic'], function () {
+        Route::get('/', 'StatisticController@index')->name('backend.statistic.index');
+        Route::post('/filte-by-date', 'StatisticController@filterByDate')->name('backend.statistic.day');
+        Route::post('/filte-option', 'StatisticController@filterOption')->name('backend.statistic.option');
     });
 });
 
