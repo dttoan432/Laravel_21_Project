@@ -122,23 +122,10 @@
                     <!--Widget Price Slider Start-->
                     <div class="widget widget-price-slider">
                         <h3 class="widget-title">Lọc theo giá</h3>
-                        <div class="widget-content">
-                            <div class="price-filter">
-                                <form action="{{ route('frontend.category', $category->id) }}" method="GET">
-                                    <div id="slider-range"></div>
-                                    <span><input id="amount" class="amount" readonly type="text"
-                                                 style="width: 100%;"></span>
-                                    <input type="hidden" id="start_price" name="start_price" value="1000000">
-                                    <input type="hidden" id="end_price" name="end_price" value="50000000">
-                                    <input class="price-button" value="Filter" type="submit">
-                                </form>
-                            </div>
-                        </div>
                     </div>
 
                     <!--Widget Price Slider End-->
                     <div class="widget widget-brand">
-                        <h3 class="widget-title">Brand</h3>
                         <div class="widget-content">
                             <ul class="brand-menu">
                                 <li class="priceui">
@@ -166,49 +153,6 @@
                                     <a href="{{ request()->fullUrlWithQuery(['price' => '25']) }}">Trên 25 triệu</a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-
-                    <div class="widget widget-manufacture">
-                        <h3 class="widget-title">MANUFACTURER</h3>
-                        <div class="widget-content">
-                            <ul class="brand-menu">
-                                <li><input type="checkbox"><a href="#">Pellentesque</a> <span
-                                        class="pull-right">(1)</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--Widget Manufacture End-->
-                    <!--Widget Color Start-->
-                    <div class="widget widget-color">
-                        <h3 class="widget-title">Color</h3>
-                        <div class="widget-content">
-                            <ul class="brand-menu">
-                                <li><input type="checkbox"><a href="#">Gold</a> <span class="pull-right">(1)</span></li>
-                                <li><input type="checkbox"><a href="#">Green</a> <span class="pull-right">(1)</span>
-                                </li>
-                                <li><input type="checkbox"><a href="#">White</a> <span class="pull-right">(1)</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--Widget Color End-->
-                    <!--Widget Compare Start-->
-                    <div class="widget widget-compare">
-                        <h3 class="widget-compare-title">Compare</h3>
-                        <div class="widget-content">
-                            <ul class="compare-menu">
-                                <li>
-                                    <a class="title" href="#">Cillum dolore</a>
-                                    <a class="pull-right" href="#"><i class="fa fa-times"></i></a>
-                                </li>
-                                <li>
-                                    <a class="title" href="#">Cillum dolore</a>
-                                    <a class="pull-right" href="#"><i class="fa fa-times"></i></a>
-                                </li>
-                            </ul>
-                            <a class="clear-all" href="#">Clear all</a>
-                            <a class="compare-btn" href="#">compare</a>
                         </div>
                     </div>
                 </div>

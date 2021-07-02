@@ -18,14 +18,14 @@
                             <div class="slider-caption">
                                 <div class="slider-text">
                                     <h5 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                                        Exclusive Offer -20% Off This Week </h5>
+                                        Xu hướng công nghệ </h5>
                                     <h1 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                                        Gone Gear Vr <br>Sale 70% Off</h1>
+                                        VR<br></h1>
                                     <h4 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                        Starting at <span>$560.99</span></h4>
+                                        Chỉ từ <span>400.000 ₫</span></h4>
                                     <div class="slider-button">
-                                        <a href="#" class="wow button animated fadeInLeft" data-text="Shop now"
-                                           data-wow-duration="2.5s" data-wow-delay="0.5s">shopping Now</a>
+                                        <a href="{{ route('frontend.category', 'kinh-thuc-te-ao') }}" class="wow button animated fadeInLeft" data-text="Shop now"
+                                           data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                     <h4 class="wow animated fadeInLeft" data-wow-duration="2s" data-wow-delay="0.5s">
                                         Starting at <span>$560.99</span></h4>
                                     <div class="slider-button">
-                                        <a href="#" class="wow button animated fadeInLeft" data-text="Shop now"
+                                        <a href="{{ route('frontend.category', 'dien-thoai') }}" class="wow button animated fadeInLeft" data-text="Shop now"
                                            data-wow-duration="2.5s" data-wow-delay="0.5s">shopping Now</a>
                                     </div>
                                 </div>
@@ -246,7 +246,7 @@
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Quick View</a>
+                                                                   data-toggle="tooltip">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -317,7 +317,7 @@
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Quick View</a>
+                                                                   data-toggle="tooltip">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -388,7 +388,7 @@
                                                                 <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Quick View</a>
+                                                                   data-toggle="tooltip">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -105,7 +105,7 @@
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm"
-                                           href="{{ route('frontend.product.show', $product->id) }}">
+                                           href="{{ route('frontend.product.show', $product->slug) }}">
                                             <i class="fas fa-street-view"></i> Xem
                                         </a>
                                         @can('update', $product)

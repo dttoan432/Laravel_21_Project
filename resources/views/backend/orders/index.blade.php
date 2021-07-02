@@ -53,7 +53,7 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $order->user->name }}</td>
                                         <td>{{ $order->user->phone }}</td>
-                                        <td>{{ $order->total_price }}</td>
+                                        <td>{{ number_format($order->total_price, 0, '.', '.') }} ₫</td>
                                         <td>{{ date('d-m-Y', strtotime($order->order_date)) }}</td>
                                         @if($order->status == 0)
                                             <td><span class="badge badge-pill bg-danger widspan font-weight-normal">{{ $order->status_text }}</span></td>
@@ -66,7 +66,7 @@
                                         @endif
                                         <td class="project-actions text-right">
                                                 <a class="btn btn-info btn-sm"
-                                                   href="">
+                                                   href="{{ route('backend.order.show', $order->id) }}">
                                                     <i class="fas fa-eye"></i> Chi tiết
                                                 </a>
                                                 <form action=""

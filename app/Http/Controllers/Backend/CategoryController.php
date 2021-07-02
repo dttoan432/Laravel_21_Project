@@ -118,7 +118,7 @@ class CategoryController extends Controller
         $category->update($data);
         if (!empty($data['trademark_id'])){
             $category->trademarks()->sync($data['trademark_id'], [
-                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
             ]);
         } else{
             $category->trademarks()->detach();

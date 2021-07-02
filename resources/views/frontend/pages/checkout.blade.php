@@ -28,20 +28,20 @@
                             <h3>Thông tin khách hàng</h3>
                         </div>
                         <div class="ceckout-form">
-                            <form action="#">
-                                <!--Billing Fields Start-->
+                            <form action="{{ route('frontend.pay') }}" method="POST">
+                                @csrf
                                 <div class="billing-fields">
                                     <div class="form-fild company-name">
                                         <p><label>Họ tên <span class="required">*</span></label></p>
-                                        <input type="text" placeholder name="name" value disabled>
+                                        <input type="text" placeholder name="name" value="{{ $user->name }}" disabled>
                                     </div>
                                     <div class="form-fild billing_address_1">
                                         <p><label>Số điện thoại <span class="required">*</span></label></p>
-                                        <input type="text" name="billing_company_name" value disabled>
+                                        <input type="text" name="phone" value="{{ $user->phone }}">
                                     </div>
                                     <div class="form-fild billing_postcode">
                                         <p><label>Địa chỉ <span class="required">*</span></label></p>
-                                        <input type="text" placeholder name="billing_company_name" value disabled>
+                                        <input type="text" placeholder name="address" value="{{ $user->address }}">
                                     </div>
                                 </div>
 
@@ -51,7 +51,10 @@
                                             <tbody>
                                             <tr class="order-total">
                                                 <th>Tổng tiền</th>
-                                                <td><strong><span class="total-amount">$207.00</span></strong></td>
+                                                <td>
+                                                    <input type="hidden" value="{{ \Gloudemans\Shoppingcart\Facades\Cart::total() }}" name="total_price">
+                                                    <strong><span class="total-amount">{{ number_format(\Gloudemans\Shoppingcart\Facades\Cart::total(), 0, '.', '.') }} ₫</span></strong>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -61,7 +64,7 @@
                                 <div class="checkout-payment">
                                     <ul>
                                         <li class="payment_method_cheque-li">
-                                            <input id="payment_method_cheque" class="input-radio" name="payment_method" checked="checked" value="bacs" type="radio">
+                                            <input id="payment_method_cheque" class="input-radio" checked="checked" value="bacs" type="radio">
                                             <label for="payment_method_cheque">Thanh toán khi nhận hàng</label>
                                         </li>
                                     </ul>

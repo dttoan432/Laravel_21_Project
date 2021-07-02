@@ -64,7 +64,7 @@
                     <!--Logo Start-->
                     <div class="col-lg-3 col-md-3 col-12">
                         <div class="logo">
-                            <a href="{{ route('frontend.index') }}"><img src="frontend/images/logo.png" alt></a>
+                            <a href="{{ route('frontend.index') }}"><img src="/frontend/images/logo.png" alt></a>
                         </div>
                     </div>
                     <!--Logo End-->
@@ -91,7 +91,7 @@
                     <div class="col-lg-3 col-md-4 col-12">
                         <div class="mini-cart-area">
                             <ul>
-                                <li><a href="#"><i class="ion-android-cart"></i></li>
+                                <li><a href="{{ route('frontend.cart.index') }}"><i class="ion-android-cart"></i></a></li>
                             </ul>
                         </div>
                     </div>

@@ -47,78 +47,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="product-remove">
-                                        <a href="#">×</a>
-                                    </td>
-                                    <td class="product-cart-img">
-                                        <a href="#"><img src="images/1.jpg" alt></a>
-                                    </td>
-                                    <td class="product-name">
-                                        <a href="#">natural typesetting</a>
-                                    </td>
-                                    <td class="product-quantity">
-                                        <select>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </td>
-                                    <td class="product-price">
-                                        <span><ins>$69.00</ins></span>
-                                    </td>
-                                    <td class="product-total-price">
-                                        <span>$69.00</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-remove">
-                                        <a href="#">×</a>
-                                    </td>
-                                    <td class="product-cart-img">
-                                        <a href="#"><img src="images/2.jpg" alt></a>
-                                    </td>
-                                    <td class="product-name">
-                                        <a href="#">Natural simply random</a>
-                                    </td>
-                                    <td class="product-quantity">
-                                        <select>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </td>
-                                    <td class="product-price">
-                                        <span><ins>$69.00</ins></span>
-                                    </td>
-                                    <td class="product-total-price">
-                                        <span>$69.00</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-remove">
-                                        <a href="#">×</a>
-                                    </td>
-                                    <td class="product-cart-img">
-                                        <a href="#"><img src="images/1.jpg" alt></a>
-                                    </td>
-                                    <td class="product-name">
-                                        <a href="#">Natural simply random</a>
-                                    </td>
-                                    <td class="product-quantity">
-                                        <select>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </td>
-                                    <td class="product-price">
-                                        <span><ins>$69.00</ins></span>
-                                    </td>
-                                    <td class="product-total-price">
-                                        <span>$69.00</span>
-                                    </td>
-                                </tr>
+                                @foreach($items as $item)
+                                    <tr>
+                                        <td class="product-remove">
+                                            <a href="{{ route('frontend.cart.remove', $item->rowId) }}">×</a>
+                                        </td>
+                                        <td class="product-cart-img">
+                                            <a href="{{ route('frontend.product.show', $item->options->slug) }}"><img
+                                                    src="{{ $item->options->image }}" style="width: 150px;" alt></a>
+                                        </td>
+                                        <td class="product-name">
+                                            <a href="{{ route('frontend.product.show', $item->options->slug) }}">{{ $item->name }}</a>
+                                        </td>
+                                        <td class="product-quantity">
+                                            <input class="input-text" value="{{ $item->qty }}" type="number" min="1" onchange="updateCart(this.value, '{{ $item->rowId }}')" style="width: 50px;">
+                                        </td>
+                                        <td class="product-price">
+                                            <span><ins>{{ number_format($item->price, 0, '.', '.') }} ₫</ins></span>
+                                        </td>
+                                        <td class="product-total-price">
+                                            <span>{{ number_format($item->qty * $item->price, 0, '.', '.') }} ₫</span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -126,9 +77,13 @@
                 </div>
             </div>
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
+                    @if(\Gloudemans\Shoppingcart\Facades\Cart::count() > 0)
+                        <a class="checkout-button " href="{{ route('frontend.cart.destroy') }}">Xóa toàn bộ</a>
+                    @endif
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="shopping-cart-total">
@@ -137,17 +92,39 @@
                             <table>
                                 <tbody>
                                 <tr class="order-total">
-                                    <td data-title="Tổng tiền"><span><strong>$212.00</strong></span></td>
+                                    <td data-title="Tổng tiền"><span><strong>{{ number_format(\Gloudemans\Shoppingcart\Facades\Cart::total(), 0, '.', '.') }} ₫</strong></span>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="proceed-to-checkout">
-                            <a class="checkout-button " href="#">Tiếp tục</a>
+                            @if(\Illuminate\Support\Facades\Auth::check() && \Gloudemans\Shoppingcart\Facades\Cart::count() > 0)
+                                <a href="{{ route('frontend.checkout') }}" class="checkout-button">Tiếp tục</a>
+                            @elseif(\Illuminate\Support\Facades\Auth::check())
+                                <p class="text-danger">Chưa có sản phẩm</p>
+                            @else
+                                <a href="{{ route('login.form') }}" class="checkout-button" id="conti">Đăng nhập</a>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function updateCart(qty, rowId){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{ route('frontend.cart.update') }}',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {qty: qty, rowId: rowId, _token: _token},
+                success: function (data) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
 @endsection

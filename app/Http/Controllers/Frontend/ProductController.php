@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->first();
+        $products = Product::where('category_id', $product->category_id)->offset(0)->limit(10)->get();
         return view('frontend.pages.product')->with([
-            'product'   => $product
+            'product'   => $product,
+            'products'  => $products
         ]);
     }
 

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -94,6 +95,8 @@ class ProductController extends Controller
                 $image->save();
             }
         }
+
+        Cache::forget('productFE');
 
         if ($product && $image) {
             return redirect()->route('backend.product.index')->with("success", 'Tạo mới thành công');
@@ -187,6 +190,8 @@ class ProductController extends Controller
             }
         }
 
+        Cache::forget('productFE');
+
         if ($product) {
             return redirect()->route('backend.product.index')->with("success", 'Thay đổi thành công');
         }
@@ -210,6 +215,8 @@ class ProductController extends Controller
             }
         }
         $product->delete();
+
+        Cache::forget('productFE');
 
         if ($product) {
             return redirect()->route('backend.product.index')->with("success", 'Xóa thành công');

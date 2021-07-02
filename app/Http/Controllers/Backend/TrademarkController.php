@@ -129,6 +129,7 @@ class TrademarkController extends Controller
             }
         }
         $trademark->delete();
+        $trademark->categories()->detach();
 
         Cache::forget('listTrademarks');
 

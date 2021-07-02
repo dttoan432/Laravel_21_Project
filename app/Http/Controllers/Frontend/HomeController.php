@@ -12,7 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = Product::where('status', Product::STATUS_BUY)->orderBy('created_at', 'DESC')->get();
+        $products = Cache::remember('productFE', 60, function() {
+            return Product::where('status', Product::STATUS_BUY)->orderBy('created_at', 'DESC')->get();
+        });
+
         return view('frontend.home')->with([
             'products' => $products,
         ]);

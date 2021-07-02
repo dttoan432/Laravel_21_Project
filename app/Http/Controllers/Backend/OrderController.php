@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(25);
+        $orders = Order::orderBy('created_at', 'DESC')->paginate(25);
         return view('backend.orders.index')->with([
             'orders' => $orders
         ]);
@@ -48,9 +51,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return view('backend.orders.show')->with([
+            'order' => $order
+        ]);
     }
 
     /**
@@ -73,7 +78,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token');
+        $data['updated_at'] = Carbon::now();
+        $order = Order::where('id', $id)->first();
+        $order->update($data);
+
+        if ($order){
+            return redirect()->route('backend.order.index')->with("success",'Cập nhật thành công');
+        }
+        return redirect()->route('backend.order.index')->with("error",'Cập nhật thất bại');
     }
 
     /**
@@ -82,8 +95,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        //
+
     }
 }

@@ -65,14 +65,14 @@
                         </div>
                         <!--Product Description End-->
                         <!--Product Quantity Start-->
+{{--                        {{ route('frontend.cart.add', $product->id) }}--}}
+
                         <div class="single-product-quantity">
-                            <form action="#">
                                 <div class="quantity">
                                     <label>Số lượng</label>
-                                    <input class="input-text" value="1" type="number">
+                                    <input class="input-text" value="1" type="number" name="quantity" min="1" id="quantity">
                                 </div>
-                                <button class="quantity-button" type="submit">Thêm vào giỏ hàng</button>
-                            </form>
+                                <button class="quantity-button" type="button" id="addToCart">Thêm vào giỏ hàng</button>
                         </div>
                         <!--Wislist Compare Button End-->
                         <!--Product Meta Start-->
@@ -93,7 +93,6 @@
                                 <ul class="nav">
                                     <li><a class="active" data-toggle="tab" href="#description">Mô tả sản phẩm</a></li>
                                     <li><a data-toggle="tab" href="#specifications">Thông số kỹ thuật</a></li>
-                                    <li><a data-toggle="tab" href="#review">Đánh giá</a></li>
                                 </ul>
                             </div>
                             <!--Discription Tab Menu End-->
@@ -176,81 +175,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="review" class="tab-pane fade">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="review-page-comment">
-                                                <div class="review-comment">
-                                                    <h2>1 review for typesetting animal</h2>
-                                                    <ul>
-                                                        <li>
-                                                            <div class="product-comment">
-                                                                <img src="images/2_1.png" alt>
-                                                                <div class="product-comment-content">
-                                                                    <p><strong>admin</strong>
-                                                                        -
-                                                                        <span>March 7, 2016:</span>
-                                                                        <span class="pro-comments-rating">
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                        </span>
-                                                                    </p>
-                                                                    <div class="description">
-                                                                        <p>roadthemes</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="review-form-wrapper">
-                                                        <div class="review-form">
-                                                            <span class="comment-reply-title">Add a review </span>
-                                                            <form action="#">
-                                                                <p class="comment-notes">
-                                                                    <span id="email-notes">Your email address will not be published.</span>
-                                                                    Required fields are marked
-                                                                    <span class="required">*</span>
-                                                                </p>
-                                                                <div class="comment-form-rating">
-                                                                    <label>Your rating</label>
-                                                                    <div class="rating">
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="input-element">
-                                                                    <div class="comment-form-comment">
-                                                                        <label>Comment</label>
-                                                                        <textarea name="message" cols="40"
-                                                                                  rows="8"></textarea>
-                                                                    </div>
-                                                                    <div class="review-comment-form-author">
-                                                                        <label>Name </label>
-                                                                        <input required="required" type="text">
-                                                                    </div>
-                                                                    <div class="review-comment-form-email">
-                                                                        <label>Email </label>
-                                                                        <input required="required" type="text">
-                                                                    </div>
-                                                                    <div class="comment-submit">
-                                                                        <button type="submit" class="form-button">
-                                                                            Submit
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <!--Discription Tab Content End-->
                         </div>
@@ -277,219 +201,30 @@
             </div>
             <div class="row">
                 <div class="related-products owl-carousel">
-                    <!--Single Product Start-->
+                    @foreach($products as $pro)
                     <div class="col-lg-12">
                         <div class="single-product">
                             <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/9.jpg" alt>
-                                    <img class="hover-img" src="images/10.jpg" alt>
+                                <a href="{{ route('frontend.product.show', $pro->slug) }}">
+                                    <img class="first-img" src="{{ $pro->images[0]->image_url }}" alt>
                                 </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
                             </div>
                             <div class="product-content">
-                                <h2><a href="single-product.html">Letraset animal</a></h2>
+                                <h2><a href="{{ route('frontend.product.show', $pro->slug) }}">{{ $pro->name }}</a></h2>
                                 <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
+                                    <span class="new-price">{{ $pro->sale_price }}</span>
+                                    <a class="button add-btn" href="{{ route('frontend.product.show', $pro->slug) }}">Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/21.jpg" alt>
-                                    <img class="hover-img" src="images/22.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Natural popularised</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/19.jpg" alt>
-                                    <img class="hover-img" src="images/20.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Natural simply</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/17.jpg" alt>
-                                    <img class="hover-img" src="images/18.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Specimen animal</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/11.jpg" alt>
-                                    <img class="hover-img" src="images/12.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Natural Contrary</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/25.jpg" alt>
-                                    <img class="hover-img" src="images/26.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Dummy animal</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/31.jpg" alt>
-                                    <img class="hover-img" src="images/32.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Simply animal</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
-                    <!--Single Product Start-->
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="single-product.html">
-                                    <img class="first-img" src="images/27.jpg" alt>
-                                    <img class="hover-img" src="images/28.jpg" alt>
-                                </a>
-                                <span class="sicker">-7%</span>
-                                <ul class="product-action">
-                                    <li><a href="#"><i class="ion-android-favorite-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-ios-shuffle-strong"></i></a></li>
-                                    <li><a href="#" data-toggle="modal" title="Quick View" data-target="#myModal"><i
-                                                class="ion-android-expand"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="single-product.html">Natural standard</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">$69.00</span>
-                                    <a class="button add-btn" href="#">add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Single Product End-->
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#show_description').click(function () {
@@ -501,6 +236,30 @@
                 $('.specifications-content').css({
                     'height': '100%'
                 }, $('#show').hide(), $('.bg-article').hide(), $('#show_specifications').hide())
+            })
+
+            $('#addToCart').click(function (){
+                var id = {{ $product->id }};
+                var quantity = $('#quantity').val();
+                var _token = $('input[name="_token"]').val();
+                var total_quantity = {{ $product->quantity }};
+                if (quantity <= total_quantity){
+                    $.ajax({
+                        url: '{{ route('frontend.cart.add') }}',
+                        method: 'POST',
+                        dataType: 'JSON',
+                        data: {id: id, quantity: quantity, _token: _token},
+                        success: function (data){
+                            swal("Thêm thành công", "Xem chi tiết trong giỏ hàng", "success");
+                        },
+                        error: function (){
+                            swal("Thêm không thành công", "Vui lòng thử lại", "error");
+                        }
+                    });
+                } else {
+                    swal("Không đủ sản phẩm", "Chỉ còn lại " + total_quantity + " sản phẩm", "error");
+                }
+
             })
         });
     </script>
