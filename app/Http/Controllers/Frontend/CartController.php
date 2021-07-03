@@ -22,6 +22,7 @@ class CartController extends Controller
         Cart::add($product->id, $product->name, $data['quantity'], $product->sale_price, 0, [
             'slug' => $product->slug,
             'image' => $product->images[0]->image_url,
+            'cost' => $product->origin_price,
         ]);
 
         echo $data = json_encode($data);

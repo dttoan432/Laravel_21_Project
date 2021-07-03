@@ -46,14 +46,12 @@
                             <div class="row">
                                 <div class="col-2">
                                     <label for="">Từ ngày</label>
-                                    <input type="text" id="datepicker" class="form-control form-control-sm"
-                                           value="2021-06-26">
+                                    <input type="text" id="datepicker" class="form-control form-control-sm">
                                     </p>
                                 </div>
                                 <div class="col-2">
                                     <label for="">Đến ngày</label>
-                                    <input type="text" id="datepicker2" class="form-control form-control-sm"
-                                           value="2021-06-29">
+                                    <input type="text" id="datepicker2" class="form-control form-control-sm">
 
                                 </div>
                                 <div class="col-1">
@@ -162,9 +160,9 @@
                 parseTime: false,
                 resize: true,
                 xkey: 'period',
-                ykeys: ['order', 'sale', 'profit', 'quantity'],
+                ykeys: ['order', 'revenue', 'profit', 'quantity'],
                 behaveLikeLine: true,
-                labels: ['đơn hàng', 'doanh thu', 'lợi nhuận', 'số lượng'],
+                labels: ['đơn hàng', 'doanh thu', 'lợi nhuận', 'sản phẩm'],
             });
 
             $('#btn-dashboard-filter').click(function () {
@@ -181,7 +179,7 @@
                         var revenue = 0;
                         var profit = 0;
                         for (var i = 0; i < data.length; i++) {
-                            revenue += data[i]['sale'];
+                            revenue += data[i]['revenue'];
                             profit += data[i]['profit'];
                         }
                         ;
@@ -213,7 +211,7 @@
                         var revenue = 0;
                         var profit = 0;
                         for (var i = 0; i < data.length; i++) {
-                            revenue += data[i]['sale'];
+                            revenue += data[i]['revenue'];
                             profit += data[i]['profit'];
                         };
 
@@ -242,7 +240,7 @@
                         var revenue = 0;
                         var profit = 0;
                         for (var i = 0; i < data.length; i++) {
-                            revenue += data[i]['sale'];
+                            revenue += data[i]['revenue'];
                             profit += data[i]['profit'];
                         }
                         ;

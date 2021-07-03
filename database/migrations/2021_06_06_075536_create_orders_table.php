@@ -16,9 +16,12 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('address');
+            $table->text('note')->nullable();
             $table->integer('total_price');
             $table->integer('status')->default(0); //0: Chờ xác nhận    1: Đã xác nhận      2: Đang giao hàng       3: Đã hoàn thành
-            $table->date('order_date');
             $table->timestamps();
         });
     }

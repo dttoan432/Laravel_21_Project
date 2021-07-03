@@ -33,7 +33,7 @@
                                 <div class="billing-fields">
                                     <div class="form-fild company-name">
                                         <p><label>Họ tên <span class="required">*</span></label></p>
-                                        <input type="text" placeholder name="name" value="{{ $user->name }}" disabled>
+                                        <input type="text" placeholder name="name" value="{{ $user->name }}">
                                     </div>
                                     <div class="form-fild billing_address_1">
                                         <p><label>Số điện thoại <span class="required">*</span></label></p>
@@ -42,6 +42,10 @@
                                     <div class="form-fild billing_postcode">
                                         <p><label>Địa chỉ <span class="required">*</span></label></p>
                                         <input type="text" placeholder name="address" value="{{ $user->address }}">
+                                    </div>
+                                    <div class="form-fild billing_postcode">
+                                        <p><label>Lưu ý <span class="required">*</span></label></p>
+                                        <textarea name="note" rows="3" placeholder="Lưu ý khi nhận hàng"></textarea>
                                     </div>
                                 </div>
 

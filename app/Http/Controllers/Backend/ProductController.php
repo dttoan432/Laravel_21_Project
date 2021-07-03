@@ -226,6 +226,7 @@ class ProductController extends Controller
 
     public function filter(Request $request)
     {
+        $keyW = '';
         if ($request->get('trademark') == -1 && $request->get('category') == -1 && $request->get('status') == -1) {
             return redirect()->route('backend.product.index');
         }
@@ -237,6 +238,7 @@ class ProductController extends Controller
 
         return view('backend.products.index')->with([
             'products' => $products,
+            'keyW' => $keyW
         ]);
     }
 }

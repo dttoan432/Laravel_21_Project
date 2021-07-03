@@ -17,7 +17,8 @@ class Order extends Model
         'status',
         'phone',
         'address',
-        'order_date'
+        'name',
+        'note',
     ];
 
     public function products()

@@ -44,7 +44,7 @@ class StatisticController extends Controller
             $chartData[] = array(
                 'period'    => $get->order_date,
                 'order'     => $get->total_order,
-                'sale'      => $get->sale,
+                'revenue'   => $get->revenue,
                 'profit'    => $get->profit,
                 'quantity'  => $get->quantity
             );
@@ -99,7 +99,7 @@ class StatisticController extends Controller
             $chartData[] = array(
                 'period'    => $get->order_date,
                 'order'     => $get->total_order,
-                'sale'      => $get->sale,
+                'revenue'   => $get->revenue,
                 'profit'    => $get->profit,
                 'quantity'  => $get->quantity
             );
