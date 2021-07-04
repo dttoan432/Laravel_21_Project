@@ -65,15 +65,8 @@
                         </div>
                         <!--Product Description End-->
                         <!--Product Quantity Start-->
-{{--                        {{ route('frontend.cart.add', $product->id) }}--}}
+                        <button class="quantity-button" type="button" id="addToCart">Thêm vào giỏ hàng</button>
 
-                        <div class="single-product-quantity">
-                                <div class="quantity">
-                                    <label>Số lượng</label>
-                                    <input class="input-text" value="1" type="number" name="quantity" min="1" id="quantity">
-                                </div>
-                                <button class="quantity-button" type="button" id="addToCart">Thêm vào giỏ hàng</button>
-                        </div>
                         <!--Wislist Compare Button End-->
                         <!--Product Meta Start-->
 
@@ -202,22 +195,24 @@
             <div class="row">
                 <div class="related-products owl-carousel">
                     @foreach($products as $pro)
-                    <div class="col-lg-12">
-                        <div class="single-product">
-                            <div class="product-img">
-                                <a href="{{ route('frontend.product.show', $pro->slug) }}">
-                                    <img class="first-img" src="{{ $pro->images[0]->image_url }}" alt>
-                                </a>
-                            </div>
-                            <div class="product-content">
-                                <h2><a href="{{ route('frontend.product.show', $pro->slug) }}">{{ $pro->name }}</a></h2>
-                                <div class="product-price">
-                                    <span class="new-price">{{ $pro->sale_price }}</span>
-                                    <a class="button add-btn" href="{{ route('frontend.product.show', $pro->slug) }}">Xem chi tiết</a>
+                        <div class="col-lg-12">
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <a href="{{ route('frontend.product.show', $pro->slug) }}">
+                                        <img class="first-img" src="{{ $pro->images[0]->image_url }}" alt>
+                                    </a>
+                                </div>
+                                <div class="product-content">
+                                    <h2><a href="{{ route('frontend.product.show', $pro->slug) }}">{{ $pro->name }}</a>
+                                    </h2>
+                                    <div class="product-price">
+                                        <span class="new-price">{{ $pro->sale_price }}</span>
+                                        <a class="button add-btn"
+                                           href="{{ route('frontend.product.show', $pro->slug) }}">Xem chi tiết</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
@@ -238,29 +233,23 @@
                 }, $('#show').hide(), $('.bg-article').hide(), $('#show_specifications').hide())
             })
 
-            $('#addToCart').click(function (){
+            $('#addToCart').click(function () {
                 var id = {{ $product->id }};
-                var quantity = $('#quantity').val();
                 var _token = $('input[name="_token"]').val();
-                var total_quantity = {{ $product->quantity }};
-                if (quantity <= total_quantity){
-                    $.ajax({
-                        url: '{{ route('frontend.cart.add') }}',
-                        method: 'POST',
-                        dataType: 'JSON',
-                        data: {id: id, quantity: quantity, _token: _token},
-                        success: function (data){
-                            swal("Thêm thành công", "Xem chi tiết trong giỏ hàng", "success");
-                        },
-                        error: function (){
-                            swal("Thêm không thành công", "Vui lòng thử lại", "error");
-                        }
-                    });
-                } else {
-                    swal("Không đủ sản phẩm", "Chỉ còn lại " + total_quantity + " sản phẩm", "error");
-                }
-
-            })
+                $.ajax({
+                    url: '{{ route('frontend.cart.add') }}',
+                    method: 'POST',
+                    dataType: 'JSON',
+                    data: {id: id, _token: _token},
+                    success: function (data) {
+                        swal("Thêm thành công", "Xem chi tiết trong giỏ hàng", "success");
+                        console.log(data);
+                    },
+                    error: function () {
+                        swal("Thêm không thành công", "Không đủ sản phẩm", "error");
+                    }
+                });
+            });
         });
     </script>
 

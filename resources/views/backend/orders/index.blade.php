@@ -51,10 +51,10 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ $order->user->name }}</td>
-                                        <td>{{ $order->user->phone }}</td>
+                                        <td>{{ $order->name }}</td>
+                                        <td>{{ $order->phone }}</td>
                                         <td>{{ number_format($order->total_price, 0, '.', '.') }} ₫</td>
-                                        <td>{{ date('d-m-Y', strtotime($order->order_date)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
                                         @if($order->status == 0)
                                             <td><span class="badge badge-pill bg-danger widspan font-weight-normal">{{ $order->status_text }}</span></td>
                                         @elseif($order->status == 1)
@@ -69,7 +69,7 @@
                                                    href="{{ route('backend.order.show', $order->id) }}">
                                                     <i class="fas fa-eye"></i> Chi tiết
                                                 </a>
-                                                <form action=""
+                                                <form action="{{ route('backend.order.destroy', $order->id) }}"
                                                       method="POST" style="display: inline">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
@@ -89,15 +89,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script-bot')
-    <style>
-        .widspan {
-            padding: .25em 10px;
-            font-size: 14px;
-        }
-    </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @if(Session::has('success'))
@@ -109,7 +100,7 @@
             toastr.error("{!! Session::get('error') !!}");
         </script>
     @endif
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
         $('.delete-confirm').click(function(event) {
@@ -130,4 +121,13 @@
                 });
         });
     </script>
+@endsection
+
+@section('script-bot')
+    <style>
+        .widspan {
+            padding: .25em 10px;
+            font-size: 14px;
+        }
+    </style>
 @endsection

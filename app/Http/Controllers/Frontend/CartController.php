@@ -9,37 +9,57 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $items = Cart::content();
         return view('frontend.pages.cart')->with([
             'items' => $items
         ]);
     }
 
-    public function add(Request $request){
+    public function add(Request $request)
+    {
         $data = $request->all();
         $product = Product::find($data['id']);
-        Cart::add($product->id, $product->name, $data['quantity'], $product->sale_price, 0, [
+        $qua = Cart::add($product->id, $product->name, 1, $product->sale_price, 0, [
             'slug' => $product->slug,
             'image' => $product->images[0]->image_url,
             'cost' => $product->origin_price,
+            'quantity' => $product->quantity,
         ]);
-
-        echo $data = json_encode($data);
+        if ($qua->qty > $qua->options->quantity){
+            Cart::update($qua->rowId, $qua->qty - 1);
+        } else {
+            echo $data = json_encode($qua);
+        }
     }
 
-    public function update(Request $request){
-        $up = Cart::update($request->rowId, $request->qty);
-        echo $data = json_encode($up);
+    public function increment(Request $request)
+    {
+        $cart = Cart::get($request->rowId);
+        if ($cart->qty < $cart->options->quantity){
+            Cart::update($request->rowId, $cart->qty + 1);
+            echo $data = json_encode($cart);
+        } else {
+            echo $data;
+        }
     }
 
-    public function remove($cart_id){
+    public function decrement(Request $request)
+    {
+        $cart = Cart::get($request->rowId);
+        Cart::update($request->rowId, $cart->qty - 1);
+        echo $data = json_encode($cart);
+    }
+
+    public function remove($cart_id)
+    {
         Cart::remove($cart_id);
-
         return redirect()->route('frontend.cart.index');
     }
 
-    public function destroy(){
+    public function destroy()
+    {
         Cart::destroy();
         return redirect()->route('frontend.cart.index');
     }

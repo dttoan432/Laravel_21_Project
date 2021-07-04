@@ -60,7 +60,9 @@
                                             <a href="{{ route('frontend.product.show', $item->options->slug) }}">{{ $item->name }}</a>
                                         </td>
                                         <td class="product-quantity">
-                                            <input class="input-text" value="{{ $item->qty }}" type="number" min="1" onchange="updateCart(this.value, '{{ $item->rowId }}')" style="width: 50px;">
+                                            <i class="fas fa-plus butt" onclick="increment('{{ $item->rowId }}')"></i>
+                                            <span style="margin: 0 10px;">{{ $item->qty }}</span>
+                                            <i class="fas fa-minus butt" onclick="decrement('{{ $item->rowId }}')"></i>
                                         </td>
                                         <td class="product-price">
                                             <span><ins>{{ number_format($item->price, 0, '.', '.') }} ₫</ins></span>
@@ -98,13 +100,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="proceed-to-checkout">
+                        <div class="proceed-to-checkout" id="checkd">
                             @if(\Illuminate\Support\Facades\Auth::check() && \Gloudemans\Shoppingcart\Facades\Cart::count() > 0)
                                 <a href="{{ route('frontend.checkout') }}" class="checkout-button">Tiếp tục</a>
                             @elseif(\Illuminate\Support\Facades\Auth::check())
                                 <p class="text-danger">Chưa có sản phẩm</p>
                             @else
-                                <a href="{{ route('login.form') }}" class="checkout-button" id="conti">Đăng nhập</a>
+                                <a href="{{ route('login.form') }}" class="checkout-button">Đăng nhập</a>
                             @endif
                         </div>
                     </div>
@@ -113,16 +115,42 @@
         </div>
     </div>
 
+    <style>
+        .butt:hover{
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
-        function updateCart(qty, rowId){
+        function increment(rowId){
             var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: '{{ route('frontend.cart.update') }}',
+                url: '{{ route('frontend.cart.increment') }}',
                 method: 'POST',
                 dataType: 'JSON',
-                data: {qty: qty, rowId: rowId, _token: _token},
+                data: {rowId: rowId, _token: _token},
                 success: function (data) {
                     location.reload();
+                },
+                error: function (){
+                    swal("Thêm không thành công", "Không đủ sản phẩm", "error");
+                }
+            });
+        }
+
+        function decrement(rowId){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{ route('frontend.cart.decrement') }}',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {rowId: rowId, _token: _token},
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (){
+                    swal("Thêm không thành công", "Vui lòng thử lại", "error");
+
                 }
             });
         }

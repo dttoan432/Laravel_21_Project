@@ -25,9 +25,9 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name'              => 'required|min:10|max:255|unique:products,name',
-            'quantity'          => 'required|numeric|max:10000|integer',
-            'origin_price'      => 'required|numeric|max:100000000|integer',
-            'sale_price'        => 'required|numeric|max:100000000|integer',
+            'quantity'          => 'required|numeric|max:10000|min:1|integer',
+            'origin_price'      => 'required|numeric|max:100000000|min:1000|integer|lt:sale_price',
+            'sale_price'        => 'required|numeric|max:100000000|min:1000|integer',
 //            'content'           => 'required',
 //            'image[]'           => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:200000',
         ];
@@ -44,16 +44,20 @@ class StoreProductRequest extends FormRequest
             'quantity.required'         => ':attribute không được để trống',
             'quantity.numeric'          => ':attribute phải nhập số',
             'quantity.max'              => ':attribute không nhập quá :max',
+            'quantity.min'              => ':attribute không nhỏ hơn :min',
             'quantity.integer'          => ':attribute phải là số nguyên',
 
             'origin_price.required'     => ':attribute không được để trống',
             'origin_price.numeric'      => ':attribute phải nhập số',
             'origin_price.max'          => ':attribute không nhập quá :max',
+            'origin_price.min'          => ':attribute không nhỏ hơn :min',
             'origin_price.integer'      => ':attribute phải là số nguyên',
+            'origin_price.lt'           => ':attribute không được cao hơn hoặc bằng giá bán',
 
             'sale_price.required'       => ':attribute không được để trống',
             'sale_price.numeric'        => ':attribute phải nhập số',
             'sale_price.max'            => ':attribute không nhập quá :max',
+            'sale_price.min'            => ':attribute không nhỏ hơn :min',
             'sale_price.integer'        => ':attribute phải là số nguyên',
 
 //            'content.required'          => ':attribute không được để trống',

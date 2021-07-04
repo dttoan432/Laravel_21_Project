@@ -43,6 +43,7 @@
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="/frontend/css/responsive.css">
     <link rel="stylesheet" href="/frontend/css/account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
 	<!-- Modernizr Js -->
 	<script src="/frontend/js/modernizr-2.8.3.min.js"></script>
 </head>

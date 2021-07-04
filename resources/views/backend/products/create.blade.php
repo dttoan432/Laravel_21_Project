@@ -57,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Số lượng</label>
-                                <input type="text" class="form-control" value="{{ old('quantity') }}" name="quantity"
+                                <input type="number" class="form-control" value="{{ old('quantity') }}" name="quantity"
                                        placeholder="Nhập số lượng sản phẩm">
 
                                 @error('quantity')
@@ -68,7 +68,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá gốc</label>
-                                        <input type="text" class="form-control" value="{{ old('origin_price') }}"
+                                        <input type="number" class="form-control" value="{{ old('origin_price') }}"
                                                name="origin_price" placeholder="Nhập giá gốc">
 
                                         @error('origin_price')
@@ -79,7 +79,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá bán</label>
-                                        <input type="text" class="form-control" value="{{ old('sale_price') }}"
+                                        <input type="number" class="form-control" value="{{ old('sale_price') }}"
                                                name="sale_price" placeholder="Nhập giá bán">
 
                                         @error('sale_price')

@@ -17,7 +17,7 @@
             <div class="col-md-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">{{ $order->user->name }}</h3>
+                        <h3 class="card-title">{{ $order->name }}</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -42,6 +42,19 @@
                         <p class="text-muted">
                             {{ $order->address }}
                         </p>
+
+                        <hr>
+
+                        <strong><i class="far fa-sticky-note mr-1"></i> Lưu ý khi giao hàng</strong>
+                        @if(!empty($order->note))
+                            <p class="text-muted">
+                                {{ $order->note }}
+                            </p>
+                        @else
+                            <p class="text-muted">
+                                Không có
+                            </p>
+                        @endif
 
                         <hr>
 

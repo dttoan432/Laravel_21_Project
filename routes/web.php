@@ -33,8 +33,11 @@ Route::group([
     Route::post('cart/add', 'CartController@add')
         ->name('frontend.cart.add');
 
-    Route::post('cart/update', 'CartController@update')
-        ->name('frontend.cart.update');
+    Route::post('/cart/increment', 'CartController@increment')
+        ->name('frontend.cart.increment');
+
+    Route::post('/cart/decrement', 'CartController@decrement')
+        ->name('frontend.cart.decrement');
 
     Route::get('cart/remove/{id}', 'CartController@remove')
         ->name('frontend.cart.remove');
