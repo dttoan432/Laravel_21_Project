@@ -82,6 +82,10 @@ class Product extends Model
         return $this->belongsToMany(Order::class);
     }
 
+    public function warehouses(){
+        return $this->hasMany(Warehouse::class);
+    }
+
     public function scopeSearch($query, $request)
     {
         if ($request->has('q')) {

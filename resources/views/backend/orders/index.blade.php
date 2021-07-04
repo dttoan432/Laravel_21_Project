@@ -100,7 +100,7 @@
             toastr.error("{!! Session::get('error') !!}");
         </script>
     @endif
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
         $('.delete-confirm').click(function(event) {

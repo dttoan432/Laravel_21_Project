@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Statistic;
 use App\Models\User;
+use App\Models\Warehouse;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
@@ -82,6 +86,75 @@ class OrderController extends Controller
         $data['updated_at'] = Carbon::now();
         $order = Order::where('id', $id)->first();
         $order->update($data);
+        if ($order->status == 3){
+            $date = Carbon::now()->format('Y-m-d');
+
+            foreach ($order->products as $item){
+                if ($warehouse = Warehouse::where([['sale_date', $date], ['product_id', $item->id]])->first()){
+                    $warehouse->sold += $item->pivot->quantity;
+                    $warehouse->save();
+
+                    $product = Product::where('id', $item->id)->first();
+                    $product->quantity -= $item->pivot->quantity;
+                    $product->save();
+                    if ($product->quantity == 0){
+                        $product->status = 2;
+                        $product->save();
+                    }
+                    Cache::forget('productFE');
+                } else{
+                    $warehouse = new Warehouse();
+                    $warehouse->product_id = $item->id;
+                    $warehouse->sold = $item->pivot->quantity;
+                    $warehouse->sale_date = Carbon::now();
+                    $warehouse->created_at = Carbon::now();
+                    $warehouse->updated_at = Carbon::now();
+                    $warehouse->save();
+
+                    $product = Product::where('id', $item->id)->first();
+                    $product->quantity -= $item->pivot->quantity;
+                    $product->save();
+                    if ($product->quantity == 0){
+                        $product->status = 2;
+                        $product->save();
+                    }
+                    Cache::forget('productFE');
+                }
+            };
+
+            $profit = $order->total_price;
+            $qty = 0;
+
+            if ($statistic = Statistic::where('order_date', $date)->first()){
+                foreach ($order->products as $item){
+                    $profit -= $item->pivot->quantity * $item->origin_price;
+                    $qty += $item->pivot->quantity;
+                }
+
+                $statistic->revenue += $order->total_price;
+                $statistic->profit += $profit;
+                $statistic->quantity += $qty;
+                $statistic->total_order += 1;
+                $statistic->updated_at = Carbon::now();
+                $statistic->save();
+
+            } else {
+                foreach ($order->products as $item){
+                    $profit -= $item->pivot->quantity * $item->origin_price;
+                    $qty += $item->pivot->quantity;
+                }
+
+                $statistic = new Statistic();
+                $statistic->order_date = $date;
+                $statistic->revenue = $order->total_price;
+                $statistic->profit = $profit;
+                $statistic->quantity = $qty;
+                $statistic->total_order = 1;
+                $statistic->created_at = Carbon::now();
+                $statistic->updated_at = Carbon::now();
+                $statistic->save();
+            }
+        }
 
         if ($order){
             return redirect()->route('backend.order.index')->with("success",'Cập nhật thành công');
@@ -97,6 +170,12 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        dd($order->id);
+        $order->products()->detach();
+        $order->delete();
+
+        if ($order){
+            return redirect()->route('backend.order.index')->with("success",'Xóa thành công');
+        }
+        return redirect()->route('backend.order.index')->with("error",'Xóa thất bại');
     }
 }
