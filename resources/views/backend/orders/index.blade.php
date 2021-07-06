@@ -27,7 +27,7 @@
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên khách hàng</th>
+                                <th>Tên người nhận</th>
                                 <th>Số điện thoại</th>
                                 <th>Tổng đơn hàng</th>
                                 <th>Thời gian tạo</th>
@@ -42,45 +42,53 @@
                                 }
                             </style>
                             <tbody>
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach($orders as $order)
                                 @php
-                                    $i = 0;
+                                    $i++;
                                 @endphp
-                                @foreach($orders as $order)
-                                    @php
-                                        $i++;
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->phone }}</td>
-                                        <td>{{ number_format($order->total_price, 0, '.', '.') }} ₫</td>
-                                        <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
-                                        @if($order->status == 0)
-                                            <td><span class="badge badge-pill bg-danger widspan font-weight-normal">{{ $order->status_text }}</span></td>
-                                        @elseif($order->status == 1)
-                                            <td><span class="badge badge-pill bg-warning widspan font-weight-normal">{{ $order->status_text }}</span></td>
-                                        @elseif($order->status == 2)
-                                            <td><span class="badge badge-pill bg-info widspan font-weight-normal">{{ $order->status_text }}</span></td>
-                                        @else
-                                            <td><span class="badge badge-pill bg-success widspan font-weight-normal">{{ $order->status_text }}</span></td>
-                                        @endif
-                                        <td class="project-actions text-right">
-                                                <a class="btn btn-info btn-sm"
-                                                   href="{{ route('backend.order.show', $order->id) }}">
-                                                    <i class="fas fa-eye"></i> Chi tiết
-                                                </a>
-                                                <form action="{{ route('backend.order.destroy', $order->id) }}"
-                                                      method="POST" style="display: inline">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-
-                                                    <button type="submit" class="btn btn-danger btn-sm delete-confirm">
-                                                        <i class="fas fa-eraser"></i> Xóa
-                                                    </button>
-                                                </form>
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $order->name }}</td>
+                                    <td>{{ $order->phone }}</td>
+                                    <td>{{ number_format($order->total_price, 0, '.', '.') }} ₫</td>
+                                    <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
+                                    @if($order->status == 0)
+                                        <td><span
+                                                class="badge badge-pill bg-danger widspan font-weight-normal">{{ $order->status_text }}</span>
                                         </td>
-                                    </tr>
-                                @endforeach
+                                    @elseif($order->status == 1)
+                                        <td><span
+                                                class="badge badge-pill bg-warning widspan font-weight-normal">{{ $order->status_text }}</span>
+                                        </td>
+                                    @elseif($order->status == 2)
+                                        <td><span
+                                                class="badge badge-pill bg-info widspan font-weight-normal">{{ $order->status_text }}</span>
+                                        </td>
+                                    @else
+                                        <td><span
+                                                class="badge badge-pill bg-success widspan font-weight-normal">{{ $order->status_text }}</span>
+                                        </td>
+                                    @endif
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-info btn-sm"
+                                           href="{{ route('backend.order.show', $order->id) }}">
+                                            <i class="fas fa-eye"></i> Chi tiết
+                                        </a>
+                                        <form action="{{ route('backend.order.destroy', $order->id) }}"
+                                              method="POST" style="display: inline">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm">
+                                                <i class="fas fa-eraser"></i> Xóa
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -103,8 +111,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
-        $('.delete-confirm').click(function(event) {
-            var form =  $(this).closest("form");
+        $('.delete-confirm').click(function (event) {
+            var form = $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();
             swal({

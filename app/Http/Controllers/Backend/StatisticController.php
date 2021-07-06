@@ -9,12 +9,14 @@ use App\Models\Product;
 use App\Models\Statistic;
 use App\Models\Trademark;
 use App\Models\User;
+use App\Models\Warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', User::class);
         $orders = Order::all()->count();
@@ -23,12 +25,34 @@ class StatisticController extends Controller
         $trademarks = Trademark::all()->count();
         $users = User::all()->count();
 
+        if ($request->has('from_sale_date') && $request->has('to_sale_date')){
+            $fromDate = $request->get('from_sale_date');
+            $toDate = $request->get('to_sale_date');
+            $warehouses = Warehouse::distinct()
+                ->select('product_id', DB::raw('SUM(sold) as sold'))
+                ->whereBetween('sale_date', [$fromDate, $toDate])
+                ->groupBy('product_id')
+                ->paginate(12, ['product_id']);
+        } else {
+            //Ngày đầu tiên của tháng
+            $startOfMonth = Carbon::now()->startOfMonth();
+            //Ngày cuối cùng của tháng
+            $endOfMonth = Carbon::now()->endOfMonth();
+
+            $warehouses = Warehouse::distinct()
+                ->select('product_id', DB::raw('SUM(sold) as sold'))
+                ->whereBetween('sale_date', [$startOfMonth, $endOfMonth])
+                ->groupBy('product_id')
+                ->paginate(12, ['product_id']);
+        }
+
         return view('backend.statistics.index')->with([
-            'orders'        => $orders,
-            'products'      => $products,
-            'categories'    => $categories,
-            'trademarks'    => $trademarks,
-            'users'         => $users
+            'orders' => $orders,
+            'products' => $products,
+            'categories' => $categories,
+            'trademarks' => $trademarks,
+            'users' => $users,
+            'warehouses' => $warehouses
         ]);
     }
 
@@ -42,17 +66,17 @@ class StatisticController extends Controller
 
         foreach ($gets as $get) {
             $chartData[] = array(
-                'period'    => $get->order_date,
-                'order'     => $get->total_order,
-                'revenue'   => $get->revenue,
-                'profit'    => $get->profit,
-                'quantity'  => $get->quantity
+                'period' => $get->order_date,
+                'order' => $get->total_order,
+                'revenue' => $get->revenue,
+                'profit' => $get->profit,
+                'quantity' => $get->quantity
             );
         }
         echo $data = json_encode($chartData);
     }
 
-    public function filteroption(Request $request)
+    public function filterOption(Request $request)
     {
         //Ngày đầu tiên của tuần
         $startOfWeek = Carbon::now()->startOfWeek();
@@ -78,7 +102,7 @@ class StatisticController extends Controller
         $endOfYear = Carbon::now()->endOfYear();
 
         $data = $request->get('filter_value');
-        switch ($data){
+        switch ($data) {
             case 'this_week':
                 $gets = Statistic::whereBetween('order_date', [$startOfWeek, $endOfWeek])->orderBy('order_date', 'ASC')->get();
                 break;
@@ -97,11 +121,11 @@ class StatisticController extends Controller
         }
         foreach ($gets as $get) {
             $chartData[] = array(
-                'period'    => $get->order_date,
-                'order'     => $get->total_order,
-                'revenue'   => $get->revenue,
-                'profit'    => $get->profit,
-                'quantity'  => $get->quantity
+                'period' => $get->order_date,
+                'order' => $get->total_order,
+                'revenue' => $get->revenue,
+                'profit' => $get->profit,
+                'quantity' => $get->quantity
             );
         }
 

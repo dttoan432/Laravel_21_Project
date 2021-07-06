@@ -56,7 +56,7 @@
                         <!--Product Rating End-->
                         <!--Product Price Start-->
                         <div class="single-product-price">
-                            <span class="new-price">Giá: {{ number_format($product->sale_price) }} ₫</span>
+                            <span class="new-price">Giá: {{ number_format($product->sale_price, 0, '.', '.') }} ₫</span>
                         </div>
                         <!--Product Price End-->
                         <!--Product Description Start-->
@@ -206,7 +206,7 @@
                                     <h2><a href="{{ route('frontend.product.show', $pro->slug) }}">{{ $pro->name }}</a>
                                     </h2>
                                     <div class="product-price">
-                                        <span class="new-price">{{ $pro->sale_price }}</span>
+                                        <span class="new-price">{{ number_format($pro->sale_price, 0, '.', '.') }}</span>
                                         <a class="button add-btn"
                                            href="{{ route('frontend.product.show', $pro->slug) }}">Xem chi tiết</a>
                                     </div>

@@ -172,7 +172,7 @@
                                                                 }
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
-                                                                <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                                <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Xem chi tiết</a>
@@ -243,7 +243,7 @@
                                                                 }
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
-                                                                <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                                <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Xem chi tiết</a>
@@ -314,7 +314,7 @@
                                                                 }
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
-                                                                <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                                <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Xem chi tiết</a>
@@ -385,7 +385,7 @@
                                                                 }
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
-                                                                <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                                <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn"
                                                                    href="{{ route('frontend.product.show', $product->slug) }}"
                                                                    data-toggle="tooltip">Xem chi tiết</a>
@@ -437,7 +437,7 @@
                                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                                     </h2>
                                                                     <div class="product-price">
-                                                                        <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                                        <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -541,7 +541,7 @@
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                         </h2>
                                                         <div class="product-price">
-                                                            <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                            <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -590,7 +590,7 @@
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                         </h2>
                                                         <div class="product-price">
-                                                            <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                            <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -639,7 +639,7 @@
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                         </h2>
                                                         <div class="product-price">
-                                                            <span class="new-price">{{ number_format($product->sale_price) }} <b>₫</b></span>
+                                                            <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                         </div>
                                                     </div>
                                                 </div>

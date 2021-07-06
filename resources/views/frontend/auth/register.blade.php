@@ -8,7 +8,7 @@
                     <div class="heading-banner">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="index.html">Home</a><span class="breadcome-separator">></span></li>
+                                <li><a href="index.html">Trang chủ</a><span class="breadcome-separator">></span></li>
                                 <li>Đăng ký</li>
                             </ul>
                         </div>
@@ -28,7 +28,7 @@
                             <form action="{{ route('register.store') }}" method="POST">
                                 @csrf
                                 <div class="form-fild">
-                                    <p><label>Name<span class="required">*</span></label></p>
+                                    <p><label>Họ tên<span class="required">*</span></label></p>
                                     <input type="text" name="name" value="{{ old('name') }}">
 
                                     @error('name')
@@ -36,7 +36,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-fild">
-                                    <p><label>Email address <span class="required">*</span></label></p>
+                                    <p><label>Email <span class="required">*</span></label></p>
                                     <input type="text" name="email" value="{{ old('email') }}">
 
                                     @error('email')
@@ -44,7 +44,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-fild">
-                                    <p><label>Phone <span class="required">*</span></label></p>
+                                    <p><label>Số điện thoại <span class="required">*</span></label></p>
                                     <input type="text" name="phone" value="{{ old('phone') }}">
 
                                     @error('phone')
@@ -52,7 +52,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-fild">
-                                    <p><label>Address <span class="required">*</span></label></p>
+                                    <p><label>Địa chỉ <span class="required">*</span></label></p>
                                     <input type="text" name="address" value="{{ old('address') }}">
 
                                     @error('address')
@@ -60,7 +60,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-fild">
-                                    <p><label>Password <span class="required">*</span></label></p>
+                                    <p><label>Mật khẩu <span class="required">*</span></label></p>
                                     <input type="password" name="password">
 
                                     @error('password')
@@ -68,11 +68,11 @@
                                     @enderror
                                 </div>
                                 <div class="form-fild">
-                                    <p><label>Password <span class="required">*</span></label></p>
+                                    <p><label>Nhập lại mật khẩu <span class="required">*</span></label></p>
                                     <input type="password" name="password_confirmation">
                                 </div>
                                 <div class="register-submit">
-                                    <button type="submit" class="form-button">Register</button>
+                                    <button type="submit" class="form-button">Đăng ký</button>
                                 </div>
                             </form>
                         </div>

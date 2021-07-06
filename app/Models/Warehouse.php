@@ -17,6 +17,11 @@ class Warehouse extends Model
         'sale_date',
     ];
 
+    const SELLING       = 'Bán chạy';
+    const ALMOST_OVER   = 'Sắp hết';
+    const END           = 'Hết hàng';
+    const NORMAL        = 'Bình thường';
+
     public function product(){
         return $this->belongsTo(Product::class);
     }

@@ -15,9 +15,9 @@
                                     <!--Footer Content Start-->
                                     <div class="footer-content">
                                         <div class="contact">
-                                            <p><label>Địa chỉ:</label>123 Main Street, Anytown, CA 12345 - USA.</p>
-                                            <p><label>Liên hệ:</label><a href="tel:+800123456789"></a>(+800) 123 456 789)</p>
-                                            <p><label>Email:</label><a href="mailto:Support@demo.com">Support@demo.com</a></p>
+                                            <p><label>Địa chỉ:</label>Thị trấn Đông Anh - Đông Anh - Hà Nội</p>
+                                            <p><label>Liên hệ:</label><a href="tel:0381452749"></a>0381452749</p>
+                                            <p><label>Email:</label><a href="mailto:dttoan432@gmail.com">dttoan432@gmail.com</a></p>
                                         </div>
                                     </div>
                                     <!--Footer Content End-->
@@ -86,7 +86,7 @@
                             <!--Footer Left Content Start-->
                             <div class="col-lg-6 col-md-6">
                                 <div class="copyright-text">
-                                    <p>Copyright © <script>document.write(new Date().getFullYear());</script> <a href="http://hastech.company/" target="_blank">Hastech</a>, All Rights Reserved.</p>
+                                    <p>Copyright © <a href="#">TienToan</a>, All Rights Reserved.</p>
                                 </div>
                             </div>
                             <!--Footer Left Content End-->

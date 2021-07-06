@@ -134,7 +134,7 @@
 
                             <li class="nav-header">ĐƠN HÀNG</li>
                             <li class="nav-item">
-                                <a href="{{ route('backend.order.index') }}" class="nav-link">
+                                <a href="{{ route('backend.order.index') }}" class="nav-link {{ ($prefix == 'admin/order') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-drumstick-bite"></i>
                                     <p>Quản lý đơn hàng</p>
                                 </a>

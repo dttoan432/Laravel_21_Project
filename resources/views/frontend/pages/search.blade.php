@@ -8,7 +8,7 @@
                     <div class="heading-banner">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="index.html">Home</a><span class="breadcome-separator">&gt;</span></li>
+                                <li><a href="index.html">Trang chủ</a><span class="breadcome-separator">&gt;</span></li>
                                 <li>Tìm kiếm</li>
                             </ul>
                         </div>

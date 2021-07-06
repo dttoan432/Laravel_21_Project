@@ -23,9 +23,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
-
             <div class="col-12">
                 <div class="card card-info">
                     <div class="card-header">
@@ -35,9 +33,6 @@
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
-                            {{--                            <button type="button" class="btn btn-tool" data-card-widget="remove">--}}
-                            {{--                                <i class="fas fa-times"></i>--}}
-                            {{--                            </button>--}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -47,12 +42,10 @@
                                 <div class="col-2">
                                     <label for="">Từ ngày</label>
                                     <input type="text" id="datepicker" class="form-control form-control-sm">
-                                    </p>
                                 </div>
                                 <div class="col-2">
                                     <label for="">Đến ngày</label>
                                     <input type="text" id="datepicker2" class="form-control form-control-sm">
-
                                 </div>
                                 <div class="col-1">
                                     <label for="">&nbsp;</label>
@@ -97,21 +90,99 @@
             <div class="col-12">
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">Thống kê</h3>
+                        <h3 class="card-title">Thống kê sản phẩm</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
-                            {{--                            <button type="button" class="btn btn-tool" data-card-widget="remove">--}}
-                            {{--                                <i class="fas fa-times"></i>--}}
-                            {{--                            </button>--}}
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div id="donut" class="morris-donut-inverse"></div>
+                                <br>
+                                <form action="{{ route('backend.statistic.index') }}" method="GET" autocomplete="off">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="">Từ ngày</label>
+                                            <input type="text" id="datepicker3" class="form-control form-control-sm" name="from_sale_date" required>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="">Đến ngày</label>
+                                            <input type="text" id="datepicker4" class="form-control form-control-sm" name="to_sale_date" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-sm btn-success d-block" style="margin-top: 10px;">Lọc kết quả</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-9">
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Đã bán</th>
+                                            <th>Tồn kho</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                        </thead>
+                                        @php
+                                            $i = 0;
+                                        @endphp
+                                        <tbody>
+                                        @foreach($warehouses as $warehouse)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>{{ $warehouse->product->name }}</td>
+                                                <td>{{ $warehouse->sold }}</td>
+                                                <td>{{ $warehouse->product->quantity }}</td>
+                                                @if($warehouse->sold > 20 && $warehouse->product->quantity > 0 && $warehouse->product->quantity < 50)
+                                                    <td>
+                                                        <span
+                                                            class="badge badge-pill bg-danger widspan">{{ \App\Models\Warehouse::SELLING }}</span>
+                                                        <span
+                                                            class="badge badge-pill bg-warning widspan">{{ \App\Models\Warehouse::ALMOST_OVER }}</span>
+                                                    </td>
+                                                @elseif($warehouse->sold > 20 && $warehouse->product->quantity == 0)
+                                                    <td>
+                                                        <span
+                                                            class="badge badge-pill bg-danger widspan">{{ \App\Models\Warehouse::SELLING }}</span>
+                                                        <span
+                                                            class="badge badge-pill bg-secondary widspan">{{ \App\Models\Warehouse::END }}</span>
+                                                    </td>
+                                                @elseif($warehouse->product->quantity == 0)
+                                                    <td><span
+                                                            class="badge badge-pill bg-secondary widspan">{{ \App\Models\Warehouse::END }}</span>
+                                                    </td>
+                                                @elseif($warehouse->sold > 20)
+                                                    <td><span
+                                                            class="badge badge-pill bg-danger widspan">{{ \App\Models\Warehouse::SELLING }}</span>
+                                                    </td>
+                                                @elseif($warehouse->product->quantity < 50)
+                                                    <td><span
+                                                            class="badge badge-pill bg-warning widspan">{{ \App\Models\Warehouse::ALMOST_OVER }}</span>
+                                                    </td>
+                                                @else
+                                                    <td><span
+                                                            class="badge badge-pill bg-info widspan">{{ \App\Models\Warehouse::NORMAL }}</span>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-center">{!! $warehouses->appends(request()->input())->links() !!}</div>
                             </div>
                         </div>
                     </div>
@@ -122,6 +193,14 @@
 @endsection
 
 @section('script_bot')
+    <style>
+        .widspan {
+            /*width: 90px;*/
+            padding: 4px 20px;
+            font-size: 14px;
+            font-weight: normal;
+        }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script type="text/javascript">
@@ -134,6 +213,20 @@
                 duration: 'slow'
             });
             $("#datepicker2").datepicker({
+                prevText: 'Tháng trước',
+                nextText: 'Tháng sau',
+                dateFormat: 'yy-mm-dd',
+                dayNamesMin: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
+                duration: 'slow'
+            });
+            $("#datepicker3").datepicker({
+                prevText: 'Tháng trước',
+                nextText: 'Tháng sau',
+                dateFormat: 'yy-mm-dd',
+                dayNamesMin: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
+                duration: 'slow'
+            });
+            $("#datepicker4").datepicker({
                 prevText: 'Tháng trước',
                 nextText: 'Tháng sau',
                 dateFormat: 'yy-mm-dd',
@@ -213,7 +306,8 @@
                         for (var i = 0; i < data.length; i++) {
                             revenue += data[i]['revenue'];
                             profit += data[i]['profit'];
-                        };
+                        }
+                        ;
 
                         $('#revenue').empty();
                         $('#revenue').append(formatter.format(revenue));
@@ -280,8 +374,8 @@
                 //backgroundColor: '#333333', // border color
                 data: [
                     {label: "Don hang", value: {{ $orders }}, color: colorDanger},
-                    {label: "San pham", value: {{ $products }} },
-                    {label: "Nguoi dung", value: {{ $users }} },
+                    {label: "San pham", value: {{ $products }}},
+                    {label: "Nguoi dung", value: {{ $users }}},
                     {{--{label: "Danh muc", value: {{ $categories }} },--}}
                     {{--{label: "Thuong hieu", value: {{ $trademarks }}}--}}
                 ]

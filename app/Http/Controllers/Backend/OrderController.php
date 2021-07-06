@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('created_at', 'DESC')->paginate(25);
+        $orders = Order::orderBy('status', 'ASC')->paginate(25);
         return view('backend.orders.index')->with([
             'orders' => $orders
         ]);

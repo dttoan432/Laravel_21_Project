@@ -8,8 +8,8 @@
                     <div class="heading-banner">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="index.html">Home</a><span class="breadcome-separator">></span></li>
-                                <li>Login</li>
+                                <li><a href="index.html">Trang chủ</a><span class="breadcome-separator">></span></li>
+                                <li>Đăng nhập</li>
                             </ul>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             <form action="{{ route('login.store') }}" method="post">
                                 @csrf
                                 <div class="form-fild">
-                                    <p><label>Email address <span class="required">*</span></label></p>
+                                    <p><label>Email <span class="required">*</span></label></p>
                                     <input type="text" name="email" value>
 
                                     @error('email')
@@ -36,7 +36,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-fild">
-                                    <p><label>Password <span class="required">*</span></label></p>
+                                    <p><label>Mật khẩu <span class="required">*</span></label></p>
                                     <input type="password" name="password" value>
 
                                     @error('password')
@@ -44,13 +44,13 @@
                                     @enderror
                                 </div>
                                 <div class="login-submit">
-                                    <button type="submit" class="form-button">Login</button>
+                                    <button type="submit" class="form-button">Đăng nhập</button>
                                     @error('login')
                                     <span style="color: red;">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="lost-password">
-                                    <a href="#">Lost your password?</a>
+                                    <a href="#">Quên mật khẩu?</a>
                                 </div>
                             </form>
                         </div>
