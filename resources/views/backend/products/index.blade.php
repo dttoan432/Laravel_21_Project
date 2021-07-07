@@ -21,29 +21,36 @@
                         <h3 class="card-title">Sản phẩm mới</h3>
 
                         <div class="card-tools" style="display: flex">
-                            <form action="{{ route('backend.product.filter') }}" method="GET" class="d-flex">
-                                <button type="submit" class="btn btn-sm btn-warning" style="margin-right: 10px;">Lọc</button>
-                                <select class="form-select form-select-sm" aria-label="Default select example" name="trademark" style="margin-right: 10px;">
-                                    <option selected value="-1">Chọn thương hiệu</option>
-                                    <option value="0">Không có thương hiệu</option>
-                                    @foreach($trademarks as $trademark)
-                                        <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
-                                    @endforeach
-                                </select>
-                                <select class="form-select form-select-sm" aria-label="Default select example" name="category" style="margin-right: 10px;">
-                                    <option selected value="-1">Chọn danh mục</option>
-                                    <option value="0">Không có danh mục</option>
-                                    @foreach($categories as $categorie)
-                                        <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                    @endforeach
-                                </select>
-                                <select class="form-select form-select-sm" aria-label="Default select example" name="status" style="margin-right: 10px;">
-                                    <option selected value="-1">Chọn trạng thái</option>
-                                    @foreach(\App\Models\Product::$status_text as $key => $value)
-                                        <option value="{{ $key }}">{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                            </form>
+                            <select class="form-select form-select-sm" aria-label="Default select example"
+                                    name="trademark" style="margin-right: 10px;" onchange="location = this.value;">
+                                <option selected value="">Chọn thương hiệu</option>
+                                <option value="{{ request()->fullUrlWithQuery(['trademark' => 0]) }}">Không có thương
+                                    hiệu
+                                </option>
+                                @foreach($trademarks as $trademark)
+                                    <option
+                                        value="{{ request()->fullUrlWithQuery(['trademark' => $trademark->id]) }}">{{ $trademark->name }}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select form-select-sm" aria-label="Default select example"
+                                    name="category" style="margin-right: 10px;" onchange="location = this.value;">
+                                <option selected value="">Chọn danh mục</option>
+                                <option value="{{ request()->fullUrlWithQuery(['category' => 0]) }}">Không có danh mục
+                                </option>
+                                @foreach($categories as $categorie)
+                                    <option
+                                        value="{{ request()->fullUrlWithQuery(['category' => $categorie->id]) }}">{{ $categorie->name }}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select form-select-sm" aria-label="Default select example" name="status"
+                                    style="margin-right: 10px;" onchange="location = this.value;">
+                                <option selected value="">Chọn trạng thái</option>
+                                @foreach(\App\Models\Product::$status_text as $key => $value)
+                                    <option
+                                        value="{{ request()->fullUrlWithQuery(['status' => $key]) }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+
                             <form action="{{ route('backend.product.index') }}" method="GET">
                                 <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
                                     <input type="text" name="q" class="form-control float-right"
@@ -80,7 +87,7 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $product->name }}</td>
+                                    <td><a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a></td>
                                     @if($product->trademark !== null)
                                         <td>{{ $product->trademark->name }}</td>
                                     @else
@@ -153,8 +160,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
-        $('.delete-confirm').click(function(event) {
-            var form =  $(this).closest("form");
+        $('.delete-confirm').click(function (event) {
+            var form = $(this).closest("form");
             var name = $(this).data("name");
             event.preventDefault();
             swal({
@@ -176,13 +183,15 @@
         td {
             vertical-align: middle !important;
         }
+
         .widspan {
             width: 90px;
             font-size: 14px;
             font-weight: normal;
             color: white !important;
         }
-        .table>:not(:last-child)>:last-child>*{
+
+        .table > :not(:last-child) > :last-child > * {
             border-bottom-color: #dee2e6;
         }
     </style>

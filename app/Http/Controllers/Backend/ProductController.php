@@ -28,13 +28,25 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyW = '';
+        $products = Product::where('quantity', '>=', -100);
         if ($request->has('q')) {
             $keyW = $request->get('q');
-            $products = Product::search($request)->paginate(25);
-        } else {
-            $products = Product::orderBy('created_at', 'DESC')->paginate(25);
+            $products->where('name', 'LIKE', '%'.$keyW.'%');
         }
 
+        if ($request->has('trademark')) {
+            $products->where('trademark_id', $request->get('trademark'));
+        }
+
+        if ($request->has('category')) {
+            $products->where('category_id', $request->get('category'));
+        }
+
+        if ($request->has('status')) {
+            $products->where('status', $request->get('status'));
+        }
+
+        $products = $products->orderBy('created_at', 'DESC')->paginate(25);
         return view('backend.products.index')->with([
             'products' => $products,
             'keyW' => $keyW
@@ -222,23 +234,5 @@ class ProductController extends Controller
             return redirect()->route('backend.product.index')->with("success", 'Xóa thành công');
         }
         return redirect()->route('backend.product.index')->with("error", 'Xóa thất bại');
-    }
-
-    public function filter(Request $request)
-    {
-        $keyW = '';
-        if ($request->get('trademark') == -1 && $request->get('category') == -1 && $request->get('status') == -1) {
-            return redirect()->route('backend.product.index');
-        }
-        $products = Product::query()
-            ->status($request)
-            ->trade($request)
-            ->category($request)
-            ->paginate(25);
-
-        return view('backend.products.index')->with([
-            'products' => $products,
-            'keyW' => $keyW
-        ]);
     }
 }

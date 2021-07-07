@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Statistic;
@@ -31,7 +32,22 @@ class PayController extends Controller
                 'updated_at'    => Carbon::now()
             ]);
         }
+
+        $details = [
+            'order_id' => $order->id,
+            'date' => Carbon::now()->format('d-m-Y'),
+            'total' => Cart::total(),
+            'name' => $order->name,
+            'phone' => $order->phone,
+            'address' => $order->address,
+            'qty'  => Cart::count(),
+            'products' => $items
+        ];
+
         Cart::destroy();
+
+        \Mail::to(Auth::user()->email)->send(new SendMail($details));
+
 
         if ($order){
             return redirect()->route('frontend.index')->with("success",'Đặt hàng thành công');

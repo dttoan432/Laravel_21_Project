@@ -206,7 +206,7 @@
                                     <h2><a href="{{ route('frontend.product.show', $pro->slug) }}">{{ $pro->name }}</a>
                                     </h2>
                                     <div class="product-price">
-                                        <span class="new-price">{{ number_format($pro->sale_price, 0, '.', '.') }}</span>
+                                        <span class="new-price">{{ number_format($pro->sale_price, 0, '.', '.') }} ₫</span>
                                         <a class="button add-btn"
                                            href="{{ route('frontend.product.show', $pro->slug) }}">Xem chi tiết</a>
                                     </div>

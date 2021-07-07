@@ -25,6 +25,14 @@
                                                     class="fa fa-angle-down"></i></a>
                                             <ul class="ht-dropdown">
                                                 <li><a href="{{ route('backend.dashboard') }}">Quản lý</a></li>
+                                                <li><a href="{{ route('frontend.account') }}">Tài khoản</a></li>
+                                                <li>
+                                                    <form action="{{ route('frontend.order') }}" method="POST">
+                                                        @csrf
+                                                        <a href="#" id="orders">Đơn hàng</a>
+                                                        <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}" name="user_id">
+                                                    </form>
+                                                </li>
                                                 <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
@@ -34,7 +42,13 @@
                                                     class="fa fa-angle-down"></i></a>
                                             <ul class="ht-dropdown">
                                                 <li><a href="{{ route('frontend.account') }}">Tài khoản</a></li>
-                                                <li><a href="{{ route('frontend.order') }}">Đơn hàng</a></li>
+                                                <li>
+                                                    <form action="{{ route('frontend.order') }}" method="POST">
+                                                        @csrf
+                                                        <a href="#" id="orders">Đơn hàng</a>
+                                                        <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}" name="user_id">
+                                                    </form>
+                                                </li>
                                                 <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                             </ul>
                                         </li>
@@ -200,6 +214,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
+        $(document).ready(function (){
+            $('#orders').click(function (){
+                $('#orders').parent().submit();
+            });
+        });
+
         $('#keywords').keyup(function (){
             var query = $(this).val();
             if (query != ''){

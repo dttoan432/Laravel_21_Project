@@ -36,6 +36,7 @@
 	<link rel="stylesheet" href="/frontend/css/slick.css">
 	<!-- Bootstrap CSS-->
 	<link rel="stylesheet" href="/frontend/css/bootstrap.min.css">
+{{--	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">--}}
 	<!-- Default CSS -->
 	<link rel="stylesheet" href="/frontend/css/default.css">
 	<!-- Style CSS -->
@@ -48,10 +49,6 @@
 	<script src="/frontend/js/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-	<!--[if lt IE 8]>
-	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-
 	<div class="wrapper home">
 		@include('frontend.includes.header')
 
@@ -65,7 +62,6 @@
 
 	<!--Jquery 1.12.4-->
 	<script src="/frontend/js/jquery-1.12.4.min.js"></script>
-	<!--Popper-->
 	<script src="/frontend/js/popper.min.js"></script>
 	<!--Bootstrap-->
 	<script src="/frontend/js/bootstrap.min.js"></script>
@@ -108,30 +104,30 @@
 	<script src="/frontend/js/mean.js"></script>
 
     <!-- Messenger Plugin chat Code -->
-    <div id="fb-root"></div>
+{{--    <div id="fb-root"></div>--}}
 
-    <!-- Your Plugin chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+{{--    <!-- Your Plugin chat code -->--}}
+{{--    <div id="fb-customer-chat" class="fb-customerchat">--}}
+{{--    </div>--}}
 
-    <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "108402824832712");
-        chatbox.setAttribute("attribution", "biz_inbox");
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml            : true,
-                version          : 'v11.0'
-            });
-        };
+{{--    <script>--}}
+{{--        var chatbox = document.getElementById('fb-customer-chat');--}}
+{{--        chatbox.setAttribute("page_id", "108402824832712");--}}
+{{--        chatbox.setAttribute("attribution", "biz_inbox");--}}
+{{--        window.fbAsyncInit = function() {--}}
+{{--            FB.init({--}}
+{{--                xfbml            : true,--}}
+{{--                version          : 'v11.0'--}}
+{{--            });--}}
+{{--        };--}}
 
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+{{--        (function(d, s, id) {--}}
+{{--            var js, fjs = d.getElementsByTagName(s)[0];--}}
+{{--            if (d.getElementById(id)) return;--}}
+{{--            js = d.createElement(s); js.id = id;--}}
+{{--            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';--}}
+{{--            fjs.parentNode.insertBefore(js, fjs);--}}
+{{--        }(document, 'script', 'facebook-jssdk'));--}}
+{{--    </script>--}}
 </body>
 </html>

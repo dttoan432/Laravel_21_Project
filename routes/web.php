@@ -54,14 +54,35 @@ Route::group([
     Route::get('account', 'UserController@edit')
         ->name('frontend.account');
 
-    Route::get('order', 'UserController@order')
+    Route::match(['put', 'patch'], '/{id}', 'UserController@update')
+        ->name('frontend.account.update');
+
+    Route::post('order', 'UserController@order')
         ->name('frontend.order');
+
+    Route::post('order-detail', 'UserController@orderDetail')
+        ->name('frontend.order.detail');
 
     Route::get('/search', 'ProductController@search')
         ->name('frontend.product.search');
 
     Route::post('/autocomplete-ajax', 'ProductController@autocomplete_ajax')
         ->name('frontend.product.searchauto');
+
+//    Route::get('send-mail', 'PayController@sendEmail')
+//        ->name('frontend.mail');
+
+    Route::get('send-mail', function () {
+
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+
+        \Mail::to('dttoan432@gmail.com')->send(new \App\Mail\SendMail($details));
+
+        dd("Email is Sent.");
+    })->name('sendmail');
 });
 //=====================================
 
