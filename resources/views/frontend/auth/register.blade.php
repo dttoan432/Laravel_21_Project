@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Đăng ký
+@endsection
+
 @section('content')
     <section class="heading-banner-area pt-30">
         <div class="container">

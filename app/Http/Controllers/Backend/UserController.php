@@ -26,9 +26,9 @@ class UserController extends Controller
         $this->authorize('viewAny', User::class);
         if ($request->has('q')) {
             $keyU = $request->get('q');
-            $users = User::search($request)->paginate(25);
+            $users = User::search($request)->paginate(10);
         } else {
-            $users = User::orderBy('role', 'ASC')->paginate(25);
+            $users = User::orderBy('role', 'ASC')->paginate(10);
         }
         return view('backend.users.index')->with([
             'users' => $users,
@@ -76,7 +76,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $this->authorize('update', $user);
-        $products = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(11);
+        $products = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(10);
         $trademarks = Trademark::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
         $categories = Category::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
         $parents = Category::where('parent_id', 0)->get();

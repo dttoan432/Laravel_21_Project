@@ -41,7 +41,7 @@ class UserController extends Controller
 
     public function order(Request $request)
     {
-        $orders = Order::where('user_id', $request->get('user_id'))->orderBy('status', 'ASC')->get();
+        $orders = Order::where('user_id', $request->get('user_id'))->orderBy('created_at', 'DESC')->get();
         return view('frontend.pages.order')->with([
             'orders' => $orders
         ]);

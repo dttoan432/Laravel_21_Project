@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Đơn hàng
+@endsection
+
 @section('content')
     <div class="account">
         <div class="container">
@@ -27,7 +31,7 @@
                 </div>
 
                 <div class="col-xl-9 col-md-8 col-12 account_right">
-                    <div class="account_listOrder">
+                    <div class="account_listOrder" style="height: 70vh; overflow: scroll;">
                         <h2>Đơn hàng của bạn</h2>
                         <div class="table-responsive-sm">
                             <table class="table">

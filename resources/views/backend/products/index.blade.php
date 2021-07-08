@@ -115,23 +115,20 @@
                                            href="{{ route('frontend.product.show', $product->slug) }}">
                                             <i class="fas fa-street-view"></i> Xem
                                         </a>
-                                        @can('update', $product)
-                                            <a class="btn btn-info btn-sm"
-                                               href="{{ route('backend.product.edit', $product->id) }}">
-                                                <i class="fas fa-user-edit"></i> Sửa
-                                            </a>
-                                        @endcan
-                                        @can('delete', $product)
-                                            <form action="{{ route('backend.product.destroy', $product->id) }}"
-                                                  method="POST" style="display: inline">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
+                                        <a class="btn btn-info btn-sm {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $product->user_id) ? '' : 'disabled'}}"
+                                           href="{{ route('backend.product.edit', $product->id) }}">
+                                            <i class="fas fa-user-edit"></i> Sửa
+                                        </a>
+                                        <form action="{{ route('backend.product.destroy', $product->id) }}"
+                                              method="POST" style="display: inline">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
 
-                                                <button type="submit" class="btn btn-danger btn-sm delete-confirm">
-                                                    <i class="fas fa-eraser"></i> Xóa
-                                                </button>
-                                            </form>
-                                        @endcan
+                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm"
+                                                {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $product->user_id) ? '' : 'disabled'}}>
+                                                <i class="fas fa-eraser"></i> Xóa
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

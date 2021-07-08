@@ -20,11 +20,26 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::orderBy('status', 'ASC')->paginate(25);
+        $q = '';
+        $orders = Order::where('status', '>', -1);
+
+        if ($request->has('status')) {
+            $orders->where('status', $request->get('status'));
+        }
+
+        if ($request->has('q')){
+            $q = $request->get('q');
+            $orders->where('name', 'LIKE', '%'.$q.'%')
+            ->orWhere('phone', 'LIKE', '%'.$q.'%');
+        }
+
+        $orders = $orders->orderBy('created_at', 'DESC')->paginate(10);
+
         return view('backend.orders.index')->with([
-            'orders' => $orders
+            'orders' => $orders,
+            'q' => $q
         ]);
     }
 

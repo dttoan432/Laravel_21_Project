@@ -68,21 +68,6 @@ Route::group([
 
     Route::post('/autocomplete-ajax', 'ProductController@autocomplete_ajax')
         ->name('frontend.product.searchauto');
-
-//    Route::get('send-mail', 'PayController@sendEmail')
-//        ->name('frontend.mail');
-
-    Route::get('send-mail', function () {
-
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
-        ];
-
-        \Mail::to('dttoan432@gmail.com')->send(new \App\Mail\SendMail($details));
-
-        dd("Email is Sent.");
-    })->name('sendmail');
 });
 //=====================================
 

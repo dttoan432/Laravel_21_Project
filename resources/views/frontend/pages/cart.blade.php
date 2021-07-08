@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Giỏ hàng
+@endsection
+
 @section('content')
     <section class="heading-banner-area pt-30">
         <div class="container">

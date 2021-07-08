@@ -20,6 +20,27 @@
                 <div class="card">
                     <div class="card-header bg-primary">
                         <h3 class="card-title">Đơn hàng</h3>
+                        <div class="card-tools d-flex">
+                            <select class="form-select form-select-sm" aria-label="Default select example"
+                                    name="status" style="margin-right: 10px;" onchange="location = this.value;">
+                                <option>Trạng thái</option>
+                                @foreach(\App\Models\Order::$status_text as $key => $value)
+                                    <option
+                                        value="{{ request()->fullUrlWithQuery(['status' => $key]) }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                            <form action="{{ route('backend.order.index') }}" method="GET">
+                                <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
+                                    <input type="text" name="q" class="form-control float-right"
+                                           placeholder="Tìm kiếm" value="{{ $q }}">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -73,6 +94,32 @@
                                         </td>
                                     @endif
                                     <td class="project-actions text-right">
+                                        <form action="{{ route('backend.order.update', $order->id) }}" method="POST"
+                                              class="d-inline-block" class="update_status">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+
+                                            <div class="btn-group" role="group"
+                                                 aria-label="Button group with nested dropdown">
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button"
+                                                            class="btn btn-warning btn-sm dropdown-toggle"
+                                                            data-bs-toggle="dropdown" aria-expanded="false"
+                                                    {{ ($order->status == 3) ? 'disabled' : '' }}>
+                                                        <i class="fas fa-layer-group"></i> Xử lý
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        @foreach(\App\Models\Order::$status_text as $key => $val)
+                                                            <li class="option_handling">
+                                                                <span class="dropdown-item" href="#"
+                                                                      style="cursor: pointer;">{{ $val }}</span>
+                                                                <input type="hidden" value="{{ $key }}" name="">
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <a class="btn btn-info btn-sm"
                                            href="{{ route('backend.order.show', $order->id) }}">
                                             <i class="fas fa-eye"></i> Chi tiết
@@ -82,7 +129,8 @@
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm">
+                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm"
+                                                {{ ($order->status == 3) ? 'disabled' : '' }}>
                                                 <i class="fas fa-eraser"></i> Xóa
                                             </button>
                                         </form>
@@ -92,7 +140,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin: 0 auto; margin-top: 20px;">{!! $orders->links() !!}</div>
+                    <div style="margin: 0 auto; margin-top: 20px;">{!! $orders->appends(request()->input())->links() !!}</div>
                 </div>
             </div>
         </div>
@@ -127,6 +175,13 @@
                         form.submit();
                     }
                 });
+        });
+
+        $(document).ready(function () {
+            $('.option_handling').click(function () {
+                $(this).children('input').attr('name', 'status');
+                $(this).parentsUntil('.update_status').submit();
+            });
         });
     </script>
 @endsection

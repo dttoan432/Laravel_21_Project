@@ -75,18 +75,16 @@
                                             </a>
                                         @endcan
                                         @can('delete', $user)
-                                            @if($user->role !== \App\Models\User::ROLE_MANAGE)
-                                                <form action="{{ route('backend.user.destroy', $user->id) }}"
-                                                      method="POST"
-                                                      style="display: inline">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
+                                            <form action="{{ route('backend.user.destroy', $user->id) }}"
+                                                  method="POST"
+                                                  style="display: inline">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
 
-                                                    <button type="submit" class="btn btn-danger btn-sm delete-confirm">
-                                                        <i class="fas fa-eraser"></i> Xóa
-                                                    </button>
-                                                </form>
-                                            @endif
+                                                <button type="submit" class="btn btn-danger btn-sm delete-confirm" {{ ($user->role == \App\Models\User::ROLE_MANAGE) ? 'disabled' : '' }}>
+                                                    <i class="fas fa-eraser"></i> Xóa
+                                                </button>
+                                            </form>
                                         @endcan
                                     </td>
                                 </tr>

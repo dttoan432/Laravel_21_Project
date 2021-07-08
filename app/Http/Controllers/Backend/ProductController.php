@@ -46,7 +46,7 @@ class ProductController extends Controller
             $products->where('status', $request->get('status'));
         }
 
-        $products = $products->orderBy('created_at', 'DESC')->paginate(25);
+        $products = $products->orderBy('created_at', 'DESC')->paginate(10);
         return view('backend.products.index')->with([
             'products' => $products,
             'keyW' => $keyW

@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Sản phẩm
+@endsection
+
 @section('content')
     <section class="single-product-area mt-20">
         <div class="container">

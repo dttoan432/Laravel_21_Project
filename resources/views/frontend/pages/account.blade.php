@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Tài khoản
+@endsection
+
 @section('content')
     <div class="account">
         <div class="container">

@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
 
+@section('title')
+    Trang chủ
+@endsection
+
 @section('content')
     <section class="slider-area ptb-30 white-bg">
         <div class="container">
