@@ -15,7 +15,7 @@
                                     <!--Footer Content Start-->
                                     <div class="footer-content">
                                         <div class="contact">
-                                            <p><label>Địa chỉ:</label>Thị trấn Đông Anh - Đông Anh - Hà Nội</p>
+                                            <p><label>Địa chỉ:</label>Đông Anh - Hà Nội</p>
                                             <p><label>Liên hệ:</label><a href="tel:0381452749"></a>0381452749</p>
                                             <p><label>Email:</label><a href="mailto:dttoan432@gmail.com">dttoan432@gmail.com</a></p>
                                         </div>
@@ -31,11 +31,9 @@
                                         <h3>Danh mục</h3>
                                     </div>
                                     <ul class="footer-info">
-                                        <li><a href="#">Điện thoại</a></li>
-                                        <li><a href="#">Laptop</a></li>
-                                        <li><a href="#">Tablet</a></li>
-                                        <li><a href="#">Phụ kiện</a></li>
-                                        <li><a href="#">Đồng hồ thông minh</a></li>
+                                        @foreach($menus as $menu)
+                                        <li><a href="{{ route('frontend.category', $menu->slug) }}">{{ $menu->name }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -47,9 +45,9 @@
                                         <h3>Tổng đài hỗ trợ</h3>
                                     </div>
                                     <ul class="footer-info">
-                                        <li><a href="#">Kỹ thuật: 1800.1763</a></li>
-                                        <li><a href="#">Khiếu nại: 1800.1062</a></li>
-                                        <li><a href="#">Bảo hành: 1800.1064</a></li>
+                                        <li><span>Kỹ thuật: 1800.1763</span></li>
+                                        <li><span>Khiếu nại: 1800.1062</span></li>
+                                        <li><span>Bảo hành: 1800.1064</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -67,12 +65,10 @@
                                         <h3>Theo dõi</h3>
                                     </div>
                                     <ul class="socil-icon mb-40">
-                                        <li><a href="#" data-toggle="tooltip" title="Twitter"><i class="ion-social-twitter"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="ion-social-facebook"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" title="Google Plus"><i class="ion-social-googleplus"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" title="Youtube"><i class="ion-social-youtube"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" title="Pinterest"><i class="ion-social-pinterest"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" title="Rss"><i class="ion-social-rss"></i></a></li>
+                                        <li><a href="https://www.facebook.com/profile.php?id=100008143235135" data-toggle="tooltip" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
+                                        <li><a href="https://join.skype.com/invite/xRV5x1lvjcmO" data-toggle="tooltip" title="Skype" target="_blank"><i class="ion-social-skype"></i></a></li>
+                                        <li><a href="https://www.youtube.com/channel/UCMNzoYfwf3S-8ISBPmT-dYQ" data-toggle="tooltip" title="Youtube" target="_blank"><i class="ion-social-youtube"></i></a></li>
+                                        <li><a href="https://www.pinterest.com/dttoan432" data-toggle="tooltip" title="Pinterest" target="_blank"><i class="ion-social-pinterest"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -86,14 +82,14 @@
                             <!--Footer Left Content Start-->
                             <div class="col-lg-6 col-md-6">
                                 <div class="copyright-text">
-                                    <p>Copyright © <a href="#">TienToan</a>, All Rights Reserved.</p>
+                                    <p>Copyright © <a href="https://www.facebook.com/profile.php?id=100008143235135" target="_blank">TienToan</a>, All Rights Reserved.</p>
                                 </div>
                             </div>
                             <!--Footer Left Content End-->
                             <!--Footer Right Content Start-->
                             <div class="col-lg-6 col-md-6">
                                 <div class="payment-img text-right">
-                                    <a href="#"><img src="frontend/images/payment.png" alt></a>
+                                    <span><img src="/frontend/images/payment.png" alt></span>
                                 </div>
                             </div>
                             <!--Footer Right Content End-->

@@ -40,14 +40,14 @@
                             <div class="slider-caption">
                                 <div class="slider-text">
                                     <h5 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                        Exclusive Offer -40% Off This Week </h5>
+                                        Giảm giá sốc 40% </h5>
                                     <h1 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
                                         Gone <br>X7/X7 edge 2018</h1>
                                     <h4 class="wow animated fadeInLeft" data-wow-duration="2s" data-wow-delay="0.5s">
-                                        Starting at <span>$560.99</span></h4>
+                                        Khởi điểm <span>400.000 ₫</span></h4>
                                     <div class="slider-button">
                                         <a href="{{ route('frontend.category', 'dien-thoai') }}" class="wow button animated fadeInLeft" data-text="Shop now"
-                                           data-wow-duration="2.5s" data-wow-delay="0.5s">shopping Now</a>
+                                           data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,9 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        <!--Single Product Start-->
+                                        @php
+                                            $i = 0;
+                                        @endphp
                                         @foreach($products as $product)
                                             @if($product->category_id == 1 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
@@ -177,13 +179,17 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Xem chi tiết</a>
+                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                @if($i == 10)
+                                                    @break
+                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -221,7 +227,9 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        <!--Single Product Start-->
+                                        @php
+                                            $i = 0;
+                                        @endphp
                                         @foreach($products as $product)
                                             @if($product->category_id == 2 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
@@ -248,13 +256,17 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Xem chi tiết</a>
+                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                @if($i == 10)
+                                                    @break
+                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -292,7 +304,9 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        <!--Single Product Start-->
+                                        @php
+                                            $i = 0;
+                                        @endphp
                                         @foreach($products as $product)
                                             @if($product->category_id == 3 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
@@ -319,13 +333,17 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Xem chi tiết</a>
+                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                @if($i == 10)
+                                                    @break
+                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -363,7 +381,9 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        <!--Single Product Start-->
+                                        @php
+                                            $i = 0;
+                                        @endphp
                                         @foreach($products as $product)
                                             @if($product->category_id == 5 && count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
@@ -390,13 +410,17 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn"
-                                                                   href="{{ route('frontend.product.show', $product->slug) }}"
-                                                                   data-toggle="tooltip">Xem chi tiết</a>
+                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                @if($i == 10)
+                                                    @break
+                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -421,7 +445,9 @@
 
                                     <div class="hot-del-single-product">
                                         <div class="row slide-active2">
-                                            <!--Single Product Start-->
+                                            @php
+                                                $i = 0;
+                                            @endphp
                                             @foreach($products as $product)
                                                 @if(count($product->images)>0)
                                                     <div class="col-lg-12">
@@ -447,6 +473,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                    @if($i == 10)
+                                                        @break
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </div>
@@ -525,7 +557,9 @@
                     <div class="hot-del-single-product">
                         <div class="row">
                             <div class="slide-active3">
-                                <!--Single Product Start-->
+                                @php
+                                    $i = 0;
+                                @endphp
                                 @foreach($products as $product)
                                     @if($product->category_id == 7 && count($product->images)>0)
                                         <div class="col-lg-12">
@@ -551,6 +585,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                        @if($i == 10)
+                                            @break
+                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -574,7 +614,9 @@
                     <div class="hot-del-single-product">
                         <div class="row">
                             <div class="slide-active3">
-                                <!--Single Product Start-->
+                                @php
+                                    $i = 0;
+                                @endphp
                                 @foreach($products as $product)
                                     @if($product->category_id == 10 && count($product->images)>0)
                                         <div class="col-lg-12">
@@ -600,6 +642,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                        @if($i == 10)
+                                            @break
+                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -623,7 +671,9 @@
                     <div class="hot-del-single-product">
                         <div class="row">
                             <div class="slide-active3">
-                                <!--Single Product Start-->
+                                @php
+                                    $i = 0;
+                                @endphp
                                 @foreach($products as $product)
                                     @if($product->category_id == 11 && count($product->images)>0)
                                         <div class="col-lg-12">
@@ -649,6 +699,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                        @if($i == 10)
+                                            @break
+                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -674,31 +730,29 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    @if(Session::has('success'))
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-bottom-left",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-            toastr.success("{!! Session::get('success') !!}");
-        </script>
-    @elseif(Session::has('error'))
-        <script>
-            toastr.error("{!! Session::get('error') !!}");
-        </script>
-    @endif
+    <style>
+        .addToCart{
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function addToCart(id){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{ route('frontend.cart.add') }}',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {id: id, _token: _token},
+                success: function (data) {
+                    swal("Thêm thành công", "Xem chi tiết trong giỏ hàng", "success");
+                },
+                error: function () {
+                    swal("Thêm không thành công", "Không đủ sản phẩm", "error");
+                }
+            });
+        };
+    </script>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @endsection

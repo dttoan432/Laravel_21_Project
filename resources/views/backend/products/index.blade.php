@@ -144,7 +144,6 @@
         </div>
         <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @if(Session::has('success'))
         <script>
             toastr.success("{!! Session::get('success') !!}");
@@ -155,7 +154,6 @@
         </script>
     @endif
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
         $('.delete-confirm').click(function (event) {
             var form = $(this).closest("form");
@@ -164,7 +162,7 @@
             swal({
                 title: `Bạn có muốn xóa không?`,
                 text: "Nếu bạn xóa nó, bạn sẽ không thể khôi phục lại được",
-                icon: "error",
+                icon: "warning",
                 buttons: ["Không", "Xóa"],
                 dangerMode: true,
             })

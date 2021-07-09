@@ -338,7 +338,7 @@
         </div>
         <!-- /.row -->
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     @if(Session::has('success'))
         <script>
             toastr.success("{!! Session::get('success') !!}");

@@ -37,6 +37,7 @@
 	<!-- Bootstrap CSS-->
 	<link rel="stylesheet" href="/frontend/css/bootstrap.min.css">
 {{--	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">--}}
+
 	<!-- Default CSS -->
 	<link rel="stylesheet" href="/frontend/css/default.css">
 	<!-- Style CSS -->
@@ -55,12 +56,14 @@
 		@yield('content')
 
 		@include('frontend.includes.footer')
-	</div>
 
+        @include('sweetalert::alert')
+	</div>
 
     <!--All Js Here-->
 
 	<!--Jquery 1.12.4-->
+{{--    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>--}}
 	<script src="/frontend/js/jquery-1.12.4.min.js"></script>
 	<script src="/frontend/js/popper.min.js"></script>
 	<!--Bootstrap-->

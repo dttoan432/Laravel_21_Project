@@ -22,6 +22,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->get('password')),
             'address' => $request->get('address'),
             'phone' => $request->get('phone'),
+            'role'  => 2,
         ]);
 
         $data = [

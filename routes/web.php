@@ -27,6 +27,7 @@ Route::group([
     Route::get('category/{slug}', 'CategoryController@show')
         ->name('frontend.category');
 
+    //Giỏ hàng
     Route::get('cart', 'CartController@index')
         ->name('frontend.cart.index');
 
@@ -45,12 +46,14 @@ Route::group([
     Route::get('cart/destroy', 'CartController@destroy')
         ->name('frontend.cart.destroy');
 
+    //Thanh toán
     Route::get('checkout', 'CheckoutController@index')
         ->name('frontend.checkout');
 
     Route::post('/', 'PayController@pay')
         ->name('frontend.pay');
 
+    //Tài khoản
     Route::get('account', 'UserController@edit')
         ->name('frontend.account');
 
@@ -63,6 +66,7 @@ Route::group([
     Route::post('order-detail', 'UserController@orderDetail')
         ->name('frontend.order.detail');
 
+    //Tìm kiếm
     Route::get('/search', 'ProductController@search')
         ->name('frontend.product.search');
 
@@ -91,6 +95,15 @@ Route::get('register', 'Auth\RegisterController@showRegisterForm')
 Route::post('register', 'Auth\RegisterController@register')
     ->name('register.store');
 //=====================================
+
+//Reset mật khẩu
+Route::post('send-mail-reset-password', 'Auth\ResetPasswordController@sendMail')
+    ->name('reset.password.sendmail');
+
+Route::get('confirm-reset-password', 'Auth\ResetPasswordController@formResetPassword');
+
+Route::post('reset-password', 'Auth\ResetPasswordController@resetPassword')
+    ->name('reset.password');
 
 
 //===============Backend===============

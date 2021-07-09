@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Mail\SendMail;
+use App\Mail\SendMailResetPassword;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -33,10 +36,12 @@ class UserController extends Controller
         $user->update($data);
 
         if ($user) {
-            return back();
+            alert()->success('Cập nhật thành công', 'Successfully');
         } else {
-            return back();
+            alert()->error('Cập nhật thất bại', 'Vui lòng thử lại');
         }
+
+        return redirect()->route('frontend.account');
     }
 
     public function order(Request $request)

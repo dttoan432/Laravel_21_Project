@@ -54,7 +54,7 @@
                                     @enderror
                                 </div>
                                 <div class="lost-password">
-                                    <a href="#">Quên mật khẩu?</a>
+                                    <a href="#" data-toggle="modal" data-target="#exampleModal">Quên mật khẩu?</a>
                                 </div>
                             </form>
                         </div>
@@ -65,27 +65,70 @@
         </div>
     </section>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Quên mật khẩu?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <form action="{{ route('reset.password.sendmail') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-fild">
+                            <p><label>Nhập địa chỉ email <span class="required">*</span></label></p>
+                            <input type="text" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <style>
+        .modal-content {
+            border-radius: .3rem;
+            overflow: unset;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: .3rem;
+            border-top-right-radius: .3rem;
+        }
+
+        .modal-header > h5 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .modal-header button.close {
+            border: none;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .btn {
+            border-radius: .25rem;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
 @endsection

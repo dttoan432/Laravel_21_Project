@@ -54,7 +54,6 @@ class RegisterRequest extends FormRequest
 
             'password.required'     => ':attribute không được để trống',
             'password.min'          => ':attribute phải lớn hơn :min ký tự',
-            'password.max'          => ':attribute phải nhỏ hơn :max ký tự',
             'password.confirmed'    => ':attribute không trùng khớp'
         ];
     }

@@ -50,8 +50,10 @@ class PayController extends Controller
 
 
         if ($order){
-            return redirect()->route('frontend.index')->with("success",'Đặt hàng thành công');
+            alert()->success('Đặt hàng thành công', 'Vui lòng kiểm tra đơn hàng hoặc email');
+        } else {
+            alert()->error('Đặt hàng thất bại', 'Vui lòng thử lại');
         }
-        return redirect()->route('frontend.index')->with("error",'Đặt hàng thất bại');
+        return redirect()->route('frontend.index');
     }
 }

@@ -88,7 +88,9 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     @if(\Gloudemans\Shoppingcart\Facades\Cart::count() > 0)
-                        <a class="checkout-button " href="{{ route('frontend.cart.destroy') }}">Xóa toàn bộ</a>
+                        <form action="{{ route('frontend.cart.destroy') }}" method="GET" id="deleteAll">
+                            <a class="checkout-button delete-confirm" href="#">Xóa toàn bộ</a>
+                        </form>
                     @endif
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -158,5 +160,20 @@
                 }
             });
         }
+
+        $('.delete-confirm').click(function(event) {
+            event.preventDefault();
+            swal({
+                title: `Bạn có muốn xóa không?`,
+                icon: "warning",
+                buttons: ["Không", "Xóa"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $('#deleteAll').submit();
+                    }
+                });
+        });
     </script>
 @endsection
