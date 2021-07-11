@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\StatisticsExport;
+use App\Exports\WarehousesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
@@ -13,6 +15,7 @@ use App\Models\Warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StatisticController extends Controller
 {
@@ -132,5 +135,17 @@ class StatisticController extends Controller
         echo $data = json_encode($chartData);
     }
 
+    public function export(Request $request)
+    {
+        $fromDate = $request->get('from-date');
+        $toDate = $request->get('to-date');
+        return Excel::download(new StatisticsExport($fromDate, $toDate), 'statistic.xlsx');
+    }
 
+    public function exportWarehouse(Request $request)
+    {
+        $fromDate = $request->get('from_sale_date');
+        $toDate = $request->get('to_sale_date');
+        return Excel::download(new WarehousesExport($fromDate, $toDate), 'warehouse.xlsx');
+    }
 }

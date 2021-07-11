@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Imports\UsersImport;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Trademark;
@@ -12,6 +14,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -32,7 +35,7 @@ class UserController extends Controller
         }
         return view('backend.users.index')->with([
             'users' => $users,
-            'keyU' => $keyU
+            'keyU'  => $keyU
         ]);
     }
 
@@ -161,5 +164,16 @@ class UserController extends Controller
             return redirect()->route('backend.user.index')->with("success", 'Xóa thành công');
         }
         return redirect()->route('backend.user.index')->with("error", 'Xóa thất bại');
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport(), 'users.xlsx');
+    }
+
+    public function import(){
+        Excel::import(new UsersImport,request()->file('file'));
+
+        return back();
     }
 }

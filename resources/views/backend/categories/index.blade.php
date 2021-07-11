@@ -55,11 +55,7 @@
                                     @if($category->parent_id == 0)
                                         <td><span class="badge badge-pill bg-success widspan font-weight-normal">Danh mục cha</span></td>
                                     @else
-                                        @foreach($parents as $parent)
-                                            @if($category->parent_id == $parent->id)
-                                                <td><span class="badge badge-pill bg-warning widspan font-weight-normal">{{ $parent->name }}</span></td>
-                                            @endif
-                                        @endforeach
+                                        <td><span class="badge badge-pill bg-warning widspan font-weight-normal">{{ $category->parent->name }}</span></td>
                                     @endif
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -98,9 +94,26 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin: 0 auto; margin-top: 20px;">{!! $categories->links() !!}</div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="d-flex ml-3 mb-3">
+                                <a href="{{ route('backend.category.export') }}" class="btn btn-sm btn-info d-inline-block"
+                                   style="margin-right: 10px;">
+                                    <i class="fas fa-file-export"></i> Export Excel
+                                </a>
+                                <form action="{{ route('backend.category.import') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+                                    @csrf
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="file" accept=".xlsx" required>
+                                    <button type="submit" class="btn btn-sm btn-info">Import</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="float-right mr-4">{!! $categories->links() !!}</div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.card -->
             </div>
         </div>
         <!-- /.row (main row) -->

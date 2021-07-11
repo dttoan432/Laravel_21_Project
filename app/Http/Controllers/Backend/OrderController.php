@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\OrdersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
@@ -12,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -101,9 +103,10 @@ class OrderController extends Controller
         $data['updated_at'] = Carbon::now();
         $order = Order::where('id', $id)->first();
         $order->update($data);
-        if ($order->status == 3){
-            $date = Carbon::now()->format('Y-m-d');
 
+        $date = Carbon::now()->format('Y-m-d');
+
+        if ($order->status == 1) {
             foreach ($order->products as $item){
                 if ($warehouse = Warehouse::where([['sale_date', $date], ['product_id', $item->id]])->first()){
                     $warehouse->sold += $item->pivot->quantity;
@@ -111,32 +114,52 @@ class OrderController extends Controller
 
                     $product = Product::where('id', $item->id)->first();
                     $product->quantity -= $item->pivot->quantity;
-                    $product->save();
                     if ($product->quantity == 0){
                         $product->status = 2;
-                        $product->save();
                     }
+                    $product->save();
+
                     Cache::forget('productFE');
                 } else{
                     $warehouse = new Warehouse();
-                    $warehouse->product_id = $item->id;
-                    $warehouse->sold = $item->pivot->quantity;
-                    $warehouse->sale_date = Carbon::now();
-                    $warehouse->created_at = Carbon::now();
-                    $warehouse->updated_at = Carbon::now();
+                    $warehouse->product_id  = $item->id;
+                    $warehouse->sold        = $item->pivot->quantity;
+                    $warehouse->sale_date   = Carbon::now();
+                    $warehouse->created_at  = Carbon::now();
+                    $warehouse->updated_at  = Carbon::now();
                     $warehouse->save();
 
                     $product = Product::where('id', $item->id)->first();
                     $product->quantity -= $item->pivot->quantity;
-                    $product->save();
                     if ($product->quantity == 0){
                         $product->status = 2;
-                        $product->save();
                     }
+                    $product->save();
+
                     Cache::forget('productFE');
                 }
-            };
+            }
+        } elseif ($order->status == 3) {
+            foreach ($order->products as $item){
+                if ($warehouse = Warehouse::where([['sale_date', $date], ['product_id', $item->id]])->first()){
+                    $warehouse->sold -= $item->pivot->quantity;
+                    if ($warehouse->sold == 0){
+                        $warehouse->delete();
+                    } else{
+                        $warehouse->save();
+                    }
 
+                    $product = Product::where('id', $item->id)->first();
+                    $product->quantity += $item->pivot->quantity;
+                    if ($product->quantity > 0){
+                        $product->status = 1;
+                    }
+                    $product->save();
+
+                    Cache::forget('productFE');
+                }
+            }
+        } elseif ($order->status == 4){
             $profit = $order->total_price;
             $qty = 0;
 

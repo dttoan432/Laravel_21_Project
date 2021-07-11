@@ -125,35 +125,59 @@
                                     </table>
                                 </div>
                                 <br>
-                                <form action="{{ route('backend.order.update', $order->id) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <p><b class="text-primary">Tổng thanh toán:</b> <span>{{ number_format($order->total_price, 0, '.', '.') }} ₫</span>
-                                            </p>
-                                        </div>
-
-                                        @if($order->status !== 3)
-                                            <div class="col-3">
-                                                <select name="status" class="form-control form-control-sm">
-                                                    @foreach(\App\Models\Order::$status_text as $key => $value)
-                                                        <option
-                                                            value="{{ $key }}" {{ ($key == $order->status) ? 'selected' : '' }}>{{ $value }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-1">
-                                                <button class="btn btn-sm btn-success w-100">Xử lý</button>
-                                            </div>
-                                        @else
-                                            <div class="col-4">
-                                                <p class="text-right text-danger font-weight-bold">Đã hoàn thành</p>
-                                            </div>
-                                        @endif
+                                <div class="row">
+                                    <div class="col-8">
+                                        <p><b class="text-primary">Tổng thanh toán:</b> <span>{{ number_format($order->total_price, 0, '.', '.') }} ₫</span>
+                                        </p>
                                     </div>
-                                </form>
-                                {{--                                    <div class="d-flex justify-content-center">{!! $products->appends(request()->input())->links() !!}</div>--}}
+
+                                    @if($order->status < 3)
+                                        <div class="col-4">
+                                            <form action="{{ route('backend.order.update', $order->id) }}" method="POST" id="update_status">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+                                                <div class="btn-group" role="group"
+                                                     aria-label="Button group with nested dropdown">
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupDrop1" type="button"
+                                                                class="btn btn-warning btn-sm dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                            {{ ($order->status == 3) ? 'disabled' : '' }}>
+                                                            <i class="fas fa-layer-group"></i> Xử lý
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                            @if($order->status == 0)
+                                                                <li class="option_handling">
+                                                                    <span class="dropdown-item" href="#"
+                                                                          style="cursor: pointer;">Đã xác nhận</span>
+                                                                    <input type="hidden" value="1" name="">
+                                                                </li>
+                                                            @endif
+                                                            @foreach(\App\Models\Order::$status_text as $key => $val)
+                                                                @if($order->status > 0 && $order->status < $key)
+                                                                    <li class="option_handling">
+                                                                    <span class="dropdown-item" href="#"
+                                                                          style="cursor: pointer;">{{ $val }}</span>
+                                                                        <input type="hidden" value="{{ $key }}" name="">
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @elseif($order->status == 3)
+                                        <div class="col-4">
+                                            <p class="text-right text-danger font-weight-bold">Đã hủy</p>
+                                        </div>
+                                    @elseif($order->status == 4)
+                                        <div class="col-4">
+                                            <p class="text-right text-danger font-weight-bold">Đã hoàn thành</p>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <!-- /.tab-content -->
@@ -165,4 +189,13 @@
         </div>
         <!-- /.row -->
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.option_handling').click(function () {
+                $(this).children('input').attr('name', 'status');
+                $('#update_status').submit();
+            });
+        });
+    </script>
 @endsection

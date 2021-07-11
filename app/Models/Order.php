@@ -34,12 +34,14 @@ class Order extends Model
     const ORDER_WAIT        = 0;
     const ORDER_CONFIRM     = 1;
     const ORDER_SHIPPING    = 2;
-    const ORDER_FINISH      = 3;
+    const ORDER_RETURN      = 3;
+    const ORDER_FINISH      = 4;
 
     public static $status_text = [
         self::ORDER_WAIT        => 'Chưa xử lý',
         self::ORDER_CONFIRM     => 'Đã xác nhận',
         self::ORDER_SHIPPING    => 'Đang giao hàng',
+        self::ORDER_RETURN      => 'Hủy đơn hàng',
         self::ORDER_FINISH      => 'Đã giao hàng',
     ];
 
@@ -51,6 +53,8 @@ class Order extends Model
         } elseif ($this->status == 2){
             return 'Đang giao hàng';
         } elseif ($this->status == 3){
+            return 'Hủy đơn hàng';
+        } else {
             return 'Đã hoàn thành';
         }
     }

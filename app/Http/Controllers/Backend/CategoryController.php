@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\CategoriesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Imports\CategoriesImport;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Trademark;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -167,5 +170,16 @@ class CategoryController extends Controller
             return redirect()->route('backend.category.index')->with("success",'Xóa thành công');
         }
         return redirect()->route('backend.category.index')->with("error",'Xóa thất bại');
+    }
+
+    public function export()
+    {
+        return Excel::download(new CategoriesExport(), 'categories.xlsx');
+    }
+
+    public function import(){
+        Excel::import(new CategoriesImport(),request()->file('file'));
+
+        return back();
     }
 }

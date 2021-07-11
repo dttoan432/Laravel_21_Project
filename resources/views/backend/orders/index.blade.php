@@ -32,7 +32,7 @@
                             <form action="{{ route('backend.order.index') }}" method="GET">
                                 <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
                                     <input type="text" name="q" class="form-control float-right"
-                                           placeholder="Tìm kiếm" value="{{ $q }}">
+                                           placeholder="Tìm kiếm" value="{{ (isset($q)? $q : '') }}">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
@@ -88,6 +88,10 @@
                                         <td><span
                                                 class="badge badge-pill bg-info widspan font-weight-normal">{{ $order->status_text }}</span>
                                         </td>
+                                    @elseif($order->status == 3)
+                                        <td><span
+                                                class="badge badge-pill bg-dark widspan font-weight-normal">{{ $order->status_text }}</span>
+                                        </td>
                                     @else
                                         <td><span
                                                 class="badge badge-pill bg-success widspan font-weight-normal">{{ $order->status_text }}</span>
@@ -105,16 +109,25 @@
                                                     <button id="btnGroupDrop1" type="button"
                                                             class="btn btn-warning btn-sm dropdown-toggle"
                                                             data-bs-toggle="dropdown" aria-expanded="false"
-                                                    {{ ($order->status == 3) ? 'disabled' : '' }}>
+                                                    {{ ($order->status == 3 || $order->status == 4) ? 'disabled' : '' }}>
                                                         <i class="fas fa-layer-group"></i> Xử lý
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                        @foreach(\App\Models\Order::$status_text as $key => $val)
+                                                        @if($order->status == 0)
                                                             <li class="option_handling">
-                                                                <span class="dropdown-item" href="#"
-                                                                      style="cursor: pointer;">{{ $val }}</span>
-                                                                <input type="hidden" value="{{ $key }}" name="">
+                                                                    <span class="dropdown-item" href="#"
+                                                                          style="cursor: pointer;">Đã xác nhận</span>
+                                                                <input type="hidden" value="1" name="">
                                                             </li>
+                                                        @endif
+                                                        @foreach(\App\Models\Order::$status_text as $key => $val)
+                                                            @if($order->status > 0 && $order->status < $key)
+                                                                <li class="option_handling">
+                                                                    <span class="dropdown-item" href="#"
+                                                                          style="cursor: pointer;">{{ $val }}</span>
+                                                                    <input type="hidden" value="{{ $key }}" name="">
+                                                                </li>
+                                                            @endif
                                                         @endforeach
                                                     </ul>
                                                 </div>
@@ -130,7 +143,7 @@
                                             {{ method_field('DELETE') }}
 
                                             <button type="submit" class="btn btn-danger btn-sm delete-confirm"
-                                                {{ ($order->status == 3) ? 'disabled' : '' }}>
+                                                {{ ($order->status == 4) ? 'disabled' : '' }}>
                                                 <i class="fas fa-eraser"></i> Xóa
                                             </button>
                                         </form>
@@ -140,7 +153,15 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin: 0 auto; margin-top: 20px;">{!! $orders->appends(request()->input())->links() !!}</div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+
+                        </div>
+                        <div class="col-6">
+                            <div class="float-right mr-4">{!! $orders->appends(request()->input())->links() !!}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

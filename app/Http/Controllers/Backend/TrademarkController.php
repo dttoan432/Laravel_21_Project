@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\TrademarksExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTrademarkRequest;
 use App\Http\Requests\UpdateTrademarkRequest;
+use App\Imports\TrademarksImport;
 use App\Models\Product;
 use App\Models\Trademark;
 use Carbon\Carbon;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrademarkController extends Controller
 {
@@ -138,5 +141,16 @@ class TrademarkController extends Controller
         } else {
             return redirect()->route('backend.trademark.index')->with("error", 'Xóa thất bại');
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new TrademarksExport(), 'trademarks.xlsx');
+    }
+
+    public function import(){
+        Excel::import(new TrademarksImport(),request()->file('file'));
+
+        return back();
     }
 }

@@ -20,7 +20,15 @@
                 <div class="card">
                     <div class="card-header bg-primary">
                         <h3 class="card-title">Danh sách người dùng</h3>
-                        <div class="card-tools">
+                        <div class="card-tools d-flex">
+                            <select class="form-select form-select-sm" aria-label="Default select example"
+                                    name="status" style="margin-right: 10px;" onchange="location = this.value;">
+                                <option>Quyền hạn</option>
+                                @foreach(\App\Models\User::$role_text as $key => $value)
+                                    <option
+                                        value="{{ request()->fullUrlWithQuery(['role' => $key]) }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                             <form action="{{ route('backend.user.index') }}" method="GET">
                                 <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
                                     <input type="text" name="q" class="form-control float-right"
@@ -81,7 +89,8 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <button type="submit" class="btn btn-danger btn-sm delete-confirm" {{ ($user->role == \App\Models\User::ROLE_MANAGE) ? 'disabled' : '' }}>
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm delete-confirm" {{ ($user->role == \App\Models\User::ROLE_MANAGE) ? 'disabled' : '' }}>
                                                     <i class="fas fa-eraser"></i> Xóa
                                                 </button>
                                             </form>
@@ -92,9 +101,26 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin: 0 auto; margin-top: 20px;">{!! $users->links() !!}</div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="d-flex ml-3  mb-3">
+                                <a href="{{ route('backend.user.export') }}" class="btn btn-sm btn-info d-inline-block"
+                                   style="margin-right: 10px;">
+                                    <i class="fas fa-file-export"></i> Export Excel
+                                </a>
+                                <form action="{{ route('backend.user.import') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+                                    @csrf
+                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="file" accept=".xlsx" required>
+                                    <button type="submit" class="btn btn-sm btn-info">Import</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="float-right mr-4">{!! $users->links() !!}</div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.card -->
             </div>
         </div>
         <!-- /.row (main row) -->
@@ -131,7 +157,7 @@
     </script>
 
     <style>
-        .table>:not(:last-child)>:last-child>*{
+        .table > :not(:last-child) > :last-child > * {
             border-bottom-color: #dee2e6;
         }
     </style>

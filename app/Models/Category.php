@@ -19,6 +19,14 @@ class Category extends Model
         'user_id',
     ];
 
+    public function parent(){
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children(){
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class);
@@ -26,5 +34,9 @@ class Category extends Model
 
     public function trademarks(){
         return $this->belongsToMany(Trademark::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

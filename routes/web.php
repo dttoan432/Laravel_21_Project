@@ -105,7 +105,6 @@ Route::get('confirm-reset-password', 'Auth\ResetPasswordController@formResetPass
 Route::post('reset-password', 'Auth\ResetPasswordController@resetPassword')
     ->name('reset.password');
 
-
 //===============Backend===============
 Route::group([
     'namespace' => 'Backend',
@@ -143,6 +142,13 @@ Route::group([
         Route::delete('/{product}', 'ProductController@destroy')
             ->name('backend.product.destroy')
             ->middleware('can:delete,product');
+
+        //Export danh mục
+        Route::get('/export-product', 'ProductController@export')
+            ->name('backend.product.export');
+        //Import danh mục
+        Route::post('/import-product', 'ProductController@import')
+            ->name('backend.product.import');
     });
 
     // Quản lý người dùng
@@ -170,6 +176,13 @@ Route::group([
             ->name('backend.user.destroy')
             ->middleware('can:delete,user');
     });
+    //Export người dùng
+    Route::get('/export-user', 'UserController@export')
+        ->name('backend.user.export');
+    //Import người dùng
+    Route::post('/import-user', 'UserController@import')
+        ->name('backend.user.import');
+
 
     // Quản lý danh mục
     Route::group(['prefix' => 'category'], function () {
@@ -192,6 +205,13 @@ Route::group([
         Route::delete('/{category}', 'CategoryController@destroy')
             ->name('backend.category.destroy')
             ->middleware('can:delete,category');
+
+        //Export danh mục
+        Route::get('/export-category', 'CategoryController@export')
+            ->name('backend.category.export');
+        //Import danh mục
+        Route::post('/import-category', 'CategoryController@import')
+            ->name('backend.category.import');
     });
 
     // Quản lý thương hiệu
@@ -215,6 +235,13 @@ Route::group([
         Route::delete('/{trademark}', 'TrademarkController@destroy')
             ->name('backend.trademark.destroy')
             ->middleware('can:delete,trademark');
+
+        //Export thương hiệu
+        Route::get('/export-trademark', 'TrademarkController@export')
+            ->name('backend.trademark.export');
+        //Import thương hiệu
+        Route::post('/import-trademark', 'TrademarkController@import')
+            ->name('backend.trademark.import');
     });
 
     //Quản lý đơn hàng
@@ -242,6 +269,14 @@ Route::group([
 
         Route::post('/filte-option', 'StatisticController@filterOption')
             ->name('backend.statistic.option');
+
+        //Export doanh thu
+        Route::post('/export-statistic', 'StatisticController@export')
+            ->name('backend.statistic.export');
+
+        //Export sản phẩm trong kho
+        Route::post('/export-statistic-warehouse', 'StatisticController@exportWarehouse')
+            ->name('backend.statistic.export.warehouse');
     });
 });
 //=====================================

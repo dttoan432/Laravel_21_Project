@@ -28,6 +28,12 @@
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Thống kê doanh thu</h3>
+{{--                        <div class="d-flex ml-3 mb-3">--}}
+{{--                            <a href="{{ route('backend.statistic.export') }}" class="btn btn-sm btn-info d-inline-block"--}}
+{{--                               style="margin-right: 10px;">--}}
+{{--                                <i class="fas fa-file-export"></i> Export Excel--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -36,16 +42,16 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="" autocomplete="off">
+                        <form action="{{ route('backend.statistic.export') }}" autocomplete="off" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-2">
                                     <label for="">Từ ngày</label>
-                                    <input type="text" id="datepicker" class="form-control form-control-sm">
+                                    <input type="text" id="datepicker" class="form-control form-control-sm" autocomplete="off" required name="from-date">
                                 </div>
                                 <div class="col-2">
                                     <label for="">Đến ngày</label>
-                                    <input type="text" id="datepicker2" class="form-control form-control-sm">
+                                    <input type="text" id="datepicker2" class="form-control form-control-sm" autocomplete="off" required name="to-date">
                                 </div>
                                 <div class="col-1">
                                     <label for="">&nbsp;</label>
@@ -54,6 +60,12 @@
                                         Lọc
                                         kết
                                         quả
+                                    </button>
+                                </div>
+                                <div class="col-1">
+                                    <label for="">&nbsp;</label>
+                                    <button type="submit" class="btn btn-sm btn-info d-block">
+                                        <i class="fas fa-file-export"></i> Export Excel
                                     </button>
                                 </div>
                                 <div class="col-2">
@@ -65,8 +77,6 @@
                                         <option value="last_month">Tháng trước</option>
                                         <option value="this_year">Năm nay</option>
                                     </select>
-                                </div>
-                                <div class="col-1">
                                 </div>
                                 <div class="col-2">
                                     <label for="">Doanh thu</label>
@@ -103,7 +113,8 @@
                             <div class="col-3">
                                 <div id="donut" class="morris-donut-inverse"></div>
                                 <br>
-                                <form action="{{ route('backend.statistic.index') }}" method="GET" autocomplete="off">
+                                <form action="{{ route('backend.statistic.index') }}" method="GET" autocomplete="off" id="form-two">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="">Từ ngày</label>
@@ -114,7 +125,10 @@
                                             <input type="text" id="datepicker4" class="form-control form-control-sm" name="to_sale_date" required>
                                         </div>
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-sm btn-success d-block" style="margin-top: 10px;">Lọc kết quả</button>
+                                            <button type="submit" class="btn btn-sm btn-success d-inline-block" id="filter-warehouse" style="margin-top: 10px;">Lọc kết quả</button>
+                                            <button type="submit" class="btn btn-sm btn-info d-inline-block ml-1" style="margin-top: 10px;" id="export">
+                                                <i class="fas fa-file-export"></i> Export Excel
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -235,6 +249,16 @@
         });
 
         $(document).ready(function () {
+            $('#export').click(function (){
+                $('#form-two').attr('action', '{{ route('backend.statistic.export.warehouse') }}');
+                $('#form-two').attr('method', 'POST');
+            });
+
+            $('#filter-warehouse').click(function (){
+                $('#form-two').attr('action', '{{ route('backend.statistic.index') }}');
+                $('#form-two').attr('method', 'GET');
+            });
+
             const formatter = new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',

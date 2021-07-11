@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Imports\ProductsImport;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -234,5 +237,16 @@ class ProductController extends Controller
             return redirect()->route('backend.product.index')->with("success", 'Xóa thành công');
         }
         return redirect()->route('backend.product.index')->with("error", 'Xóa thất bại');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport(), 'products.xlsx');
+    }
+
+    public function import(){
+        Excel::import(new ProductsImport(),request()->file('file'));
+
+        return back();
     }
 }

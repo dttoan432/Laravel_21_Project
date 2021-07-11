@@ -94,6 +94,10 @@ class User extends Authenticatable
         return $this->hasMany(Trademark::class);
     }
 
+    public function categories(){
+        return $this->hasMany(Category::class);
+    }
+
     public function scopeSearch($query, $request)
     {
         if ($request->has('q')) {
