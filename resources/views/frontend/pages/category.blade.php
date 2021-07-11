@@ -105,9 +105,10 @@
                                                     </style>
                                                     <div class="product-price" style="height: 35%;">
                                                         <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                        <a class="button add-btn"
-                                                           href="{{ route('frontend.product.show', $product->slug) }}"
-                                                           data-toggle="tooltip">Xem chi tiết</a>
+                                                        <a class="button add-btn text-white addToCart"
+                                                           data-toggle="tooltip"
+                                                           onclick="addToCart({{ $product->id }})"><i
+                                                                class="fas fa-cart-plus"></i> Thêm</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,5 +177,29 @@
         .priceui>a:hover{
             text-decoration: underline;
         }
+        .addToCart {
+            color: white;
+            cursor: pointer;
+        }
     </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function addToCart(id) {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{ route('frontend.cart.add') }}',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {id: id, _token: _token},
+                success: function (data) {
+                    swal("Thêm thành công", "Xem chi tiết trong giỏ hàng", "success");
+                },
+                error: function () {
+                    swal("Thêm không thành công", "Không đủ sản phẩm", "error");
+                }
+            });
+        };
+    </script>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @endsection

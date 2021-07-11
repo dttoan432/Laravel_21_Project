@@ -68,7 +68,8 @@
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#product"
+                            @if($user->role == 0 || $user->role == 1)
+                            <li class="nav-item"><a class="nav-link {{ ($user->role !== 2) ? 'active' : '' }}" href="#product"
                                                     data-toggle="tab">Sản phẩm đã tạo</a></li>
                             <li class="nav-item"><a class="nav-link" href="#category" data-toggle="tab">Danh mục đã
                                     tạo</a>
@@ -76,6 +77,8 @@
                             <li class="nav-item"><a class="nav-link" href="#trademark" data-toggle="tab">Thương hiệu đã
                                     tạo</a>
                             </li>
+                            @endif
+                            <li class="nav-item"><a class="nav-link {{ ($user->role == 2) ? 'active' : '' }}" href="#order" data-toggle="tab">Đơn hàng</a></li>
                             @if($user->id == \Illuminate\Support\Facades\Auth::user()->id)
                             <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Thay đổi thông
                                     tin</a>
@@ -85,7 +88,7 @@
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="active tab-pane" id="product">
+                            <div class="tab-pane {{ ($user->role !== 2) ? 'active' : '' }}" id="product">
                                 @if(count($products)>0)
                                     <div class="card-body table-responsive p-0">
                                         <table class="table table-hover">
@@ -121,8 +124,16 @@
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $product->name }}</td>
-                                                    <td>{{ $product->trademark->name }}</td>
-                                                    <td>{{ $product->category->name }}</td>
+                                                    @if($product->trademark == null)
+                                                        <td>Không có</td>
+                                                    @else
+                                                        <td>{{ $product->trademark->name }}</td>
+                                                    @endif
+                                                    @if($product->category == null)
+                                                        <td>Không có</td>
+                                                    @else
+                                                        <td>{{ $product->category->name }}</td>
+                                                    @endif
                                                     <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                                                 </tr>
                                             @endforeach
@@ -131,13 +142,13 @@
                                     </div>
                                     <br>
                                     <div
-                                        class="d-flex justify-content-center">{!! $products->appends(request()->input())->links() !!}</div>
+                                        class="d-flex justify-content-center">{!! $products->links() !!}</div>
                                 @endif
                             </div>
 
                             <div class="tab-pane" id="category">
                                 @if(count($categories)>0)
-                                    <div class="card-body table-responsive p-0">
+                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
                                         <table class="table table-hover">
                                             <thead>
                                             <tr class="bg-primary">
@@ -211,7 +222,7 @@
 
                             <div class="tab-pane" id="trademark">
                                 @if(count($trademarks)>0)
-                                    <div class="card-body table-responsive p-0">
+                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
                                         <table class="table table-hover">
                                             <thead>
                                             <tr class="bg-primary">
@@ -232,6 +243,51 @@
                                                     <td>{{ $i }}</td>
                                                     <td>{{ $trademark->name}}</td>
                                                     <td>{{ date('d-m-Y', strtotime($trademark->created_at)) }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="tab-pane {{ ($user->role == 2) ? 'active' : '' }}" id="order">
+                                @if(count($orders)>0)
+                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr class="bg-primary">
+                                                <th>Mã đơn hàng</th>
+                                                <th>Tên người nhận</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Chi tiết</th>
+                                                <th>Tình trạng</th>
+                                            </tr>
+                                            </thead>
+                                            <style>
+                                                .widspan {
+                                                    padding: .25em 0;
+                                                    width: 110px;
+                                                    font-size: 14px;
+                                                }
+                                            </style>
+                                            <tbody>
+                                            @foreach($orders as $item)
+                                                <tr>
+                                                    <td>{{ $item->id }}</td>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ number_format($item->total_price, 0, '.', '.') }} ₫</td>
+                                                    <td>
+                                                        <a href="#" id="details"
+                                                           data-toggle="modal"
+                                                           data-target="#exampleModal"
+                                                           data-id="{{ $item->id }}">
+                                                            Chi tiết
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <p class="textt">{{ $item->status_text }}</p>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -339,6 +395,42 @@
         <!-- /.row -->
     </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Đơn giá</th>
+                            <th scope="col">Thành tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tests">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger"
+                            data-dismiss="modal">Đồng ý
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if(Session::has('success'))
         <script>
             toastr.success("{!! Session::get('success') !!}");
@@ -348,4 +440,36 @@
             toastr.error("{!! Session::get('error') !!}");
         </script>
     @endif
+
+    <script>
+        $(document).ready(function () {
+            const formatter = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0
+            })
+
+            $(document).on("click", "#details", function () {
+                var id = $(this).data('id');
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{ route('frontend.order.detail') }}',
+                    method: 'POST',
+                    dataType: 'JSON',
+                    data: {id: id, _token: _token},
+                    success: function (data) {
+                        $('#tests').empty();
+                        var i = 0;
+                        $.each(data, function (key, value) {
+                            var total = value["quantity"] * value["price"];
+                            i++;
+                            $('#tests').append(
+                                '<tr><th scope="row">' + i + '</th><td>' + value["name"] + '</td><td>' + value["quantity"] + '</td><td>' + formatter.format(value["price"]) + '</td><td>' + formatter.format(total) + '</td></tr>'
+                            );
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

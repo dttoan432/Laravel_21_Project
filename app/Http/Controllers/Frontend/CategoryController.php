@@ -14,7 +14,16 @@ class CategoryController extends Controller
     public function show(Request $request, $slug)
     {
         $category = Category::where('slug', $slug)->first();
-        $products = Product::where('category_id', $category->id);
+        $childrens = Category::where('parent_id', $category->id)->get();
+        if (count($childrens) < 1){
+            $products = Product::where('category_id', $category->id);
+        } else {
+            foreach ($childrens as $children){
+                $arr[] = $children->id;
+            }
+
+            $products = Product::whereIn('category_id', $arr);
+        }
 
         if ($request->has('price')) {
             $price = $request->get('price');

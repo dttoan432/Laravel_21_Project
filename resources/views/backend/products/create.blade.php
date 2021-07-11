@@ -39,7 +39,7 @@
 
                             <div class="form-group">
                                 <label>Danh mục sản phẩm</label>
-                                <select class="form-control select2" name="category_id" style="width: 100%;">
+                                <select class="form-control select2" name="category_id" style="width: 100%;" id="category">
                                     <option value="0">-- Chọn danh mục --</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -48,11 +48,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Thương hiệu sản phẩm</label>
-                                <select class="form-control select2" name="trademark_id" style="width: 100%;">
+                                <select class="form-control select2" name="trademark_id" style="width: 100%;" id="trademark">
                                     <option value="0">-- Chọn thương hiệu --</option>
-                                    @foreach($trademarks as $trademark)
-                                        <option value="{{ $trademark->id }}">{{ $trademark->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -131,9 +128,9 @@
 
                             <div id="clone">
                                 <label for="">Thông số kỹ thuật</label>
-                                <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
 
                             </div>
+                            <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
                         </div>
                         <!-- /.card-body -->
 
@@ -159,6 +156,30 @@
                         '<input type="text" class="form-control" id="" name="val[]" value="">' +
                         '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>' +
                         '</div></div></div>')
+                });
+
+                $('#category').change(function (){
+                    var id = $('select[name=category_id] option').filter(':selected').val();
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: '{{ route('backend.product.trademark') }}',
+                        method: 'POST',
+                        dataType: 'JSON',
+                        data: {id: id, _token: _token},
+                        success: function (data) {
+                            $('#trademark').empty();
+                            var i = 0;
+                            $('#trademark').append(
+                                '<option value="0">-- Chọn thương hiệu --</option>'
+                            );
+                            $.each(data, function () {
+                                $('#trademark').append(
+                                    '<option value="'+ data[i].id +'">'+ data[i].name +'</option>'
+                                );
+                                i++;
+                            });
+                        }
+                    });
                 });
 
                 $(document).on('click', '.closee', function () {

@@ -23,12 +23,14 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ route('backend.category.store') }}" method="POST" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('backend.category.store') }}" method="POST"
+                          enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên danh mục</label>
-                                <input type="text" class="form-control" id="" name="name" placeholder="Điền tên sản phẩm" value="{{ old('name') }}">
+                                <input type="text" class="form-control" id="" name="name"
+                                       placeholder="Điền tên sản phẩm" value="{{ old('name') }}">
 
                                 @error('name')
                                 <div class="text-danger">{{ $message }}</div>
@@ -46,12 +48,34 @@
 
                             <div class="form-group">
                                 <label>Thương hiệu liên quan</label>
-                                @foreach($trademarks as $trademark)
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="trademark_id[]" value="{{ $trademark->id }}" id="flexSwitchCheckChecked" style="margin-left: -1.25rem;">
-                                    <label class="form-check-label" for="flexSwitchCheckChecked" style="margin-left: 1.25rem;">{{ $trademark->name }}</label>
+                                <div class="row">
+                                    @for($i = 0; $i < count($trademarks); $i++)
+                                        <div class="col-xl-2">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="trademark_id[]"
+                                                       value="{{ $trademarks[$i]->id }}" id="flexSwitchCheckChecked"
+                                                       style="margin-left: -1.25rem;">
+                                                <label class="form-check-label" for="flexSwitchCheckChecked"
+                                                       style="margin-left: 1.25rem;">{{ $trademarks[$i]->name }}</label>
+                                            </div>
+                                        </div>
+                                    @if($i == count($trademarks) - 1)
+                                        @break
+                                    @endif
+                                    @php
+                                        $i++;
+                                    @endphp
+                                        <div class="col-xl-2">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="trademark_id[]"
+                                                       value="{{ $trademarks[$i]->id }}" id="flexSwitchCheckChecked"
+                                                       style="margin-left: -1.25rem;">
+                                                <label class="form-check-label" for="flexSwitchCheckChecked"
+                                                       style="margin-left: 1.25rem;">{{ $trademarks[$i]->name }}</label>
+                                            </div>
+                                        </div>
+                                    @endfor
                                 </div>
-                                @endforeach
                             </div>
                         </div>
 

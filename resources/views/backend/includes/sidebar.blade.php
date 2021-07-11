@@ -44,45 +44,21 @@
                                 </a>
                             </li>
 
-                            @can('viewAny', \App\Models\User::class)
-                                <li class="nav-header">NGƯỜI DÙNG</li>
-                                <li class="nav-item {{ ($prefix == 'admin/user') ? 'menu-open' : '' }}">
-                                    <a href="#" class="nav-link  {{ ($prefix == 'admin/user') ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-user"></i>
-                                        <p>Quản lý người dùng <i class="fas fa-angle-left right"></i></p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="{{ route('backend.user.create') }}" class="nav-link {{ ($route == 'backend.user.create') ? 'active' : '' }}">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Tạo mới</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="{{ route('backend.user.index') }}" class="nav-link {{ ($route == 'backend.user.index') ? 'active' : '' }}">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Danh sách</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endcan
-
                             <li class="nav-header">SẢN PHẨM</li>
-                            <li class="nav-item {{ ($prefix == 'admin/product') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ ($prefix == 'admin/product') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-flag"></i>
-                                    <p>Quản lý sản phẩm <i class="fas fa-angle-left right"></i></p>
+                            <li class="nav-item {{ ($prefix == 'admin/trademark') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ ($prefix == 'admin/trademark') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-cloud"></i>
+                                    <p>Quản lý thương hiệu <i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('backend.product.create') }}" class="nav-link {{ ($route == 'backend.product.create') ? 'active' : '' }}">
+                                        <a href="{{ route('backend.trademark.create') }}" class="nav-link {{ ($route == 'backend.trademark.create') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tạo mới</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('backend.product.index') }}" class="nav-link {{ ($route == 'backend.product.index') ? 'active' : '' }}">
+                                        <a href="{{ route('backend.trademark.index') }}" class="nav-link {{ ($route == 'backend.trademark.index') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Danh sách</p>
                                         </a>
@@ -111,26 +87,52 @@
                                 </ul>
                             </li>
 
-                            <li class="nav-item {{ ($prefix == 'admin/trademark') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ ($prefix == 'admin/trademark') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-cloud"></i>
-                                    <p>Quản lý thương hiệu <i class="fas fa-angle-left right"></i></p>
+                            <li class="nav-item {{ ($prefix == 'admin/product') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ ($prefix == 'admin/product') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-flag"></i>
+                                    <p>Quản lý sản phẩm <i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('backend.trademark.create') }}" class="nav-link {{ ($route == 'backend.trademark.create') ? 'active' : '' }}">
+                                        <a href="{{ route('backend.product.create') }}" class="nav-link {{ ($route == 'backend.product.create') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Tạo mới</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('backend.trademark.index') }}" class="nav-link {{ ($route == 'backend.trademark.index') ? 'active' : '' }}">
+                                        <a href="{{ route('backend.product.index') }}" class="nav-link {{ ($route == 'backend.product.index') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Danh sách</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
+
+
+
+                            @can('viewAny', \App\Models\User::class)
+                                <li class="nav-header">NGƯỜI DÙNG</li>
+                                <li class="nav-item {{ ($prefix == 'admin/user') ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link  {{ ($prefix == 'admin/user') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <p>Quản lý người dùng <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('backend.user.create') }}" class="nav-link {{ ($route == 'backend.user.create') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Tạo mới</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('backend.user.index') }}" class="nav-link {{ ($route == 'backend.user.index') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Danh sách</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
 
                             <li class="nav-header">ĐƠN HÀNG</li>
                             <li class="nav-item">

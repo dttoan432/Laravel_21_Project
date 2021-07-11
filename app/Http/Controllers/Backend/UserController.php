@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Imports\UsersImport;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Trademark;
 use App\Models\User;
@@ -79,17 +80,19 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $this->authorize('update', $user);
-        $products = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(10);
+        $products   = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(10);
         $trademarks = Trademark::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
         $categories = Category::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
-        $parents = Category::where('parent_id', 0)->get();
+        $parents    = Category::where('parent_id', 0)->get();
+        $orders     = Order::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
 
         return view('backend.users.show')->with([
-            'user' => $user,
-            'products' => $products,
-            'trademarks' => $trademarks,
-            'categories' => $categories,
-            'parents' => $parents
+            'user'          => $user,
+            'products'      => $products,
+            'trademarks'    => $trademarks,
+            'categories'    => $categories,
+            'parents'       => $parents,
+            'orders'        => $orders
         ]);
     }
 

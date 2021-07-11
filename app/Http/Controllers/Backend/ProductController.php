@@ -239,6 +239,17 @@ class ProductController extends Controller
         return redirect()->route('backend.product.index')->with("error", 'Xóa thất bại');
     }
 
+    public function getTrademark(Request $request){
+        $id = $request->get('id');
+        if ($id == 0){
+            $trademark = Trademark::all();
+            echo $data = json_encode($trademark);
+        } else {
+            $category = Category::where('id', $id)->first();
+            echo $data = json_encode($category->trademarks);
+        }
+    }
+
     public function export()
     {
         return Excel::download(new ProductsExport(), 'products.xlsx');

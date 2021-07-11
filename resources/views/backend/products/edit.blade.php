@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Danh mục sản phẩm</label>
-                                <select class="form-control select2" name="category_id" style="width: 100%;">
+                                <select class="form-control select2" name="category_id" style="width: 100%;" id="category" onchange="getTrademark()">
                                     <option value="0">-- Chọn danh mục --</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}"
@@ -51,15 +51,15 @@
                             </div>
                             <div class="form-group">
                                 <label>Thương hiệu</label>
-                                <select class="form-control select2" name="trademark_id" style="width: 100%;">
+                                <select class="form-control select2" name="trademark_id" style="width: 100%;" id="trademark">
                                     <option value="0">-- Chọn thương hiệu --</option>
-                                    @foreach($trademarks as $trademark)
-                                        <option value="{{ $trademark->id }}"
-                                        @if($trademark->id == $product->trademark_id)
-                                            {{ 'selected' }}
-                                            @endif
-                                        >{{ $trademark->name }}</option>
-                                    @endforeach
+{{--                                    @foreach($trademarks as $trademark)--}}
+{{--                                        <option value="{{ $trademark->id }}"--}}
+{{--                                        @if($trademark->id == $product->trademark_id)--}}
+{{--                                            {{ 'selected' }}--}}
+{{--                                            @endif--}}
+{{--                                        >{{ $trademark->name }}</option>--}}
+{{--                                    @endforeach--}}
                                 </select>
                             </div>
                             <div class="form-group">
@@ -175,7 +175,6 @@
 
                             <div id="clone">
                                 <label for="">Thông số kỹ thuật</label>
-                                <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
                                 @if(!empty($product->content_more_json))
                                     @php
                                         $i = 0;
@@ -205,6 +204,7 @@
                                     @endforeach
                                 @endif
                             </div>
+                            <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
                         </div>
                         <!-- /.card-body -->
 
@@ -242,10 +242,57 @@
                     var button_id = $(this).attr("id");
                     $('#row' + button_id + '').remove();
                 });
-            });
-        </script>
 
-        <script>
+                getTrademark();
+                function getTrademark(){
+                    var id = {{ $product->category_id }};
+                    var id_trade = {{ $product->trademark_id }};
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: '{{ route('backend.product.trademark') }}',
+                        method: 'POST',
+                        dataType: 'JSON',
+                        data: {id: id, _token: _token},
+                        success: function (data) {
+                            $('#trademark').empty();
+                            var i = 0;
+                            $('#trademark').append(
+                                '<option value="0">-- Chọn thương hiệu --</option>'
+                            );
+                            $.each(data, function () {
+                                $('#trademark').append(
+                                    '<option value="'+ data[i].id +'">'+ data[i].name +'</option>'
+                                );
+                                i++;
+                            });
+                        }
+                    });
+                }
+                $('#category').change(function (){
+                    var id = $('select[name=category_id] option').filter(':selected').val();
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: '{{ route('backend.product.trademark') }}',
+                        method: 'POST',
+                        dataType: 'JSON',
+                        data: {id: id, _token: _token},
+                        success: function (data) {
+                            $('#trademark').empty();
+                            var i = 0;
+                            $('#trademark').append(
+                                '<option value="0">-- Chọn thương hiệu --</option>'
+                            );
+                            $.each(data, function () {
+                                $('#trademark').append(
+                                    '<option value="'+ data[i].id +'">'+ data[i].name +'</option>'
+                                );
+                                i++;
+                            });
+                        }
+                    });
+                });
+            });
+
             function previewImages() {
                 var preview = document.querySelector('.gallery');
 
@@ -262,8 +309,6 @@
 
                     reader.addEventListener("load", function () {
                         var image = new Image();
-                        // image.width = 150;
-                        // image.height = 150;
                         image.title = file.name;
                         image.src = this.result;
 

@@ -143,10 +143,13 @@ Route::group([
             ->name('backend.product.destroy')
             ->middleware('can:delete,product');
 
-        //Export danh mục
+        Route::post('/get-trademark', 'ProductController@getTrademark')
+            ->name('backend.product.trademark');
+
+        //Export sản phẩm
         Route::get('/export-product', 'ProductController@export')
             ->name('backend.product.export');
-        //Import danh mục
+        //Import sản phẩm
         Route::post('/import-product', 'ProductController@import')
             ->name('backend.product.import');
     });

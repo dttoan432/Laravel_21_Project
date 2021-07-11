@@ -28,7 +28,8 @@
                                     <h4 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">
                                         Chỉ từ <span>400.000 ₫</span></h4>
                                     <div class="slider-button">
-                                        <a href="{{ route('frontend.category', 'kinh-thuc-te-ao') }}" class="wow button animated fadeInLeft" data-text="Shop now"
+                                        <a href="{{ route('frontend.category', 'kinh-thuc-te-ao') }}"
+                                           class="wow button animated fadeInLeft" data-text="Shop now"
                                            data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>
                                     </div>
                                 </div>
@@ -46,7 +47,8 @@
                                     <h4 class="wow animated fadeInLeft" data-wow-duration="2s" data-wow-delay="0.5s">
                                         Khởi điểm <span>400.000 ₫</span></h4>
                                     <div class="slider-button">
-                                        <a href="{{ route('frontend.category', 'dien-thoai') }}" class="wow button animated fadeInLeft" data-text="Shop now"
+                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"
+                                           class="wow button animated fadeInLeft" data-text="Shop now"
                                            data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>
                                     </div>
                                 </div>
@@ -60,7 +62,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="single-offer mb-20">
                         <div class="offer-img img-full">
-                            <a href="#"><img src="frontend/images/1_6.jpg" alt></a>
+                            <a href="{{ route('frontend.category', 'tay-cam-choi-game') }}"><img src="frontend/images/1_6.jpg" alt></a>
                         </div>
                     </div>
                     <div class="offer">
@@ -179,7 +181,10 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
+                                                                <a class="button add-btn text-white addToCart"
+                                                                   data-toggle="tooltip"
+                                                                   onclick="addToCart({{ $product->id }})"><i
+                                                                        class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,7 +207,8 @@
                             <div class="col-lg-12">
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/3_2.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img
+                                                src="frontend/images/3_2.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +262,10 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
+                                                                <a class="button add-btn text-white addToCart"
+                                                                   data-toggle="tooltip"
+                                                                   onclick="addToCart({{ $product->id }})"><i
+                                                                        class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -279,7 +288,8 @@
                             <div class="col-lg-12">
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/4_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img
+                                                src="frontend/images/4_1.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -333,7 +343,10 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
+                                                                <a class="button add-btn text-white addToCart"
+                                                                   data-toggle="tooltip"
+                                                                   onclick="addToCart({{ $product->id }})"><i
+                                                                        class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -356,7 +369,8 @@
                             <div class="col-lg-12">
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'tablet') }}"><img src="frontend/images/5_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'tablet') }}"><img
+                                                src="frontend/images/5_1.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -410,7 +424,10 @@
                                                             </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
-                                                                <a class="button add-btn text-white addToCart" data-toggle="tooltip" onclick="addToCart({{ $product->id }})"><i class="fas fa-cart-plus"></i> Thêm</a>
+                                                                <a class="button add-btn text-white addToCart"
+                                                                   data-toggle="tooltip"
+                                                                   onclick="addToCart({{ $product->id }})"><i
+                                                                        class="fas fa-cart-plus"></i> Thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -492,17 +509,20 @@
                             <div class="col-lg-12">
                                 <div class="single-offer mb-20">
                                     <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'tablet') }}"><img src="frontend/images/8_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'tablet') }}"><img
+                                                src="frontend/images/8_1.jpg" alt></a>
                                     </div>
                                 </div>
                                 <div class="single-offer mb-20">
                                     <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'dong-ho') }}"><img src="frontend/images/9_1.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'dong-ho') }}"><img
+                                                src="frontend/images/9_1.jpg" alt></a>
                                     </div>
                                 </div>
                                 <div class="single-offer">
                                     <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/10.jpg" alt></a>
+                                        <a href="{{ route('frontend.category', 'tai-nghe') }}"><img
+                                                src="frontend/images/10.jpg" alt></a>
                                     </div>
                                 </div>
                             </div>
@@ -520,14 +540,16 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="single-offer">
                         <div class="offer-img img-full">
-                            <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/6_1.jpg" alt></a>
+                            <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/6_1.jpg"
+                                                                                        alt></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="single-offer">
                         <div class="offer-img img-full">
-                            <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/7_1.jpg" alt></a>
+                            <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/7_1.jpg"
+                                                                                          alt></a>
                         </div>
                     </div>
                 </div>
@@ -567,9 +589,9 @@
                                                 <div class="col-4">
                                                     <div class="product-img">
                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                                <img class="first-img"
-                                                                     src="{{ $product->images[0]->image_url }}"
-                                                                     alt>
+                                                            <img class="first-img"
+                                                                 src="{{ $product->images[0]->image_url }}"
+                                                                 alt>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -624,9 +646,9 @@
                                                 <div class="col-4">
                                                     <div class="product-img">
                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                                <img class="first-img"
-                                                                     src="{{ $product->images[0]->image_url }}"
-                                                                     alt>
+                                                            <img class="first-img"
+                                                                 src="{{ $product->images[0]->image_url }}"
+                                                                 alt>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -681,9 +703,9 @@
                                                 <div class="col-4">
                                                     <div class="product-img">
                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                                <img class="first-img"
-                                                                     src="{{ $product->images[0]->image_url }}"
-                                                                     alt>
+                                                            <img class="first-img"
+                                                                 src="{{ $product->images[0]->image_url }}"
+                                                                 alt>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -731,14 +753,14 @@
     </div>
 
     <style>
-        .addToCart{
+        .addToCart {
             color: white;
             cursor: pointer;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        function addToCart(id){
+        function addToCart(id) {
             var _token = $('input[name="_token"]').val();
             $.ajax({
                 url: '{{ route('frontend.cart.add') }}',

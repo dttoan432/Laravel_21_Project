@@ -50,23 +50,50 @@
 
                             <div class="form-group">
                                 <label>Thương hiệu liên quan</label>
-                                @for ($j = 0; $j < count($trademarks); $j++)
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="trademark_id[]"
-                                               value="{{ $trademarks[$j]->id }}" id="flexSwitchCheckChecked"
-                                               style="margin-left: -1.25rem;"
+                                <div class="row">
+                                    @for ($j = 0; $j < count($trademarks); $j++)
+                                        <div class="col-xl-2">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="trademark_id[]"
+                                                       value="{{ $trademarks[$j]->id }}" id="flexSwitchCheckChecked"
+                                                       style="margin-left: -1.25rem;"
 
-                                        @for ($i = 0; $i < count($category->trademarks); $i++)
-                                            @if ($category->trademarks[$i]->id == $trademarks[$j]->id)
-                                                {{ 'checked' }}
-                                                @endif
-                                            @endfor
+                                                @for ($i = 0; $i < count($category->trademarks); $i++)
+                                                    @if ($category->trademarks[$i]->id == $trademarks[$j]->id)
+                                                        {{ 'checked' }}
+                                                        @endif
+                                                    @endfor
 
-                                        >
-                                        <label class="form-check-label" for="flexSwitchCheckChecked"
-                                               style="margin-left: 1.25rem;">{{ $trademarks[$j]->name }}</label>
-                                    </div>
-                                @endfor
+                                                >
+                                                <label class="form-check-label" for="flexSwitchCheckChecked"
+                                                       style="margin-left: 1.25rem;">{{ $trademarks[$j]->name }}</label>
+                                            </div>
+                                        </div>
+                                    @if($j == count($trademarks) - 1)
+                                        @break
+                                    @endif
+                                    @php
+                                        $j++;
+                                    @endphp
+                                        <div class="col-xl-2">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="trademark_id[]"
+                                                       value="{{ $trademarks[$j]->id }}" id="flexSwitchCheckChecked"
+                                                       style="margin-left: -1.25rem;"
+
+                                                @for ($i = 0; $i < count($category->trademarks); $i++)
+                                                    @if ($category->trademarks[$i]->id == $trademarks[$j]->id)
+                                                        {{ 'checked' }}
+                                                        @endif
+                                                    @endfor
+
+                                                >
+                                                <label class="form-check-label" for="flexSwitchCheckChecked"
+                                                       style="margin-left: 1.25rem;">{{ $trademarks[$j]->name }}</label>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
                             </div>
                         </div>
 
