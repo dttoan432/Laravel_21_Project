@@ -16,7 +16,7 @@ class CreateWarehouseTable extends Migration
         Schema::create('warehouse', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->integer('sold');
+            $table->integer('sold')->nullable()->default(0);
             $table->date('sale_date');
             $table->timestamps();
         });

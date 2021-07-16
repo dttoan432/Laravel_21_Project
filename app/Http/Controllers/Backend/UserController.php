@@ -30,9 +30,9 @@ class UserController extends Controller
         $this->authorize('viewAny', User::class);
         if ($request->has('q')) {
             $keyU = $request->get('q');
-            $users = User::search($request)->paginate(10);
+            $users = User::search($request)->paginate(20);
         } else {
-            $users = User::orderBy('role', 'ASC')->paginate(10);
+            $users = User::orderBy('role', 'ASC')->paginate(20);
         }
         return view('backend.users.index')->with([
             'users' => $users,
@@ -76,15 +76,14 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
         $this->authorize('update', $user);
-        $products   = Product::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(10);
-        $trademarks = Trademark::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
-        $categories = Category::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
+        $products   = Product::where('user_id', $user->id)->orderBy('created_at', 'DESC')->paginate(10);
+        $trademarks = Trademark::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        $categories = Category::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
         $parents    = Category::where('parent_id', 0)->get();
-        $orders     = Order::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
+        $orders     = Order::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
 
         return view('backend.users.show')->with([
             'user'          => $user,

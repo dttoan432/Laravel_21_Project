@@ -26,9 +26,9 @@ class StoreUserRequest extends FormRequest
         return [
             'name'          => 'required|min:5|max:50',
             'email'         => 'required|email|unique:users,email',
-            'phone'         => 'required|numeric|min:100000000|max:9999999999',
+            'phone'         => 'required|numeric|min:100000000|max:9999999999|unique:users,phone',
             'address'       => 'required|min:5|max:100',
-            'password'      => 'required|min:5'
+            'password'      => 'required|min:8|max:32'
         ];
     }
 
@@ -47,6 +47,7 @@ class StoreUserRequest extends FormRequest
             'phone.numeric'         => ':attribute không hợp lệ',
             'phone.min'             => ':attribute có độ dài không hợp lệ',
             'phone.max'             => ':attribute có độ dài không hợp lệ',
+            'phone.unique'          => ':attribute đã tồn tại',
 
             'address.required'      => ':attribute không được để trống',
             'address.min'           => ':attribute phải lớn hơn :min ký tự',
@@ -54,6 +55,7 @@ class StoreUserRequest extends FormRequest
 
             'password.required'     => ':attribute không được để trống',
             'password.min'          => ':attribute phải lớn hơn :min ký tự',
+            'password.max'          => ':attribute phải nhỏ hơn :max ký tự',
         ];
     }
 

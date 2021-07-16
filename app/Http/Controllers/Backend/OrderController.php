@@ -37,7 +37,7 @@ class OrderController extends Controller
             ->orWhere('phone', 'LIKE', '%'.$q.'%');
         }
 
-        $orders = $orders->orderBy('created_at', 'DESC')->paginate(10);
+        $orders = $orders->orderBy('created_at', 'DESC')->paginate(20);
 
         return view('backend.orders.index')->with([
             'orders' => $orders,
@@ -143,7 +143,7 @@ class OrderController extends Controller
             foreach ($order->products as $item){
                 if ($warehouse = Warehouse::where([['sale_date', $date], ['product_id', $item->id]])->first()){
                     $warehouse->sold -= $item->pivot->quantity;
-                    if ($warehouse->sold == 0){
+                    if ($warehouse->sold == 0 && $warehouse->entered == 0){
                         $warehouse->delete();
                     } else{
                         $warehouse->save();

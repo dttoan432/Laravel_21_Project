@@ -52,7 +52,7 @@
                                 <label>Thương hiệu liên quan</label>
                                 <div class="row">
                                     @for ($j = 0; $j < count($trademarks); $j++)
-                                        <div class="col-xl-2">
+                                        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-2">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="trademark_id[]"
                                                        value="{{ $trademarks[$j]->id }}" id="flexSwitchCheckChecked"
@@ -75,7 +75,7 @@
                                     @php
                                         $j++;
                                     @endphp
-                                        <div class="col-xl-2">
+                                        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-2">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="trademark_id[]"
                                                        value="{{ $trademarks[$j]->id }}" id="flexSwitchCheckChecked"

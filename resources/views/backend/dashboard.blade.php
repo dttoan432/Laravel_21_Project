@@ -152,7 +152,6 @@
                                     width: 90px;
                                     font-size: 14px;
                                     font-weight: normal;
-                                    color: white !important;
                                 }
                             </style>
                             <tbody>
@@ -169,7 +168,11 @@
                                     <td>{{ $product->quantity }}</td>
                                     <td>{{ number_format($product->origin_price, 0, '.', '.') }}</td>
                                     <td>{{ number_format($product->sale_price, 0, '.', '.') }}</td>
+                                    @if($product->category == null)
+                                        <td>Không có</td>
+                                    @else
                                     <td>{{ $product->category->name }}</td>
+                                    @endif
                                     <td>
                                         @if($product->status == 0)
                                             <span

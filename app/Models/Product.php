@@ -27,14 +27,14 @@ class Product extends Model
         'status'
     ];
 
-    const STATUS_INIT = 0;
-    const STATUS_BUY = 1;
-    const STATUS_STOP = 2;
+    const STATUS_INIT   = 0;
+    const STATUS_BUY    = 1;
+    const STATUS_STOP   = 2;
 
     public static $status_text = [
-        self::STATUS_INIT => 'Đang nhập',
-        self::STATUS_BUY => 'Đang bán',
-        self::STATUS_STOP => 'Dừng bán'
+        self::STATUS_INIT   => 'Đang nhập',
+        self::STATUS_BUY    => 'Đang bán',
+        self::STATUS_STOP   => 'Dừng bán'
     ];
 
     public function getStatusTextAttribute()
@@ -84,5 +84,13 @@ class Product extends Model
 
     public function warehouses(){
         return $this->hasMany(Warehouse::class);
+    }
+
+    public function suppliers(){
+        return $this->belongsToMany(Supplier::class);
+    }
+
+    public function purchases(){
+        return $this->belongsToMany(Purchase::class);
     }
 }

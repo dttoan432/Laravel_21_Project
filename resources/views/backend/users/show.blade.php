@@ -4,6 +4,10 @@
     Chi tiết người dùng
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -63,7 +67,6 @@
                 </div>
                 <!-- /.card -->
             </div>
-            <!-- /.col -->
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header p-2">
@@ -148,7 +151,7 @@
 
                             <div class="tab-pane" id="category">
                                 @if(count($categories)>0)
-                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
+                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: auto;">
                                         <table class="table table-hover">
                                             <thead>
                                             <tr class="bg-primary">
@@ -222,7 +225,7 @@
 
                             <div class="tab-pane" id="trademark">
                                 @if(count($trademarks)>0)
-                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
+                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: auto;">
                                         <table class="table table-hover">
                                             <thead>
                                             <tr class="bg-primary">
@@ -256,7 +259,7 @@
                                     <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
                                         <table class="table table-hover">
                                             <thead>
-                                            <tr class="bg-primary">
+                                            <tr class="bg-info">
                                                 <th>Mã đơn hàng</th>
                                                 <th>Tên người nhận</th>
                                                 <th>Tổng tiền</th>

@@ -4,6 +4,10 @@
     Danh sách đơn hàng
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">

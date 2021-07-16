@@ -16,8 +16,8 @@ class CreateStatisticsTable extends Migration
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
             $table->date('order_date');
-            $table->integer('revenue');
-            $table->integer('profit');
+            $table->bigInteger('revenue');
+            $table->bigInteger('profit');
             $table->integer('quantity');
             $table->integer('total_order');
             $table->timestamps();

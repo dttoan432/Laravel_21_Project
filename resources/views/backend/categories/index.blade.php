@@ -4,6 +4,10 @@
     Danh sách danh mục
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -74,7 +78,7 @@
                                     <td>{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
 {{--                                    <td>{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>--}}
                                     <td class="project-actions text-right">
-                                        <a class="btn btn-info btn-sm {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $category->user_id) ? '' : 'disabled'}}"
+                                        <a class="btn btn-info btn-sm juss {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $category->user_id) ? '' : 'disabled'}}"
                                            href="{{ route('backend.category.edit', $category->id) }}">
                                             <i class="fas fa-user-edit"></i> Sửa
                                         </a>
@@ -83,7 +87,7 @@
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm"
+                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm juss"
                                                 {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $category->user_id) ? '' : 'disabled'}}>
                                                 <i class="fas fa-eraser"></i> Xóa
                                             </button>
@@ -96,8 +100,8 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-6">
-                            <div class="d-flex ml-3 mb-3">
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex ml-3 mb-3 pot">
                                 <a href="{{ route('backend.category.export') }}" class="btn btn-sm btn-info d-inline-block"
                                    style="margin-right: 10px;">
                                     <i class="fas fa-file-export"></i> Export Excel
@@ -109,7 +113,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="float-right mr-4">{!! $categories->links() !!}</div>
                         </div>
                     </div>

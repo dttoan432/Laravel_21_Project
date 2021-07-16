@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name'          => 'required|min:5|max:50',
             'email'         => "required|email|unique:users,email, $this->id",
-            'phone'         => 'required|numeric|min:100000000|max:9999999999',
+            'phone'         => "required|numeric|min:100000000|max:9999999999|unique:users,phone, $this->id",
             'address'       => 'required|min:5|max:100',
         ];
     }
@@ -46,6 +46,7 @@ class UpdateUserRequest extends FormRequest
             'phone.numeric'         => ':attribute không hợp lệ',
             'phone.min'             => ':attribute có độ dài không hợp lệ',
             'phone.max'             => ':attribute có độ dài không hợp lệ',
+            'phone.unique'          => ':attribute đã tồn tại',
 
             'address.required'      => ':attribute không được để trống',
             'address.min'           => ':attribute phải lớn hơn :min ký tự',

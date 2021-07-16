@@ -32,9 +32,10 @@ class StatisticController extends Controller
             $fromDate = $request->get('from_sale_date');
             $toDate = $request->get('to_sale_date');
             $warehouses = Warehouse::distinct()
-                ->select('product_id', DB::raw('SUM(sold) as sold'))
+                ->selectRaw('product_id, sum(sold) as sold, sum(entered) as entered')
                 ->whereBetween('sale_date', [$fromDate, $toDate])
                 ->groupBy('product_id')
+                ->orderBy('created_at', 'DESC')
                 ->paginate(12, ['product_id']);
         } else {
             //Ngày đầu tiên của tháng
@@ -43,9 +44,10 @@ class StatisticController extends Controller
             $endOfMonth = Carbon::now()->endOfMonth();
 
             $warehouses = Warehouse::distinct()
-                ->select('product_id', DB::raw('SUM(sold) as sold'))
+                ->selectRaw('product_id, sum(sold) as sold, sum(entered) as entered')
                 ->whereBetween('sale_date', [$startOfMonth, $endOfMonth])
                 ->groupBy('product_id')
+                ->orderBy('created_at', 'DESC')
                 ->paginate(12, ['product_id']);
         }
 

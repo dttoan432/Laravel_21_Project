@@ -4,6 +4,10 @@
     Danh sách người dùng
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -19,7 +23,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h3 class="card-title">Danh sách người dùng</h3>
+                        <h3 class="card-title mb-1">Danh sách người dùng</h3>
                         <div class="card-tools d-flex">
                             <select class="form-select form-select-sm" aria-label="Default select example"
                                     name="status" style="margin-right: 10px;" onchange="location = this.value;">
@@ -71,13 +75,13 @@
                                     <td>{{ $user->role_text }}</td>
                                     <td class="project-actions text-right">
                                         @can('view', $user)
-                                            <a class="btn btn-primary btn-sm"
+                                            <a class="btn btn-primary btn-sm juss"
                                                href="{{ route('backend.user.show', $user->id) }}">
                                                 <i class="fas fa-street-view"></i> Xem
                                             </a>
                                         @endcan
                                         @can('update', $user)
-                                            <a class="btn btn-info btn-sm"
+                                            <a class="btn btn-info btn-sm juss"
                                                href="{{ route('backend.user.edit', $user->id) }}">
                                                 <i class="fas fa-user-edit"></i> Sửa
                                             </a>
@@ -90,7 +94,7 @@
                                                 {{ method_field('DELETE') }}
 
                                                 <button type="submit"
-                                                        class="btn btn-danger btn-sm delete-confirm" {{ ($user->role == \App\Models\User::ROLE_MANAGE) ? 'disabled' : '' }}>
+                                                        class="btn btn-danger btn-sm delete-confirm juss" {{ ($user->role == \App\Models\User::ROLE_MANAGE) ? 'disabled' : '' }}>
                                                     <i class="fas fa-eraser"></i> Xóa
                                                 </button>
                                             </form>
@@ -103,8 +107,8 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-6">
-                            <div class="d-flex ml-3  mb-3">
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex ml-3 mb-3 pot">
                                 <a href="{{ route('backend.user.export') }}" class="btn btn-sm btn-info d-inline-block"
                                    style="margin-right: 10px;">
                                     <i class="fas fa-file-export"></i> Export Excel
@@ -116,8 +120,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="float-right mr-4">{!! $users->links() !!}</div>
+                        <div class="col-12 col-md-6">
+                            <div class="float-right mr-4">{!! $users->appends(request()->input())->links() !!}</div>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,10 @@
     Trang chủ
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/frontend/css/home.css">
+@endsection
+
 @section('content')
     <section class="slider-area ptb-30 white-bg">
         <div class="container">
@@ -13,8 +17,8 @@
                     <div class="slider-wrapper theme-default">
                         <!--Slider Background Image Start-->
                         <div id="slider" class="nivoSlider">
-                            <img src="frontend/images/1_4.jpg" alt title="#htmlcaption">
-                            <img src="frontend/images/2_1.jpg" alt title="#htmlcaption2">
+                            <img src="frontend/images/1_4.jpg" alt title="#htmlcaption" class="img-fluid">
+                            <img src="frontend/images/2_1.jpg" alt title="#htmlcaption2" class="img-fluid">
                         </div>
                         <!--Slider Background Image End-->
                         <!--1st Slider Caption Start-->
@@ -125,17 +129,11 @@
     </section>
     <!--Corporate About End-->
     <!--All Product Area Start-->
-    <section class="all-product-area pt-100">
+    <section class="all-product-area pt-100 product_res">
         <div class="container">
             <div class="row">
                 <!--Left Side Product Start-->
                 <div class="col-lg-9 col-md-9">
-                    <!--Desktop & Television Product Start-->
-                    <style>
-                        .section-title1 h3 {
-                            text-transform: none;
-                        }
-                    </style>
                     <div class="desktop-television-product">
                         <div class="row">
                             <div class="col-lg-12">
@@ -151,34 +149,24 @@
                         <div class="tab-content">
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
-                                    <div class="all-product mb-85  owl-carousel">
-                                        @php
-                                            $i = 0;
-                                        @endphp
-                                        @foreach($products as $product)
-                                            @if($product->category_id == 1 && count($product->images)>0)
+                                    <div class="all-product mb-85 owl-carousel">
+                                        @foreach($phones as $product)
+                                            @if(count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
-                                                                <img class="first-img"
+                                                                <img class="first-img img-fluid"
                                                                      src="{{ $product->images[0]->image_url }}"
                                                                      alt="anh"
                                                                      style="height: 100%; width: 80%; margin-left: 10%;">
                                                             </a>
                                                         </div>
-                                                        <div class="product-content" style="height: 80px;">
+                                                        <div class="product-content">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
                                                                 <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                             </h2>
-
-                                                            <style>
-                                                                a.button.add-btn, a.button.add-btn.big {
-                                                                    top: auto;
-                                                                    bottom: 0;
-                                                                }
-                                                            </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn text-white addToCart"
@@ -189,12 +177,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $i++;
-                                                @endphp
-                                                @if($i == 10)
-                                                    @break
-                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -217,7 +199,7 @@
                     </div>
                     <!--Desktop & Television Product End-->
                     <!--Smartphone & Tablet Product Start-->
-                    <div class="smartphone-tablet-product pt-100">
+                    <div class="smartphone-tablet-product product_res pt-100">
                         <div class="row">
                             <div class="col-lg-12">
                                 <!--Section Title1 Start-->
@@ -233,33 +215,23 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        @php
-                                            $i = 0;
-                                        @endphp
-                                        @foreach($products as $product)
-                                            @if($product->category_id == 2 && count($product->images)>0)
+                                        @foreach($laptops as $product)
+                                            @if(count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
-                                                                <img class="first-img"
+                                                                <img class="first-img img-fluid"
                                                                      src="{{ $product->images[0]->image_url }}"
                                                                      alt="anh"
                                                                      style="height: 100%; width: 80%; margin-left: 10%;">
                                                             </a>
                                                         </div>
-                                                        <div class="product-content" style="height: 80px;">
+                                                        <div class="product-content">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
                                                                 <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                             </h2>
-
-                                                            <style>
-                                                                a.button.add-btn, a.button.add-btn.big {
-                                                                    top: auto;
-                                                                    bottom: 0;
-                                                                }
-                                                            </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn text-white addToCart"
@@ -270,12 +242,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $i++;
-                                                @endphp
-                                                @if($i == 10)
-                                                    @break
-                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -298,7 +264,7 @@
                     </div>
                     <!--Smartphone & Tablet Product End-->
                     <!--Electronics Product Start-->
-                    <div class="electronics-product pt-100">
+                    <div class="electronics-product product_res pt-100">
                         <div class="row">
                             <div class="col-lg-12">
                                 <!--Section Title1 Start-->
@@ -314,33 +280,23 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        @php
-                                            $i = 0;
-                                        @endphp
-                                        @foreach($products as $product)
-                                            @if($product->category_id == 3 && count($product->images)>0)
+                                        @foreach($tablets as $product)
+                                            @if(count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
-                                                                <img class="first-img"
+                                                                <img class="first-img img-fluid"
                                                                      src="{{ $product->images[0]->image_url }}"
                                                                      alt="anh"
                                                                      style="height: 100%; width: 80%; margin-left: 10%;">
                                                             </a>
                                                         </div>
-                                                        <div class="product-content" style="height: 80px;">
+                                                        <div class="product-content">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
                                                                 <a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a>
                                                             </h2>
-
-                                                            <style>
-                                                                a.button.add-btn, a.button.add-btn.big {
-                                                                    top: auto;
-                                                                    bottom: 0;
-                                                                }
-                                                            </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn text-white addToCart"
@@ -351,12 +307,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $i++;
-                                                @endphp
-                                                @if($i == 10)
-                                                    @break
-                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -379,7 +329,7 @@
                     </div>
                     <!--Electronics Product End-->
                     <!--Bestseller Product Start-->
-                    <div class="bestseller-product pt-100 pb-85">
+                    <div class="bestseller-product product_res pt-100 pb-85">
                         <div class="row">
                             <div class="col-lg-12">
                                 <!--Section Title1 Start-->
@@ -395,33 +345,23 @@
                             <div id="amply" class="tab-pane fade show active">
                                 <div class="row">
                                     <div class="all-product mb-85  owl-carousel">
-                                        @php
-                                            $i = 0;
-                                        @endphp
-                                        @foreach($products as $product)
-                                            @if($product->category_id == 5 && count($product->images)>0)
+                                        @foreach($clocks as $product)
+                                            @if(count($product->images)>0)
                                                 <div class="col-lg-12 item-col">
                                                     <div class="single-product" style="height: 100%;">
                                                         <div class="product-img" style="height: 160px;">
                                                             <a href="{{ route('frontend.product.show', $product->slug) }}"
                                                                style="height: 100%;">
-                                                                <img class="first-img"
+                                                                <img class="first-img img-fluid"
                                                                      src="{{ $product->images[0]->image_url }}"
                                                                      alt="anh"
                                                                      style="height: 100%; width: 80%; margin-left: 10%;">
                                                             </a>
                                                         </div>
-                                                        <div class="product-content" style="height: 80px;">
+                                                        <div class="product-content">
                                                             <h2 style="height: 65%; width: 90%; margin: 0 auto;">
                                                                 <a href="{{ route('frontend.product.show', $product->id) }}">{{ $product->name }}</a>
                                                             </h2>
-
-                                                            <style>
-                                                                a.button.add-btn, a.button.add-btn.big {
-                                                                    top: auto;
-                                                                    bottom: 0;
-                                                                }
-                                                            </style>
                                                             <div class="product-price" style="height: 35%;">
                                                                 <span class="new-price">{{ number_format($product->sale_price, 0, '.', '.') }} <b>₫</b></span>
                                                                 <a class="button add-btn text-white addToCart"
@@ -432,12 +372,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @php
-                                                    $i++;
-                                                @endphp
-                                                @if($i == 10)
-                                                    @break
-                                                @endif
                                             @endif
                                         @endforeach
                                     </div>
@@ -462,9 +396,6 @@
 
                                     <div class="hot-del-single-product">
                                         <div class="row slide-active2">
-                                            @php
-                                                $i = 0;
-                                            @endphp
                                             @foreach($products as $product)
                                                 @if(count($product->images)>0)
                                                     <div class="col-lg-12">
@@ -472,7 +403,7 @@
                                                             <div class="col-4">
                                                                 <div class="product-img">
                                                                     <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                                        <img class="first-img"
+                                                                        <img class="first-img img-fluid"
                                                                              src="{{ $product->images[0]->image_url }}"
                                                                              alt>
                                                                     </a>
@@ -490,12 +421,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @php
-                                                        $i++;
-                                                    @endphp
-                                                    @if($i == 10)
-                                                        @break
-                                                    @endif
                                                 @endif
                                             @endforeach
                                         </div>
@@ -556,15 +481,9 @@
             </div>
         </div>
     </div>
-    <section class="all-slide-product pt-100 white-bg">
+    <section class="all-slide-product product_res pt-100 white-bg">
         <div class="container">
             <div class="row">
-                <!--Single Slide Product Start-->
-                <style>
-                    .section-title2 h3 {
-                        text-transform: none;
-                    }
-                </style>
                 <div class="col-lg-4 col-md-4">
                     <div class="row">
                         <div class="col-lg-12">
@@ -579,17 +498,14 @@
                     <div class="hot-del-single-product">
                         <div class="row">
                             <div class="slide-active3">
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach($products as $product)
-                                    @if($product->category_id == 7 && count($product->images)>0)
+                                @foreach($batterys as $product)
+                                    @if(count($product->images)>0)
                                         <div class="col-lg-12">
                                             <div class="row no-gutters single-product style-2 list">
                                                 <div class="col-4">
                                                     <div class="product-img">
                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                            <img class="first-img"
+                                                            <img class="first-img img-fluid heimg"
                                                                  src="{{ $product->images[0]->image_url }}"
                                                                  alt>
                                                         </a>
@@ -607,12 +523,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @php
-                                            $i++;
-                                        @endphp
-                                        @if($i == 10)
-                                            @break
-                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -636,17 +546,14 @@
                     <div class="hot-del-single-product">
                         <div class="row">
                             <div class="slide-active3">
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach($products as $product)
-                                    @if($product->category_id == 10 && count($product->images)>0)
+                                @foreach($cables as $product)
+                                    @if(count($product->images)>0)
                                         <div class="col-lg-12">
                                             <div class="row no-gutters single-product style-2 list">
                                                 <div class="col-4">
                                                     <div class="product-img">
                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                            <img class="first-img"
+                                                            <img class="first-img img-fluid heimg"
                                                                  src="{{ $product->images[0]->image_url }}"
                                                                  alt>
                                                         </a>
@@ -664,12 +571,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @php
-                                            $i++;
-                                        @endphp
-                                        @if($i == 10)
-                                            @break
-                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -693,17 +594,14 @@
                     <div class="hot-del-single-product">
                         <div class="row">
                             <div class="slide-active3">
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach($products as $product)
-                                    @if($product->category_id == 11 && count($product->images)>0)
+                                @foreach($speaks as $product)
+                                    @if(count($product->images)>0)
                                         <div class="col-lg-12">
                                             <div class="row no-gutters single-product style-2 list">
                                                 <div class="col-4">
                                                     <div class="product-img">
                                                         <a href="{{ route('frontend.product.show', $product->slug) }}">
-                                                            <img class="first-img"
+                                                            <img class="first-img img-fluid heimg"
                                                                  src="{{ $product->images[0]->image_url }}"
                                                                  alt>
                                                         </a>
@@ -721,12 +619,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @php
-                                            $i++;
-                                        @endphp
-                                        @if($i == 10)
-                                            @break
-                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -752,12 +644,6 @@
         </div>
     </div>
 
-    <style>
-        .addToCart {
-            color: white;
-            cursor: pointer;
-        }
-    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function addToCart(id) {

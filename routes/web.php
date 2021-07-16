@@ -262,6 +262,81 @@ Route::group([
             ->name('backend.order.destroy');
     });
 
+    //Quản lý nhà cung cấp
+    Route::group(['prefix' => 'supplier'], function (){
+        Route::get('/', 'SupplierController@index')
+            ->name('backend.supplier.index');
+
+        Route::get('/create', 'SupplierController@create')
+            ->name('backend.supplier.create');
+
+        Route::post('/', 'SupplierController@store')
+            ->name('backend.supplier.store');
+
+        Route::get('/{supplier}', 'SupplierController@show')
+            ->name('backend.supplier.show');
+
+        Route::get('/edit/{supplier}', 'SupplierController@edit')
+            ->name('backend.supplier.edit');
+
+        Route::match(['put', 'patch'], '/{id}', 'SupplierController@update')
+            ->name('backend.supplier.update');
+
+        Route::delete('/{supplier}', 'SupplierController@destroy')
+            ->name('backend.supplier.destroy');
+    });
+    //Export nhà cung cấp
+    Route::get('/export-supplier', 'SupplierController@export')
+        ->name('backend.supplier.export');
+    //Import nhà cung cấp
+    Route::post('/import-supplier', 'SupplierController@import')
+        ->name('backend.supplier.import');
+
+    //Quản lý nhập hàng
+    Route::group(['prefix' => 'purchase'], function (){
+        Route::get('/import', 'PurchaseController@import')
+            ->name('backend.purchase.import');
+
+        Route::get('/cart', 'PurchaseController@cart')
+            ->name('backend.purchase.cart');
+
+        Route::post('cart/add', 'PurchaseController@add')
+            ->name('backend.purchase.add');
+
+        Route::post('/cart/increment', 'PurchaseController@increment')
+            ->name('backend.purchase.increment');
+
+        Route::post('/cart/decrement', 'PurchaseController@decrement')
+            ->name('backend.purchase.decrement');
+
+        Route::get('cart/remove/{id}', 'PurchaseController@remove')
+            ->name('backend.purchase.remove');
+
+        Route::get('cart/destroy', 'PurchaseController@destroyCart')
+            ->name('backend.purchase.destroy.cart');
+
+        Route::post('/get-product', 'PurchaseController@getProduct')
+            ->name('backend.purchase.get.product');
+
+        Route::get('order', 'PurchaseController@order')
+            ->name('backend.purchase.order');
+
+        Route::post('/', 'PurchaseController@store')
+            ->name('backend.purchase.store');
+
+        Route::match(['put', 'patch'], '/purchase/{id}', 'PurchaseController@update')
+            ->name('backend.purchase.update');
+
+//        Route::delete('/{purchase}', 'PurchaseController@destroy')
+//            ->name('backend.purchase.destroy');
+    });
+
+    //Quản lý kho
+    Route::group(['prefix' => 'warehouse'], function (){
+        Route::get('/', 'WarehouseController@index')
+            ->name('backend.warehouse.index');
+    });
+
     //Thống kê doanh thu
     Route::group(['prefix' => 'statistic'], function () {
         Route::get('/', 'StatisticController@index')

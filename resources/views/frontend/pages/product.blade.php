@@ -31,11 +31,6 @@
                     <!--Product Tab Content End-->
                     <!--Single Product Tab Menu Start-->
                     <div class="single-product-tab">
-                        <style>
-                            /*.cloned{*/
-                            /*    display: none;*/
-                            /*}*/
-                        </style>
                         <div class="nav single-product-tab-menu owl-carousel">
                             @if(count($product->images))
                                 @php

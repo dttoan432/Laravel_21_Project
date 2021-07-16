@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="col-xl-9 col-md-8 col-12 account_right">
-                    <div class="account_listOrder" style="height: 70vh; overflow: scroll;">
+                    <div class="account_listOrder" style="max-height: 70vh; overflow: auto;">
                         <h2>Đơn hàng của bạn</h2>
                         <div class="table-responsive-sm">
                             <table class="table">

@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Trademark;
+use App\Models\Warehouse;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class ProductController extends Controller
             $products->where('status', $request->get('status'));
         }
 
-        $products = $products->orderBy('created_at', 'DESC')->paginate(10);
+        $products = $products->orderBy('created_at', 'DESC')->paginate(20);
         return view('backend.products.index')->with([
             'products' => $products,
             'keyW' => $keyW
@@ -89,6 +90,7 @@ class ProductController extends Controller
         }
 
         $data['slug'] = Str::slug($request->get('name'));
+        $data['quantity'] = 0;
         $data['user_id'] = Auth::user()->id;
         $data['created_at'] = Carbon::now();
 
@@ -111,9 +113,15 @@ class ProductController extends Controller
             }
         }
 
+        $ware['product_id'] = $product->id;
+        $ware['entered']    = 0;
+        $ware['sold']       = 0;
+        $ware['sale_date']  = Carbon::now();
+        $warehouse = Warehouse::create($ware);
+
         Cache::forget('productFE');
 
-        if ($product && $image) {
+        if ($product && $image && $warehouse) {
             return redirect()->route('backend.product.index')->with("success", 'Tạo mới thành công');
         }
         return redirect()->route('backend.product.index')->with("error", 'Tạo mới thất bại');
@@ -221,7 +229,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $this->authorize('update', $product);
+        $this->authorize('delete', $product);
         $deleteImg = Image::where('product_id', $product->id)->get();
         if (!empty($deleteImg)) {
             foreach ($deleteImg as $dete) {
@@ -229,11 +237,13 @@ class ProductController extends Controller
                 $dete->delete();
             }
         }
+        $warehouse = Warehouse::where('product_id', $product->id)->first();
+        $warehouse->delete();
         $product->delete();
 
         Cache::forget('productFE');
 
-        if ($product) {
+        if ($product && $warehouse) {
             return redirect()->route('backend.product.index')->with("success", 'Xóa thành công');
         }
         return redirect()->route('backend.product.index')->with("error", 'Xóa thất bại');

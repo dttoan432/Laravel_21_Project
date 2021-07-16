@@ -52,21 +52,21 @@
                                     <option value="0">-- Chọn thương hiệu --</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Số lượng</label>
-                                <input type="number" class="form-control" value="{{ old('quantity') }}" name="quantity"
-                                       placeholder="Nhập số lượng sản phẩm">
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail1">Số lượng</label>--}}
+{{--                                <input type="number" class="form-control" value="{{ old('quantity') }}" name="quantity"--}}
+{{--                                       placeholder="Nhập số lượng sản phẩm">--}}
 
-                                @error('quantity')
-                                <p style="color: red;">{{ $message }}</p>
-                                @enderror
-                            </div>
+{{--                                @error('quantity')--}}
+{{--                                <p style="color: red;">{{ $message }}</p>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá gốc</label>
                                         <input type="number" class="form-control" value="{{ old('origin_price') }}"
-                                               name="origin_price" placeholder="Nhập giá gốc">
+                                               name="origin_price" placeholder="Nhập giá gốc" min="0" step="1">
 
                                         @error('origin_price')
                                         <p style="color: red;">{{ $message }}</p>
@@ -77,7 +77,7 @@
                                     <div class="form-group">
                                         <label>Giá bán</label>
                                         <input type="number" class="form-control" value="{{ old('sale_price') }}"
-                                               name="sale_price" placeholder="Nhập giá bán">
+                                               name="sale_price" placeholder="Nhập giá bán" min="0" step="1">
 
                                         @error('sale_price')
                                         <p style="color: red;">{{ $message }}</p>
@@ -98,8 +98,9 @@
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="listImg" accept="image/*"
+                                        <input type="file" class="custom-file-input" id="listImg"
                                                name="image[]" multiple required>
+{{--                                        accept="image/*"--}}
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
@@ -121,7 +122,9 @@
                                 <label>Trạng thái sản phẩm</label>
                                 <select class="form-control select2" name="status" style="width: 100%;">
                                     @foreach(\App\Models\Product::$status_text as $key => $value)
-                                        <option value="{{ $key }}">{{ $value }}</option>
+                                        @if($key == 0)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -154,7 +157,7 @@
                         '</div></div><div class="col-8 col-lg-10">' +
                         '<div class="form-group" style="position: relative;">' +
                         '<input type="text" class="form-control" id="" name="val[]" value="">' +
-                        '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>' +
+                        '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Xóa</span>' +
                         '</div></div></div>')
                 });
 

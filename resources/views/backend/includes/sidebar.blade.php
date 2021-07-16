@@ -109,6 +109,61 @@
                             </li>
 
 
+                            <li class="nav-header">Nguồn hàng & Kho</li>
+                            <li class="nav-item {{ ($prefix == 'admin/supplier') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ ($prefix == 'admin/supplier') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-thumbtack"></i>
+                                    <p>Quản lý nhà cung cấp <i class="fas fa-angle-left right"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.supplier.create') }}" class="nav-link {{ ($route == 'backend.supplier.create') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Tạo mới</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.supplier.index') }}" class="nav-link {{ ($route == 'backend.supplier.index') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item {{ ($prefix == 'admin/purchase') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ ($prefix == 'admin/purchase') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-truck"></i>
+                                    <p>Quản lý nhập hàng <i class="fas fa-angle-left right"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.purchase.import') }}" class="nav-link {{ ($route == 'backend.purchase.import') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Nhập hàng</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.purchase.cart') }}" class="nav-link {{ ($route == 'backend.purchase.cart') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Giỏ hàng</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('backend.purchase.order') }}" class="nav-link {{ ($route == 'backend.purchase.order') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Đơn hàng</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('backend.warehouse.index') }}" class="nav-link {{ ($prefix == 'admin/warehouse') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-box-open"></i>
+                                    <p>Quản lý kho hàng</p>
+                                </a>
+                            </li>
 
                             @can('viewAny', \App\Models\User::class)
                                 <li class="nav-header">NGƯỜI DÙNG</li>

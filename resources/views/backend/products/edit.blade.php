@@ -53,30 +53,14 @@
                                 <label>Thương hiệu</label>
                                 <select class="form-control select2" name="trademark_id" style="width: 100%;" id="trademark">
                                     <option value="0">-- Chọn thương hiệu --</option>
-{{--                                    @foreach($trademarks as $trademark)--}}
-{{--                                        <option value="{{ $trademark->id }}"--}}
-{{--                                        @if($trademark->id == $product->trademark_id)--}}
-{{--                                            {{ 'selected' }}--}}
-{{--                                            @endif--}}
-{{--                                        >{{ $trademark->name }}</option>--}}
-{{--                                    @endforeach--}}
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Số lượng</label>
-                                <input type="text" class="form-control" id="" name="quantity"
-                                       value="{{ $product->quantity }}">
-
-                                @error('quantity')
-                                <p style="color: red;">{{ $message }}</p>
-                                @enderror
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá gốc</label>
                                         <input type="text" class="form-control" name="origin_price"
-                                               value="{{ $product->origin_price }}">
+                                               value="{{ $product->origin_price }}" min="0" step="1">
 
                                         @error('origin_price')
                                         <p style="color: red;">{{ $message }}</p>
@@ -87,7 +71,7 @@
                                     <div class="form-group">
                                         <label>Giá bán</label>
                                         <input type="text" class="form-control" name="sale_price"
-                                               value="{{ $product->sale_price }}">
+                                               value="{{ $product->sale_price }}" min="0" step="1">
 
                                         @error('sale_price')
                                         <p style="color: red;">{{ $message }}</p>
@@ -234,7 +218,7 @@
                         '</div></div><div class="col-8 col-lg-10">' +
                         '<div class="form-group" style="position: relative;">' +
                         '<input type="text" class="form-control" id="" name="val[]" value="">' +
-                        '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>' +
+                        '<span class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center" id="' + i + '" style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Xóa</span>' +
                         '</div></div></div>')
                 });
 

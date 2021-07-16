@@ -151,40 +151,11 @@
                             <nav>
                                 <ul>
                                     <li><a href="{{ route('frontend.index') }}">Trang chủ</a></li>
-                                    <li><a href="{{ route('frontend.category', 1) }}">Điện thoại</a></li>
-                                    <li><a href="{{ route('frontend.category', 2) }}">Laptop</a></li>
-                                    <li><a href="{{ route('frontend.category', 3) }}">Tablet</a></li>
-                                    <li><a href="#">Phụ kiện</a>
-                                        <ul>
-                                            <li><a href="#">pages</a>
-                                                <ul>
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="services.html">Services</a></li>
-                                                    <li><a href="frequently-questions.html">Frequently Questions</a>
-                                                    </li>
-                                                    <li><a href="404.html">Error 404</a></li>
-                                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">blog</a>
-                                                <ul>
-                                                    <li><a href="blog-nosidebar.html">None Sidebar</a></li>
-                                                    <li><a href="blog-left-sidebar.html">Sidebar Left</a></li>
-                                                    <li><a href="blog-post-gallery.html">Gallery Format</a></li>
-                                                    <li><a href="blog-post-audio.html">Audio Format</a></li>
-                                                    <li><a href="blog-post-video.html">Video Format</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">shop</a>
-                                                <ul>
-                                                    <li><a href="shop-full-width.html">Full Width</a></li>
-                                                    <li><a href="shop-right-sidebar.html">Sidebar Right</a></li>
-                                                    <li><a href="shop-list-view.html">List View</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{ route('frontend.category', 5) }}">Đồng hồ thông minh</a></li>
+                                    @if($menus)
+                                        @foreach($menus as $menu)
+                                            @include('frontend.includes.children-menus-mobie', ['menu' => $menu])
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </nav>
                         </div>
@@ -200,15 +171,24 @@
             text-transform: none;
             font-size: 14px;
         }
-
         .mega-menu {
             width: 200px;
             padding: 0;
         }
-
         .mega-menu > li {
             width: unset;
             padding: 15px;
+        }
+        .mean-container .mean-bar{
+            z-index: 10;
+        }
+        .mobile-menu:before{
+            z-index: 11;
+        }
+        #box_search{
+            max-height: 50vh;
+            overflow: auto;
+            z-index: 100;
         }
     </style>
 

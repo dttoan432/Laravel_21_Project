@@ -16,13 +16,12 @@ class CategoryController extends Controller
         $category = Category::where('slug', $slug)->first();
         $childrens = Category::where('parent_id', $category->id)->get();
         if (count($childrens) < 1){
-            $products = Product::where('category_id', $category->id);
+            $products = Product::where([['category_id', $category->id], ['status', Product::STATUS_BUY]]);
         } else {
             foreach ($childrens as $children){
                 $arr[] = $children->id;
             }
-
-            $products = Product::whereIn('category_id', $arr);
+            $products = Product::whereIn('category_id', $arr)->where('status', Product::STATUS_BUY);
         }
 
         if ($request->has('price')) {

@@ -13,11 +13,11 @@ class Warehouse extends Model
 
     protected $fillable = [
         'product_id',
+        'entered',
         'sold',
         'sale_date',
     ];
 
-    const SELLING       = 'Bán chạy';
     const ALMOST_OVER   = 'Sắp hết';
     const END           = 'Hết hàng';
     const NORMAL        = 'Bình thường';

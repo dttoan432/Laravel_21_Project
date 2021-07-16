@@ -25,7 +25,7 @@ class WarehousesExport implements FromCollection, WithHeadings, WithMapping
     public function collection()
     {
         return Warehouse::with('product')->distinct()
-            ->select('product_id', DB::raw('SUM(sold) as sold'))
+            ->selectRaw('product_id, sum(sold) as sold, sum(entered) as entered')
             ->whereBetween('sale_date', [$this->fromDate, $this->toDate])
             ->groupBy('product_id')
             ->get('product_id');
@@ -34,6 +34,7 @@ class WarehousesExport implements FromCollection, WithHeadings, WithMapping
     public function map($warehouse) : array {
         return [
             $warehouse->product->name,
+            $warehouse->entered,
             $warehouse->sold,
             $warehouse->product->quantity,
             Carbon::parse($warehouse->created_at)->toFormattedDateString(),
@@ -44,6 +45,7 @@ class WarehousesExport implements FromCollection, WithHeadings, WithMapping
     public function headings() : array {
         return [
             'Tên sản phẩm',
+            'Đã nhập',
             'Đã bán',
             'Tồn kho',
             'Ngày tạo',

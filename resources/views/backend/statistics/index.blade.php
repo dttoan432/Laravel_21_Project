@@ -12,6 +12,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
 @endsection
 
 @section('content-header')
@@ -36,7 +38,7 @@
 {{--                        </div>--}}
 
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" id="minuss">
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
@@ -45,15 +47,15 @@
                         <form action="{{ route('backend.statistic.export') }}" autocomplete="off" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-2">
+                                <div class="col-6 col-md-3 col-xl-2">
                                     <label for="">Từ ngày</label>
                                     <input type="text" id="datepicker" class="form-control form-control-sm" autocomplete="off" required name="from-date">
                                 </div>
-                                <div class="col-2">
+                                <div class="col-6 col-md-3 col-xl-2">
                                     <label for="">Đến ngày</label>
                                     <input type="text" id="datepicker2" class="form-control form-control-sm" autocomplete="off" required name="to-date">
                                 </div>
-                                <div class="col-1">
+                                <div class="col-6 col-md-3 col-xl-2">
                                     <label for="">&nbsp;</label>
                                     <button type="button" id="btn-dashboard-filter"
                                             class="btn btn-sm btn-success d-block">
@@ -62,15 +64,15 @@
                                         quả
                                     </button>
                                 </div>
-                                <div class="col-1">
+                                <div class="col-6 col-md-3 col-xl-3">
                                     <label for="">&nbsp;</label>
                                     <button type="submit" class="btn btn-sm btn-info d-block">
                                         <i class="fas fa-file-export"></i> Export Excel
                                     </button>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-12 mt-1  col-xl-3">
                                     <label for="">Lọc theo</label>
-                                    <select class="form-control form-control-sm filter-option">
+                                    <select class="form-control form-control-sm filter-option mb-1">
                                         <option value="this_week">Tuần này</option>
                                         <option value="last_week">Tuần trước</option>
                                         <option value="this_month" selected>Tháng này</option>
@@ -78,11 +80,11 @@
                                         <option value="this_year">Năm nay</option>
                                     </select>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-6">
                                     <label for="">Doanh thu</label>
                                     <p id="revenue"></p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-6">
                                     <label for="">Lợi nhuận</label>
                                     <p id="profit"></p>
                                 </div>
@@ -110,7 +112,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-12 col-lg-4 col-xl-4">
                                 <div id="donut" class="morris-donut-inverse"></div>
                                 <br>
                                 <form action="{{ route('backend.statistic.index') }}" method="GET" autocomplete="off" id="form-two">
@@ -134,16 +136,16 @@
                                 </form>
                             </div>
 
-                            <div class="col-9">
+                            <div class="col-12 col-lg-8 col-xl-8">
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
                                             <th>STT</th>
                                             <th>Tên sản phẩm</th>
+                                            <th>Đã nhập</th>
                                             <th>Đã bán</th>
                                             <th>Tồn kho</th>
-                                            <th>Trạng thái</th>
                                         </tr>
                                         </thead>
                                         @php
@@ -157,39 +159,9 @@
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $warehouse->product->name }}</td>
+                                                <td>{{ $warehouse->entered }}</td>
                                                 <td>{{ $warehouse->sold }}</td>
                                                 <td>{{ $warehouse->product->quantity }}</td>
-                                                @if($warehouse->sold > 20 && $warehouse->product->quantity > 0 && $warehouse->product->quantity < 50)
-                                                    <td>
-                                                        <span
-                                                            class="badge badge-pill bg-danger widspan">{{ \App\Models\Warehouse::SELLING }}</span>
-                                                        <span
-                                                            class="badge badge-pill bg-warning widspan">{{ \App\Models\Warehouse::ALMOST_OVER }}</span>
-                                                    </td>
-                                                @elseif($warehouse->sold > 20 && $warehouse->product->quantity == 0)
-                                                    <td>
-                                                        <span
-                                                            class="badge badge-pill bg-danger widspan">{{ \App\Models\Warehouse::SELLING }}</span>
-                                                        <span
-                                                            class="badge badge-pill bg-secondary widspan">{{ \App\Models\Warehouse::END }}</span>
-                                                    </td>
-                                                @elseif($warehouse->product->quantity == 0)
-                                                    <td><span
-                                                            class="badge badge-pill bg-secondary widspan">{{ \App\Models\Warehouse::END }}</span>
-                                                    </td>
-                                                @elseif($warehouse->sold > 20)
-                                                    <td><span
-                                                            class="badge badge-pill bg-danger widspan">{{ \App\Models\Warehouse::SELLING }}</span>
-                                                    </td>
-                                                @elseif($warehouse->product->quantity < 50)
-                                                    <td><span
-                                                            class="badge badge-pill bg-warning widspan">{{ \App\Models\Warehouse::ALMOST_OVER }}</span>
-                                                    </td>
-                                                @else
-                                                    <td><span
-                                                            class="badge badge-pill bg-info widspan">{{ \App\Models\Warehouse::NORMAL }}</span>
-                                                    </td>
-                                                @endif
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -339,7 +311,7 @@
                         $('#profit').append(formatter.format(profit));
                     },
                     error: function () {
-                        swal("Không có dữ liệu");
+                        $('#minuss').click();
                     }
                 });
             }
@@ -380,27 +352,17 @@
             Morris.Donut({
                 element: 'donut',
                 resize: true,
-                // gridTextFamily: 'sans-serif',
                 colors: [
                     '#E0F7FA',
-                    '#B2EBF2',
                     '#80DEEA',
-                    '#4DD0E1',
                     '#26C6DA',
-                    '#00BCD4',
                     '#00ACC1',
-                    '#0097A7',
                     '#00838F',
-                    '#006064'
                 ],
-                //labelColor:"#cccccc", // text color
-                //backgroundColor: '#333333', // border color
                 data: [
                     {label: "Don hang", value: {{ $orders }}, color: colorDanger},
                     {label: "San pham", value: {{ $products }}},
                     {label: "Nguoi dung", value: {{ $users }}},
-                    {{--{label: "Danh muc", value: {{ $categories }} },--}}
-                    {{--{label: "Thuong hieu", value: {{ $trademarks }}}--}}
                 ]
             });
 

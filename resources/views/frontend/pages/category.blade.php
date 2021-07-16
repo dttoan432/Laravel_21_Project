@@ -21,7 +21,7 @@
                         @if(!empty($category->trademarks))
                             @foreach($category->trademarks as $trademark)
                                 <a href="{{ request()->fullUrlWithQuery(['trademark' => $trademark->slug]) }}"
-                                   class="btn btn-sm btn-danger">{{ $trademark->name }}</a>
+                                   class="btn btn-sm btn-danger mb-1">{{ $trademark->name }}</a>
                             @endforeach
                         @endif
                     </div>
@@ -120,7 +120,6 @@
                     </div>
                     {!! $products->links() !!}
                 </div>
-
 
                 <div class="col-lg-3 order-lg-2 order-2">
                     <!--Widget Shop Categories End-->

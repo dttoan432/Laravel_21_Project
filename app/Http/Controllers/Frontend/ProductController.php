@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        $products = Product::where('category_id', $product->category_id)->offset(0)->limit(10)->get();
+        $products = Product::where([['category_id', $product->category_id], ['status', Product::STATUS_BUY]])->offset(0)->limit(10)->get();
         return view('frontend.pages.product')->with([
             'product'   => $product,
             'products'  => $products
@@ -34,8 +34,9 @@ class ProductController extends Controller
         $data = $request->all();
 
         if ($data['query']){
-            $product = Product::where('status', 1)->where('name', 'LIKE', '%'. $data['query'] .'%')->get();
-            $output = '<ul class="dropdown-menu" style="display: block; position: relative">';
+//            $product = Product::where('status', 1)->where('name', 'LIKE', '%'. $data['query'] .'%')->get();
+            $product = Product::where([['status', Product::STATUS_BUY], ['name', 'LIKE', '%'. $data['query'] .'%']])->get();
+            $output = '<ul class="dropdown-menu" id="box_search" style="display: block; position: relative">';
             foreach ($product as $key => $val) {
                 $output .= '<li class="li_search_ajax" style="margin-left: 15px;"><a href="'. route('frontend.product.show', $val->slug).'">'. $val->name .'</a></li>';
             }

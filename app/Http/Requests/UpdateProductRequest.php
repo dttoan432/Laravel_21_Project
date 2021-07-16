@@ -24,8 +24,8 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => "required|min:10|max:255|unique:products,name, $this->id",
-            'quantity'          => 'required|numeric|max:10000|integer',
+            'name'              => "required|min:5|max:255|unique:products,name, $this->id",
+//            'quantity'          => 'required|numeric|max:10000|integer',
             'origin_price'      => 'required|numeric|max:100000000|integer',
             'sale_price'        => 'required|numeric|max:100000000|integer',
 //            'content'           => 'required',
@@ -41,10 +41,10 @@ class UpdateProductRequest extends FormRequest
             'name.max'                  => 'Không được nhập quá :max ký tự',
             'name.unique'               => ':attribute đã tồn tại',
 
-            'quantity.required'         => ':attribute không được để trống',
-            'quantity.numeric'          => ':attribute phải nhập số',
-            'quantity.max'              => ':attribute không nhập quá :max',
-            'quantity.integer'          => ':attribute phải là số nguyên',
+//            'quantity.required'         => ':attribute không được để trống',
+//            'quantity.numeric'          => ':attribute phải nhập số',
+//            'quantity.max'              => ':attribute không nhập quá :max',
+//            'quantity.integer'          => ':attribute phải là số nguyên',
 
             'origin_price.required'     => ':attribute không được để trống',
             'origin_price.numeric'      => ':attribute phải nhập số',
@@ -67,7 +67,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name'              => 'Tên sản phẩm',
-            'quantity'          => 'Số lượng sản phẩm',
+//            'quantity'          => 'Số lượng sản phẩm',
             'origin_price'      => 'Giá gốc',
             'sale_price'        => 'Giá bán',
 //            'content'           => 'Nội dung',

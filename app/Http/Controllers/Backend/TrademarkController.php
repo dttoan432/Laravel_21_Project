@@ -26,7 +26,7 @@ class TrademarkController extends Controller
      */
     public function index()
     {
-        $trademarks = Trademark::orderBy('created_at', 'DESC')->paginate(10);
+        $trademarks = Trademark::orderBy('created_at', 'DESC')->paginate(20);
         return view('backend.trademarks.index')->with([
             'trademarks' => $trademarks
         ]);

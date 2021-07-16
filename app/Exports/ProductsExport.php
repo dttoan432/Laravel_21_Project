@@ -27,14 +27,26 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             $status = 'Dừng bán';
         }
 
+        if ($products->category == null){
+            $category = 'Không có';
+        } else {
+            $category = $products->category->name;
+        }
+
+        if ($products->trademark == null){
+            $trademark = 'Không có';
+        } else {
+            $trademark = $products->trademark->name;
+        }
+
         return [
             $products->name,
             $products->quantity,
             $products->origin_price,
             $products->sale_price,
             $products->user->name,
-            $products->category->name,
-            $products->trademark->name,
+            $category,
+            $trademark,
             $status,
             Carbon::parse($products->created_at)->toFormattedDateString(),
             Carbon::parse($products->updated_at)->toFormattedDateString()

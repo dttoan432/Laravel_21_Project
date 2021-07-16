@@ -4,6 +4,10 @@
     Danh sách sản phẩm
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -18,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h3 class="card-title">Sản phẩm mới</h3>
+                        <h3 class="card-title mb-1">Sản phẩm mới</h3>
 
                         <div class="card-tools" style="display: flex">
                             <select class="form-select form-select-sm" aria-label="Default select example"
@@ -52,7 +56,7 @@
                             </select>
 
                             <form action="{{ route('backend.product.index') }}" method="GET">
-                                <div class="input-group input-group-sm" style="width: 150px; margin-top: 0;">
+                                <div class="input-group input-group-sm winp" style="width: 150px; margin-top: 0;">
                                     <input type="text" name="q" class="form-control float-right"
                                            placeholder="Tìm kiếm" required value="{{ $keyW }}">
 
@@ -65,14 +69,14 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
+                    <div class="card-body table-responsive-sm p-0">
                         <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên sản phẩm</th>
+                                <th id="namepro">Tên sản phẩm</th>
                                 <th>Thương hiệu</th>
-                                <th>Danh mục</th>
+                                <th id="cate">Danh mục</th>
                                 <th>Trạng thái</th>
                                 <th></th>
                             </tr>
@@ -111,11 +115,11 @@
                                         @endif
                                     </td>
                                     <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm"
+                                        <a class="btn btn-primary btn-sm juss"
                                            href="{{ route('frontend.product.show', $product->slug) }}">
                                             <i class="fas fa-street-view"></i> Xem
                                         </a>
-                                        <a class="btn btn-info btn-sm {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $product->user_id) ? '' : 'disabled'}}"
+                                        <a class="btn btn-info btn-sm juss {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $product->user_id) ? '' : 'disabled'}}"
                                            href="{{ route('backend.product.edit', $product->id) }}">
                                             <i class="fas fa-user-edit"></i> Sửa
                                         </a>
@@ -124,7 +128,7 @@
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm"
+                                            <button type="submit" class="btn btn-danger btn-sm delete-confirm juss"
                                                 {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $product->user_id) ? '' : 'disabled'}}>
                                                 <i class="fas fa-eraser"></i> Xóa
                                             </button>
@@ -143,11 +147,6 @@
                                    style="margin-right: 10px;">
                                     <i class="fas fa-file-export"></i> Export Excel
                                 </a>
-                                <form action="{{ route('backend.product.import') }}" method="POST" enctype="multipart/form-data" class="d-flex">
-                                    @csrf
-                                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="file" accept=".xlsx" required>
-                                    <button type="submit" class="btn btn-sm btn-info">Import</button>
-                                </form>
                             </div>
                         </div>
                         <div class="col-6">
@@ -197,16 +196,27 @@
         td {
             vertical-align: middle !important;
         }
-
         .widspan {
             width: 90px;
             font-size: 14px;
             font-weight: normal;
-            color: white !important;
         }
-
         .table > :not(:last-child) > :last-child > * {
             border-bottom-color: #dee2e6;
+        }
+
+        @media ( min-width: 521px ) and (max-width: 767px){
+            #namepro{
+                width: 20% !important;
+            }
+        }
+        @media ( min-width: 768px ) and (max-width: 992px){
+            #namepro{
+                width: 19%;
+            }
+            #cate{
+                width: 12%;
+            }
         }
     </style>
 @endsection
