@@ -18,7 +18,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">{{ $order->name }}</h3>
@@ -73,7 +73,7 @@
                 <!-- /.card -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-xl-9">
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
@@ -84,12 +84,12 @@
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="active tab-pane" id="product">
-                                <div class="card-body table-responsive p-0">
+                                <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: auto;">
                                     <table class="table table-hover">
                                         <thead>
                                         <tr class="bg-primary">
                                             <th>STT</th>
-                                            <th>Tên sản phẩm</th>
+                                            <th id="proname">Tên sản phẩm</th>
                                             <th>Số lượng</th>
                                             <th>Đơn giá</th>
                                             <th>Thành tiền</th>
@@ -118,7 +118,11 @@
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $item->name }}</td>
+                                                @if($item->quantity == 0)
+                                                    <td class="text-danger">Hết hàng</td>
+                                                @else
                                                 <td>{{ $item->pivot->quantity }}</td>
+                                                @endif
                                                 <td>{{ number_format($item->pivot->price, 0, '.', '.') }} ₫</td>
                                                 <td>{{ number_format($item->pivot->price * $item->pivot->quantity, 0, '.', '.') }}
                                                     ₫
@@ -130,14 +134,14 @@
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-12 col-sm-6 col-md-6 col-xl-8">
                                         <p><b class="text-primary">Tổng thanh toán:</b> <span>{{ number_format($order->total_price, 0, '.', '.') }} ₫</span>
                                         </p>
                                     </div>
 
-                                    @if($order->status < 3)
-                                        <div class="col-4">
-                                            <form action="{{ route('backend.order.update', $order->id) }}" method="POST" id="update_status">
+                                    @if($order->status < 3 && $item->quantity > 0)
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <form action="{{ route('backend.order.update', $order->id) }}" method="POST" id="update_status" class="float-sm-right">
                                                 {{ csrf_field() }}
                                                 {{ method_field('PUT') }}
 
@@ -172,13 +176,17 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    @elseif($item->quantity == 0)
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <p class="text-sm-right text-danger font-weight-bold">Không đủ sản phẩm</p>
+                                        </div>
                                     @elseif($order->status == 3)
-                                        <div class="col-4">
-                                            <p class="text-right text-danger font-weight-bold">Đã hủy</p>
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <p class="text-sm-right text-danger font-weight-bold">Đã hủy</p>
                                         </div>
                                     @elseif($order->status == 4)
-                                        <div class="col-4">
-                                            <p class="text-right text-danger font-weight-bold">Đã hoàn thành</p>
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <p class="text-sm-right text-danger font-weight-bold">Đã hoàn thành</p>
                                         </div>
                                     @endif
                                 </div>
@@ -193,7 +201,13 @@
         </div>
         <!-- /.row -->
     </div>
-
+    <style>
+        @media (min-width: 576px) and (max-width: 767px){
+            #proname{
+                width: 25%;
+            }
+        }
+    </style>
     <script>
         $(document).ready(function () {
             $('.option_handling').click(function () {

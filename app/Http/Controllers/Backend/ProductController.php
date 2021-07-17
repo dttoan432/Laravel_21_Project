@@ -119,8 +119,6 @@ class ProductController extends Controller
         $ware['sale_date']  = Carbon::now();
         $warehouse = Warehouse::create($ware);
 
-        Cache::forget('productFE');
-
         if ($product && $image && $warehouse) {
             return redirect()->route('backend.product.index')->with("success", 'Tạo mới thành công');
         }
@@ -213,8 +211,6 @@ class ProductController extends Controller
             }
         }
 
-        Cache::forget('productFE');
-
         if ($product) {
             return redirect()->route('backend.product.index')->with("success", 'Thay đổi thành công');
         }
@@ -241,8 +237,6 @@ class ProductController extends Controller
         $warehouse->delete();
         $product->delete();
 
-        Cache::forget('productFE');
-
         if ($product && $warehouse) {
             return redirect()->route('backend.product.index')->with("success", 'Xóa thành công');
         }
@@ -255,8 +249,8 @@ class ProductController extends Controller
             $trademark = Trademark::all();
             echo $data = json_encode($trademark);
         } else {
-            $category = Category::where('id', $id)->first();
-            echo $data = json_encode($category->trademarks);
+            $category   = Category::where('id', $id)->first();
+            echo $data  = json_encode($category->trademarks);
         }
     }
 

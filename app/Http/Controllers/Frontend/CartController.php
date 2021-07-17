@@ -22,10 +22,10 @@ class CartController extends Controller
         $data = $request->all();
         $product = Product::find($data['id']);
         $qua = Cart::add($product->id, $product->name, 1, $product->sale_price, 0, [
-            'slug' => $product->slug,
-            'image' => $product->images[0]->image_url,
-            'cost' => $product->origin_price,
-            'quantity' => $product->quantity,
+            'slug'      => $product->slug,
+            'image'     => $product->images[0]->image_url,
+            'cost'      => $product->origin_price,
+            'quantity'  => $product->quantity,
         ]);
         if ($qua->qty > $qua->options->quantity){
             Cart::update($qua->rowId, $qua->qty - 1);

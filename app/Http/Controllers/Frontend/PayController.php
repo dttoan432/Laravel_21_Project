@@ -34,14 +34,14 @@ class PayController extends Controller
         }
 
         $details = [
-            'order_id' => $order->id,
-            'date' => Carbon::now()->format('d-m-Y'),
-            'total' => Cart::total(),
-            'name' => $order->name,
-            'phone' => $order->phone,
-            'address' => $order->address,
-            'qty'  => Cart::count(),
-            'products' => $items
+            'order_id'  => $order->id,
+            'date'      => Carbon::now()->format('d-m-Y'),
+            'total'     => Cart::total(),
+            'name'      => $order->name,
+            'phone'     => $order->phone,
+            'address'   => $order->address,
+            'qty'       => Cart::count(),
+            'products'  => $items
         ];
 
         Cart::destroy();

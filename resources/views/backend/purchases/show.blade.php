@@ -4,6 +4,10 @@
     Chi tiết đơn hàng
 @endsection
 
+@section('script_top')
+    <link rel="stylesheet" href="/backend/dist/css/respon.css">
+@endsection
+
 @section('content-header')
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,7 +18,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">{{ $order->name }}</h3>
@@ -24,7 +28,7 @@
                         <strong><i class="fas fa-envelope"></i> Email</strong>
 
                         <p class="text-muted">
-                            {{ $order->user->email }}
+                            {{ $order->supplier->email }}
                         </p>
 
                         <hr>
@@ -45,19 +49,6 @@
 
                         <hr>
 
-                        <strong><i class="far fa-sticky-note mr-1"></i> Lưu ý khi giao hàng</strong>
-                        @if(!empty($order->note))
-                            <p class="text-muted">
-                                {{ $order->note }}
-                            </p>
-                        @else
-                            <p class="text-muted">
-                                Không có
-                            </p>
-                        @endif
-
-                        <hr>
-
                         <strong><i class="fas fa-clock"></i> Thời gian tạo</strong>
 
                         <p class="text-muted">
@@ -69,7 +60,7 @@
                 <!-- /.card -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-xl-9">
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
@@ -80,30 +71,18 @@
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="active tab-pane" id="product">
-                                <div class="card-body table-responsive p-0">
+                                <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: auto;">
                                     <table class="table table-hover">
                                         <thead>
                                         <tr class="bg-primary">
                                             <th>STT</th>
-                                            <th>Tên sản phẩm</th>
+                                            <th id="proname">Tên sản phẩm</th>
                                             <th>Số lượng</th>
                                             <th>Đơn giá</th>
                                             <th>Thành tiền</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <style>
-                                            td {
-                                                vertical-align: middle !important;
-                                            }
-
-                                            .widspan {
-                                                width: 90px;
-                                                font-size: 14px;
-                                                font-weight: normal;
-                                                color: white !important;
-                                            }
-                                        </style>
                                         @php
                                             $i = 0;
                                         @endphp
@@ -126,14 +105,14 @@
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-12 col-sm-6 col-md-6 col-xl-8">
                                         <p><b class="text-primary">Tổng thanh toán:</b> <span>{{ number_format($order->total_price, 0, '.', '.') }} ₫</span>
                                         </p>
                                     </div>
 
-                                    @if($order->status < 3)
-                                        <div class="col-4">
-                                            <form action="{{ route('backend.order.update', $order->id) }}" method="POST" id="update_status">
+                                    @if($order->status == 0)
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <form action="{{ route('backend.purchase.update', $order->id) }}" method="POST" id="update_status" class="float-sm-right">
                                                 {{ csrf_field() }}
                                                 {{ method_field('PUT') }}
 
@@ -147,15 +126,8 @@
                                                             <i class="fas fa-layer-group"></i> Xử lý
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                            @if($order->status == 0)
-                                                                <li class="option_handling">
-                                                                    <span class="dropdown-item" href="#"
-                                                                          style="cursor: pointer;">Đã xác nhận</span>
-                                                                    <input type="hidden" value="1" name="">
-                                                                </li>
-                                                            @endif
-                                                            @foreach(\App\Models\Order::$status_text as $key => $val)
-                                                                @if($order->status > 0 && $order->status < $key)
+                                                            @foreach(\App\Models\Purchase::$status_text as $key => $val)
+                                                                @if($key > 0)
                                                                     <li class="option_handling">
                                                                     <span class="dropdown-item" href="#"
                                                                           style="cursor: pointer;">{{ $val }}</span>
@@ -168,13 +140,13 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    @elseif($order->status == 3)
-                                        <div class="col-4">
-                                            <p class="text-right text-danger font-weight-bold">Đã hủy</p>
+                                    @elseif($order->status == 2)
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <p class="text-sm-right text-danger font-weight-bold">Đã hủy</p>
                                         </div>
-                                    @elseif($order->status == 4)
-                                        <div class="col-4">
-                                            <p class="text-right text-danger font-weight-bold">Đã hoàn thành</p>
+                                    @elseif($order->status == 1)
+                                        <div class="col-12 col-sm-6 col-md-6 col-xl-4">
+                                            <p class="text-sm-right text-danger font-weight-bold">Đã hoàn thành</p>
                                         </div>
                                     @endif
                                 </div>
@@ -189,6 +161,22 @@
         </div>
         <!-- /.row -->
     </div>
+
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+        @media (min-width: 576px) and (max-width: 767px){
+            #proname{
+                width: 25%;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 991px){
+            #proname{
+                width: 40%;
+            }
+        }
+    </style>
 
     <script>
         $(document).ready(function () {

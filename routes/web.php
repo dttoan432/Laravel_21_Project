@@ -294,8 +294,11 @@ Route::group([
 
     //Quản lý nhập hàng
     Route::group(['prefix' => 'purchase'], function (){
-        Route::get('/import', 'PurchaseController@import')
-            ->name('backend.purchase.import');
+        Route::get('/create', 'PurchaseController@create')
+            ->name('backend.purchase.create');
+
+        Route::get('/show/{purchase}', 'PurchaseController@show')
+            ->name('backend.purchase.show');
 
         Route::get('/cart', 'PurchaseController@cart')
             ->name('backend.purchase.cart');
@@ -326,9 +329,6 @@ Route::group([
 
         Route::match(['put', 'patch'], '/purchase/{id}', 'PurchaseController@update')
             ->name('backend.purchase.update');
-
-//        Route::delete('/{purchase}', 'PurchaseController@destroy')
-//            ->name('backend.purchase.destroy');
     });
 
     //Quản lý kho

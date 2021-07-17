@@ -29,8 +29,8 @@ class CategoryController extends Controller
         $categories = Category::orderBy('created_at', 'DESC')->paginate(20);
         $parents = Category::where('parent_id', 0)->get();
         return view('backend.categories.index')->with([
-            'categories' => $categories,
-            'parents' => $parents
+            'categories'    => $categories,
+            'parents'       => $parents
         ]);
     }
 

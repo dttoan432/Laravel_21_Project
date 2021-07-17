@@ -138,7 +138,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('backend.purchase.import') }}" class="nav-link {{ ($route == 'backend.purchase.import') ? 'active' : '' }}">
+                                        <a href="{{ route('backend.purchase.create') }}" class="nav-link {{ ($route == 'backend.purchase.create') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Nhập hàng</p>
                                         </a>

@@ -27,6 +27,10 @@ class Supplier extends Model
         return $this->belongsToMany(Product::class);
     }
 
+    public function purchases(){
+        return $this->hasMany(Purchase::class);
+    }
+
     public function scopeSearch($query, $request)
     {
         if ($request->has('q')) {

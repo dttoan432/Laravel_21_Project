@@ -26,8 +26,8 @@ class Warehousecontroller extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(20, ['product_id']);
         return view('backend.warehouses.index')->with([
-            'warehouses'  => $warehouses,
-            'keyW'      => $keyW
+            'warehouses'    => $warehouses,
+            'keyW'          => $keyW
         ]);
     }
 }

@@ -117,7 +117,7 @@
                                             </div>
                                         </form>
                                         <a class="btn btn-info btn-sm"
-                                           href="{{ route('backend.order.show', $order->id) }}">
+                                           href="{{ route('backend.purchase.show', $order->id) }}">
                                             <i class="fas fa-eye"></i> Chi tiết
                                         </a>
 {{--                                        <form action="{{ route('backend.purchase.destroy', $order->id) }}"--}}

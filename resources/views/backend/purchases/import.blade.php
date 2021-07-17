@@ -20,7 +20,7 @@
         <form action="{{ route('backend.purchase.add') }}" method="POST">
             @csrf
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-xl-4">
                     <div class="card card-default" style="max-height: 80vh; overflow: auto;">
                         <div class="card-header bg-primary">
                             <h3 class="card-title">
@@ -51,7 +51,7 @@
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-8">
+                <div class="col-xl-8">
                     <div class="card card-default" style="max-height: 80vh; overflow: auto;">
                         <div class="card-header bg-primary">
                             <h3 class="card-title">
@@ -153,7 +153,7 @@
                                 '<tr>' +
                                     '<td>'+ i +'</td>' +
                                     '<td>'+ data[i].name +'</td>' +
-                                    '<td class="quantity"><input type="number" min="1" name="quantity"></td>' +
+                                    '<td class="quantity"><input type="number" min="1" name="quantity" autocomplete="off"></td>' +
                                     '<td data-id="'+ data[i].id +'"><button type="button" class="btn btn-sm btn-info addToCart">Đặt hàng</button></td>'+
                                 '</tr>'
                             );

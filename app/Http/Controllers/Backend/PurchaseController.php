@@ -9,12 +9,29 @@ use App\Models\Supplier;
 use App\Models\Warehouse;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class PurchaseController extends Controller
 {
-    public function import(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
     {
         $suppliers = Supplier::all();
         $items = Cart::content();
@@ -26,62 +43,15 @@ class PurchaseController extends Controller
         ]);
     }
 
-    public function getProduct(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $id = $request->get('id');
-        $supplier = Supplier::where('id', $id)->first();
-        echo $data = json_encode($supplier->products);
-    }
-
-    public function cart(Request $request){
-        $items = Cart::content();
-        if (Cart::count() < 1 && $request->session()->has('info_supplier')){
-            $request->session()->forget('info_supplier');
-        }
-        return view('backend.purchases.cart')->with([
-            'items' => $items
-        ]);
-    }
-
-    public function add(Request $request)
-    {
-        $data = $request->except('_token');
-        $supplier = Supplier::find($data['supplier']);
-        $product = Product::find($data['product_id']);
-
-        $request->session()->put('info_supplier', $supplier);
-
-        $cart = Cart::add($product->id, $product->name, $data['quantity'], $product->origin_price, 0);
-        echo $data = json_encode($cart);
-    }
-
-    public function increment(Request $request)
-    {
-        $cart = Cart::get($request->rowId);
-            Cart::update($request->rowId, $cart->qty + 1);
-            echo $data = json_encode($cart);
-    }
-
-    public function decrement(Request $request)
-    {
-        $cart = Cart::get($request->rowId);
-        Cart::update($request->rowId, $cart->qty - 1);
-        echo $data = json_encode($cart);
-    }
-
-    public function remove($cart_id)
-    {
-        Cart::remove($cart_id);
-        return redirect()->route('backend.purchase.cart');
-    }
-
-    public function destroyCart()
-    {
-        Cart::destroy();
-        return redirect()->route('backend.purchase.cart');
-    }
-
-    public function store(Request $request){
+        //Xử lý thanh toán giỏ hàng
         $purchase = new Purchase();
         $purchase->supplier_id    = $request->session()->get('info_supplier')->id;
         $purchase->name           = $request->session()->get('info_supplier')->name;
@@ -112,25 +82,40 @@ class PurchaseController extends Controller
         return redirect()->route('backend.purchase.order')->with("error",'Đặt hàng thất bại');
     }
 
-    public function order(Request $request){
-        $purchase = Purchase::where('status', '>', -1);
-        if ($request->has('status')) {
-            $purchase->where('status', $request->get('status'));
-        }
-
-        if ($request->has('q')){
-            $q = $request->get('q');
-            $purchase->where('name', 'LIKE', '%'.$q.'%')
-                ->orWhere('phone', 'LIKE', '%'.$q.'%');
-        }
-        $purchase = $purchase->orderBy('created_at', 'DESC')->paginate(20);
-
-        return view('backend.purchases.order')->with([
-            'orders' => $purchase
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Purchase $purchase)
+    {
+        return view('backend.purchases.show')->with([
+            'order' => $purchase
         ]);
     }
 
-    public function update(Request $request, $id){
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //Cập nhật tình trạng đơn hàng
         $purchase = Purchase::find($id);
         $date = Carbon::now()->format('Y-m-d');
         $purchase->status = $request->get('status');
@@ -170,14 +155,88 @@ class PurchaseController extends Controller
         return redirect()->route('backend.purchase.order')->with("error",'Thay đổi thất bại');
     }
 
-//    public function destroy(Purchase $purchase)
-//    {
-//        $purchase->products()->detach();
-//        $purchase->delete();
-//
-//        if ($purchase){
-//            return redirect()->route('backend.purchase.order')->with("success",'Xóa thành công');
-//        }
-//        return redirect()->route('backend.purchase.order')->with("error",'Xóa thất bại');
-//    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    public function order(Request $request){
+        //Hiển thị danh sách đơn hàng
+        $purchase = Purchase::where('status', '>', -1);
+        if ($request->has('status')) {
+            $purchase->where('status', $request->get('status'));
+        }
+
+        if ($request->has('q')){
+            $q = $request->get('q');
+            $purchase->where('name', 'LIKE', '%'.$q.'%')
+                ->orWhere('phone', 'LIKE', '%'.$q.'%');
+        }
+        $purchase = $purchase->orderBy('created_at', 'DESC')->paginate(20);
+
+        return view('backend.purchases.order')->with([
+            'orders' => $purchase
+        ]);
+    }
+
+    public function getProduct(Request $request)
+    {
+        $id = $request->get('id');
+        $supplier = Supplier::where('id', $id)->first();
+        echo $data = json_encode($supplier->products);
+    }
+
+    public function cart(Request $request){
+        $items = Cart::content();
+        if (Cart::count() < 1 && $request->session()->has('info_supplier')){
+            $request->session()->forget('info_supplier');
+        }
+        return view('backend.purchases.cart')->with([
+            'items' => $items
+        ]);
+    }
+
+    public function add(Request $request)
+    {
+        $data = $request->except('_token');
+        $supplier = Supplier::find($data['supplier']);
+        $product = Product::find($data['product_id']);
+
+        $request->session()->put('info_supplier', $supplier);
+
+        $cart = Cart::add($product->id, $product->name, $data['quantity'], $product->origin_price, 0);
+        echo $data = json_encode($cart);
+    }
+
+    public function increment(Request $request)
+    {
+        $cart = Cart::get($request->rowId);
+        Cart::update($request->rowId, $cart->qty + 1);
+        echo $data = json_encode($cart);
+    }
+
+    public function decrement(Request $request)
+    {
+        $cart = Cart::get($request->rowId);
+        Cart::update($request->rowId, $cart->qty - 1);
+        echo $data = json_encode($cart);
+    }
+
+    public function remove($cart_id)
+    {
+        Cart::remove($cart_id);
+        return redirect()->route('backend.purchase.cart');
+    }
+
+    public function destroyCart()
+    {
+        Cart::destroy();
+        return redirect()->route('backend.purchase.cart');
+    }
 }

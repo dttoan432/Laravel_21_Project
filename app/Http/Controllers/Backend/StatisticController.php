@@ -22,8 +22,8 @@ class StatisticController extends Controller
     public function index(Request $request)
     {
         $this->authorize('viewAny', User::class);
-        $orders = Order::all()->count();
-        $products = Product::all()->count();
+        $orders     = Order::all()->count();
+        $products   = Product::all()->count();
         $categories = Category::all()->count();
         $trademarks = Trademark::all()->count();
         $users = User::all()->count();
@@ -52,12 +52,12 @@ class StatisticController extends Controller
         }
 
         return view('backend.statistics.index')->with([
-            'orders' => $orders,
-            'products' => $products,
-            'categories' => $categories,
-            'trademarks' => $trademarks,
-            'users' => $users,
-            'warehouses' => $warehouses
+            'orders'        => $orders,
+            'products'      => $products,
+            'categories'    => $categories,
+            'trademarks'    => $trademarks,
+            'users'         => $users,
+            'warehouses'    => $warehouses
         ]);
     }
 
@@ -71,11 +71,11 @@ class StatisticController extends Controller
 
         foreach ($gets as $get) {
             $chartData[] = array(
-                'period' => $get->order_date,
-                'order' => $get->total_order,
-                'revenue' => $get->revenue,
-                'profit' => $get->profit,
-                'quantity' => $get->quantity
+                'period'    => $get->order_date,
+                'order'     => $get->total_order,
+                'revenue'   => $get->revenue,
+                'profit'    => $get->profit,
+                'quantity'  => $get->quantity
             );
         }
         echo $data = json_encode($chartData);
@@ -126,11 +126,11 @@ class StatisticController extends Controller
         }
         foreach ($gets as $get) {
             $chartData[] = array(
-                'period' => $get->order_date,
-                'order' => $get->total_order,
-                'revenue' => $get->revenue,
-                'profit' => $get->profit,
-                'quantity' => $get->quantity
+                'period'    => $get->order_date,
+                'order'     => $get->total_order,
+                'revenue'   => $get->revenue,
+                'profit'    => $get->profit,
+                'quantity'  => $get->quantity
             );
         }
 

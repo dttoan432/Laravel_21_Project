@@ -256,7 +256,7 @@
 
                             <div class="tab-pane {{ ($user->role == 2) ? 'active' : '' }}" id="order">
                                 @if(count($orders)>0)
-                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: scroll;">
+                                    <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: auto;">
                                         <table class="table table-hover">
                                             <thead>
                                             <tr class="bg-info">

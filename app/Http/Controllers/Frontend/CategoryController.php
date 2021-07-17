@@ -51,9 +51,9 @@ class CategoryController extends Controller
         }
 
         if ($request->has('trademark')) {
-            $slugTrade = $request->get('trademark');
-            $trademark = Trademark::where('slug', $slugTrade)->first();
-            $products = $products->where('trademark_id', $trademark->id);
+            $slugTrade  = $request->get('trademark');
+            $trademark  = Trademark::where('slug', $slugTrade)->first();
+            $products   = $products->where('trademark_id', $trademark->id);
         }
 
         if ($request->has('sort')) {

@@ -73,8 +73,16 @@
                             @foreach($orders as $order)
                                 @php
                                     $i++;
+                                    $j = 0;
                                 @endphp
                                 <tr>
+                                    @foreach($order->products as $item)
+                                        @if($item->quantity == 0)
+                                            @php
+                                                $j = 1;
+                                            @endphp
+                                        @endif
+                                    @endforeach
                                     <td>{{ $i }}</td>
                                     <td>{{ $order->name }}</td>
                                     <td>{{ $order->phone }}</td>
@@ -117,7 +125,9 @@
                                                         <i class="fas fa-layer-group"></i> Xử lý
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                        @if($order->status == 0)
+                                                        @if($order->status == 0 && $j == 1)
+                                                            <li class="text-center">Không đủ sản phẩm</li>
+                                                        @elseif($order->status == 0)
                                                             <li class="option_handling">
                                                                     <span class="dropdown-item" href="#"
                                                                           style="cursor: pointer;">Đã xác nhận</span>
