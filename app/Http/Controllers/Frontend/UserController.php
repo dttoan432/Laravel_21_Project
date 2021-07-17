@@ -35,6 +35,12 @@ class UserController extends Controller
         }
         $user->update($data);
 
+        if (Auth::attempt(['email'=>$user->email,'password'=>$request->get('password')])) {
+            $request->session()->regenerate();
+            alert()->success('Cập nhật thành công', 'Successfully');
+            return redirect()->intended('/account');
+        }
+
         if ($user) {
             alert()->success('Cập nhật thành công', 'Successfully');
         } else {

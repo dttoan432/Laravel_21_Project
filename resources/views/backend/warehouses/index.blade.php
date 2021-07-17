@@ -64,7 +64,7 @@
                                     <td>{{ $warehouse->product->name }}</td>
                                     <td>{{ $warehouse->entered }}</td>
                                     <td>{{ $warehouse->sold }}</td>
-                                    <td>{{ $warehouse->entered - $warehouse->sold }}</td>
+                                    <td>{{ $warehouse->product->quantity }}</td>
                                     <td class="text-center">
                                         @if($warehouse->product->status == 0)
                                             <span class="badge badge-pill bg-warning widspan">{{ $warehouse->product->status_text }}</span>

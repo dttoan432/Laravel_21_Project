@@ -37,8 +37,8 @@ class WarehousesExport implements FromCollection, WithHeadings, WithMapping
             $warehouse->entered,
             $warehouse->sold,
             $warehouse->product->quantity,
-            Carbon::parse($warehouse->created_at)->toFormattedDateString(),
-            Carbon::parse($warehouse->updated_at)->toFormattedDateString()
+            Carbon::parse($warehouse->product->created_at)->toFormattedDateString(),
+            Carbon::parse($warehouse->product->updated_at)->toFormattedDateString()
         ] ;
     }
 

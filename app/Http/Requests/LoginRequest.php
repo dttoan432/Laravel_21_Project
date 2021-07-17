@@ -35,7 +35,6 @@ class LoginRequest extends FormRequest
             'email.required'        => ':attribute không được để trống',
             'email.email'           => ':attribute không hợp lệ',
             'password.required'     => ':attribute không được để trống'
-
         ];
     }
 

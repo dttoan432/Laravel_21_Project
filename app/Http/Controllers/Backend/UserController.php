@@ -30,10 +30,15 @@ class UserController extends Controller
         $this->authorize('viewAny', User::class);
         if ($request->has('q')) {
             $keyU = $request->get('q');
-            $users = User::search($request)->paginate(20);
+            $users = User::search($request);
         } else {
-            $users = User::orderBy('role', 'ASC')->paginate(20);
+            $users = User::where('id', '>', 0);
         }
+
+        if ($request->has('role')) {
+            $users = $users->where('role', $request->get('role'));
+        }
+        $users = $users->orderBy('created_at', 'DESC')->paginate(20);
         return view('backend.users.index')->with([
             'users' => $users,
             'keyU'  => $keyU
@@ -131,6 +136,18 @@ class UserController extends Controller
         }
         $user->update($data);
 
+
+        if ($user->id == Auth::user()->id && $data['password'] !== null && Auth::user()->role !== User::ROLE_MANAGE) {
+            if (Auth::attempt(['email'=>$user->email,'password'=>$request->get('password')])) {
+                $request->session()->regenerate();
+                return redirect()->intended('/admin')->with("success", 'Thay đổi thành công');
+            }
+        } elseif ($user->id == Auth::user()->id && $data['password'] !== null && Auth::user()->role == User::ROLE_MANAGE){
+            if (Auth::attempt(['email'=>$user->email,'password'=>$request->get('password')])) {
+                $request->session()->regenerate();
+                return redirect()->intended('/admin/user')->with("success", 'Thay đổi thành công');
+            }
+        }
         if ($user) {
             if (Auth::user()->role == User::ROLE_MANAGE) {
                 return redirect()->route('backend.user.index')->with("success", 'Thay đổi thành công');

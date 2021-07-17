@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Sản phẩm cung cấp</label>
-                                <div class="row" style="max-height: 100vh; overflow: scroll;">
+                                <div class="row" style="max-height: 100vh; overflow: auto;">
                                     @for($i = 0; $i < count($products); $i++)
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="form-check form-switch">
