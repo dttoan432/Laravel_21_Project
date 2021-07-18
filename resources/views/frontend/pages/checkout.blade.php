@@ -48,7 +48,7 @@
                                         <input type="text" placeholder name="address" value="{{ $user->address }}">
                                     </div>
                                     <div class="form-fild billing_postcode">
-                                        <p><label>Lưu ý <span class="required">*</span></label></p>
+                                        <p><label>Lưu ý</label></p>
                                         <textarea name="note" rows="3" placeholder="Lưu ý khi nhận hàng"></textarea>
                                     </div>
                                 </div>
