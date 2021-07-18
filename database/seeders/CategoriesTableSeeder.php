@@ -25,6 +25,7 @@ class CategoriesTableSeeder extends Seeder
                 'name' => $category,
                 'slug' => Str::slug($category),
                 'parent_id' => 0,
+                'user_id' => 1,
                 'depth' => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
