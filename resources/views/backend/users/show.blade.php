@@ -259,7 +259,7 @@
                                     <div class="card-body table-responsive p-0" style="max-height: 70vh; overflow: auto;">
                                         <table class="table table-hover">
                                             <thead>
-                                            <tr class="bg-info">
+                                            <tr class="bg-primary">
                                                 <th>Mã đơn hàng</th>
                                                 <th>Tên người nhận</th>
                                                 <th>Tổng tiền</th>

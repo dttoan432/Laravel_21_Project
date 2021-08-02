@@ -28,7 +28,7 @@
                         {{ method_field('PUT') }}
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tên</label>
+                                <label for="exampleInputEmail1">Họ tên</label>
                                 <input type="text" class="form-control" name="name" value="{{ $user->name }}">
 
                                 @error('name')
@@ -37,7 +37,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
-                                <input type="email" class="form-control" name="email" value="{{ $user->email }}">
+                                <input type="text" class="form-control" name="email" value="{{ $user->email }}">
 
                                 @error('email')
                                 <div class="text-danger">{{ $message }}</div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Số điện thoại</label>
-                                <input type="text" class="form-control" name="phone" value="{{ $user->phone }}">
+                                <input type="number" class="form-control" name="phone" value="{{ $user->phone }}">
 
                                 @error('phone')
                                 <div class="text-danger">{{ $message }}</div>

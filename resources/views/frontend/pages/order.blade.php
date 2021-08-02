@@ -10,8 +10,6 @@
             <div class="row">
                 <div class="col-xl-3 col-md-4 col-12 account_left">
                     <div class="text_left">
-                        <img style="width: 35px" src="images/user.png" alt="">&ensp;
-                        <span>Tài khoản của</span>
                         <div>
                             <div style="padding: 15px 0;">
                                 <i class="fas fa-user"></i>

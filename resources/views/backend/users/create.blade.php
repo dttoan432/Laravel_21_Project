@@ -27,7 +27,7 @@
                     @csrf
 					<div class="card-body">
 						<div class="form-group">
-							<label for="exampleInputEmail1">Tên</label>
+							<label for="exampleInputEmail1">Họ tên</label>
 							<input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Tên người dùng">
 
                             @error('name')
@@ -44,7 +44,7 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Số điện thoại</label>
-							<input type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Số điện thoại">
+							<input type="number" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Số điện thoại">
 
                             @error('phone')
                             <div class="text-danger">{{ $message }}</div>

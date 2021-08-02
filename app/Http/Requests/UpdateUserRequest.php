@@ -28,6 +28,7 @@ class UpdateUserRequest extends FormRequest
             'email'         => "required|email|unique:users,email, $this->id",
             'phone'         => "required|digits_between:10,11|regex:/(0)[0-9]{9}/|unique:users,phone, $this->id",
             'address'       => 'required|min:5|max:100',
+//            'password'      => 'required|min:8|max:32|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
         ];
     }
 
@@ -37,6 +38,7 @@ class UpdateUserRequest extends FormRequest
             'name.required'         => ':attribute không được để trống',
             'name.min'              => ':attribute phải lớn hơn :min ký tự',
             'name.max'              => ':attribute phải nhỏ hơn :max ký tự',
+//            'name.alpha'            => ':attribute chỉ được phép chứa chữ',
 
             'email.required'        => ':attribute không được để trống',
             'email.email'           => ':attribute không hợp lệ',
@@ -50,6 +52,11 @@ class UpdateUserRequest extends FormRequest
             'address.required'      => ':attribute không được để trống',
             'address.min'           => ':attribute phải lớn hơn :min ký tự',
             'address.max'           => ':attribute phải nhỏ hơn :max ký tự',
+
+//            'password.required'     => ':attribute không được để trống',
+//            'password.min'          => ':attribute phải lớn hơn :min ký tự',
+//            'password.max'          => ':attribute phải nhỏ hơn :max ký tự',
+//            'password.regex'        => ':attribute phải chứa ký tự thường, ký tự in hoa, số và ký tự đặc biệt',
         ];
     }
 

@@ -38,6 +38,7 @@ class StoreUserRequest extends FormRequest
             'name.required'         => ':attribute không được để trống',
             'name.min'              => ':attribute phải lớn hơn :min ký tự',
             'name.max'              => ':attribute phải nhỏ hơn :max ký tự',
+//            'name.alpha'            => ':attribute chỉ được phép chứa chữ',
 
             'email.required'        => ':attribute không được để trống',
             'email.email'           => ':attribute không hợp lệ',
