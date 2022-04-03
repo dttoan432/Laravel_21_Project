@@ -12,7 +12,7 @@
                     <div class="heading-banner">
                         <div class="breadcrumbs">
                             <ul>
-                                <li><a href="index.html">Trang chủ</a><span class="breadcome-separator">></span></li>
+                                <li><a href="{{ route('frontend.index') }}">Trang chủ</a><span class="breadcome-separator">></span></li>
                                 <li>{{ $category->name }}</li>
                             </ul>
                         </div>
