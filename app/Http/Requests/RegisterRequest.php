@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
             'email'         => 'required|email|unique:users,email',
             'phone'         => 'required|digits_between:10,11|unique:users,phone|regex:/(0)[0-9]{9}/',
             'address'       => 'required|min:5|max:100',
-            'password'      => 'required|min:8|max:32|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            'password'      => 'required|min:8|max:32|confirmed'
         ];
     }
 
@@ -56,7 +56,6 @@ class RegisterRequest extends FormRequest
             'password.min'          => ':attribute phải lớn hơn :min ký tự',
             'password.max'          => ':attribute phải nhỏ hơn :max ký tự',
             'password.confirmed'    => ':attribute không trùng khớp',
-            'password.regex'        => ':attribute phải chứa ký tự thường, ký tự in hoa, số và ký tự đặc biệt',
         ];
     }
 
