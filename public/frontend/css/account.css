@@ -2,7 +2,10 @@
 	height: 45px;
 }
 .account{
-	margin-bottom: 20px; 
+	margin-bottom: 20px;
+}
+.account:before {
+    content: '';
 }
 .account_left>.text_left{
 	padding-top: 10px;
@@ -35,7 +38,7 @@
 @media only screen and (min-width: 576px) and (max-width: 767px){
 	.account{
 		margin: 0 auto;
-		margin-bottom: 20px; 
+		margin-bottom: 20px;
 		width: 450px;
 	}
 }
