@@ -8,7 +8,7 @@ use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Warehousecontroller extends Controller
+class WarehouseController extends Controller
 {
     public function index(Request $request){
         $keyW = '';
