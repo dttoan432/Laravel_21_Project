@@ -23,7 +23,6 @@ class WarehouseController extends Controller
         }
 
         $warehouses = $warehouses->groupBy('product_id')
-            ->orderBy('created_at', 'DESC')
             ->paginate(20, ['product_id']);
         return view('backend.warehouses.index')->with([
             'warehouses'    => $warehouses,

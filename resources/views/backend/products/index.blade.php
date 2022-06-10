@@ -91,7 +91,7 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td><a href="{{ route('frontend.product.show', $product->slug) }}">{{ $product->name }}</a></td>
+                                    <td><a href="{{ route('frontend.product.show', $product->slug) }}" target="_blank">{{ $product->name }}</a></td>
                                     @if($product->trademark !== null)
                                         <td>{{ $product->trademark->name }}</td>
                                     @else
@@ -116,7 +116,7 @@
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm juss"
-                                           href="{{ route('frontend.product.show', $product->slug) }}">
+                                           href="{{ route('frontend.product.show', $product->slug) }}" target="_blank">
                                             <i class="fas fa-street-view"></i> Xem
                                         </a>
                                         <a class="btn btn-info btn-sm juss {{ (\Illuminate\Support\Facades\Auth::user()->role == 0 || \Illuminate\Support\Facades\Auth::user()->id == $product->user_id) ? '' : 'disabled'}}"

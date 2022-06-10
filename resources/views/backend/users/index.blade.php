@@ -113,11 +113,11 @@
                                    style="margin-right: 10px;">
                                     <i class="fas fa-file-export"></i> Export Excel
                                 </a>
-                                <form action="{{ route('backend.user.import') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+                                {{--<form action="{{ route('backend.user.import') }}" method="POST" enctype="multipart/form-data" class="d-flex">
                                     @csrf
                                     <input class="form-control form-control-sm" id="formFileSm" type="file" name="file" accept=".xlsx" required>
                                     <button type="submit" class="btn btn-sm btn-info">Import</button>
-                                </form>
+                                </form>--}}
                             </div>
                         </div>
                         <div class="col-12 col-md-6">

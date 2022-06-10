@@ -197,15 +197,15 @@
                                 </a>
                             </li>
 
-                            @can('viewAny', \App\Models\User::class)
-                                <li class="nav-header">THỐNG KÊ</li>
-                                <li class="nav-item">
-                                    <a href="{{ route('backend.statistic.index') }}" class="nav-link {{ ($prefix == 'admin/statistic') ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-chart-pie"></i>
-                                        <p>Thống kê</p>
-                                    </a>
-                                </li>
-                            @endcan
+{{--                            @can('viewAny', \App\Models\User::class)--}}
+{{--                                <li class="nav-header">THỐNG KÊ</li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{ route('backend.statistic.index') }}" class="nav-link {{ ($prefix == 'admin/statistic') ? 'active' : '' }}">--}}
+{{--                                        <i class="nav-icon fas fa-chart-pie"></i>--}}
+{{--                                        <p>Thống kê</p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endcan--}}
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
