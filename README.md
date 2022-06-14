@@ -29,13 +29,15 @@ MAIL_FROM_NAME=null
 
 3. Run
 ```
-$ composer install
+$ composer install (để chạy lệnh này, máy tính cần phải cài composer)
 $ php artisan key:generate
 $ php artisan storage:link
 $ php artisan migrate   (chỉ chạy khi dùng database mới)
 $ php artisan db:seed --class=DatabaseSeeder    (chỉ chạy khi dùng database mới)
 $ php artisan route:clear
 $ php artisan config:clear
+
+Copy folder "images" (public/images), paste the copied folder into "storage/app/public"
 ```
 
 4. Local development server
@@ -43,7 +45,7 @@ $ php artisan config:clear
 ```
 $ php artisan serve
 ```
-5. Login with default admin acount:
+5. Login with default admin account:
 ```
 email: admin@gmail.com
 password: admin
