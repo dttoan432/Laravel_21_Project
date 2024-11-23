@@ -376,7 +376,7 @@ Version: 1.0;
 	padding: 20px 20px;
 }
 .main-menu > li:first-child > a{
-    padding-left: 0;
+    /*padding-left: 0;*/
 }
 .main-menu > li.active > a,.main-menu > li:hover > a{
     color: #EB3E32;

@@ -17,7 +17,13 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Điện thoại', 'Laptop', 'Tablet', 'Phụ kiện', 'Đồng hồ'
+            'Đặc sản núi rừng',
+            'Đặc sản sông biển',
+            'Nông sản',
+            'Ngũ cốc dinh dưỡng',
+            'Hải sản Bạch Long Vĩ',
+            'Đặc sản bánh kẹo',
+            'Thảo dược quý',
         ];
         DB::table('categories')->truncate();
         foreach ($categories as $category) {

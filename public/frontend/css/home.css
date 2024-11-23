@@ -53,3 +53,7 @@ a.button.add-btn, a.button.add-btn.big {
 /*        margin-bottom: 20px;*/
 /*    }*/
 /*}*/
+
+.nivo-main-image {
+    max-height: 505px;
+}

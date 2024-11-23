@@ -15,9 +15,9 @@
                                     <!--Footer Content Start-->
                                     <div class="footer-content">
                                         <div class="contact">
-                                            <p><label>Địa chỉ:</label>Đông Anh - Hà Nội</p>
+                                            <p><label>Địa chỉ:</label>Hà Nội</p>
                                             <p><label>Liên hệ:</label><a href="tel:0381452749"></a>0381452749</p>
-                                            <p><label>Email:</label><a href="mailto:dttoan432@gmail.com">dttoan432@gmail.com</a></p>
+                                            <p><label>Email:</label><a href="mailto:dttoan432@gmail.com">dacsan@gmail.com</a></p>
                                         </div>
                                     </div>
                                     <!--Footer Content End-->
@@ -65,10 +65,10 @@
                                         <h3>Theo dõi</h3>
                                     </div>
                                     <ul class="socil-icon mb-40">
-                                        <li><a href="https://www.facebook.com/profile.php?id=100008143235135" data-toggle="tooltip" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
-                                        <li><a href="https://join.skype.com/invite/xRV5x1lvjcmO" data-toggle="tooltip" title="Skype" target="_blank"><i class="ion-social-skype"></i></a></li>
-                                        <li><a href="https://www.youtube.com/channel/UCMNzoYfwf3S-8ISBPmT-dYQ" data-toggle="tooltip" title="Youtube" target="_blank"><i class="ion-social-youtube"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/dttoan432" data-toggle="tooltip" title="Pinterest" target="_blank"><i class="ion-social-pinterest"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" title="Skype" target="_blank"><i class="ion-social-skype"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" title="Youtube" target="_blank"><i class="ion-social-youtube"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" title="Pinterest" target="_blank"><i class="ion-social-pinterest"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -82,7 +82,8 @@
                             <!--Footer Left Content Start-->
                             <div class="col-lg-6 col-md-6">
                                 <div class="copyright-text">
-                                    <p>Copyright © <a href="https://www.facebook.com/profile.php?id=100008143235135" target="_blank">TienToan</a>, All Rights Reserved.</p>
+{{--                                    <p>Copyright © <a href="https://www.facebook.com/profile.php?id=100008143235135" target="_blank">TienToan</a>, All Rights Reserved.</p>--}}
+                                    <p>All Rights Reserved.</p>
                                 </div>
                             </div>
                             <!--Footer Left Content End-->

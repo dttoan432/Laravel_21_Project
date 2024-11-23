@@ -106,32 +106,47 @@
 	<!--Main Js-->
 {{--	<script src="/frontend/js/main.js"></script>--}}
 	<script src="/frontend/js/mean.js"></script>
-
-    <!-- Messenger Plugin chat Code -->
-    <div id="fb-root"></div>
-
-    <!-- Your Plugin chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
     <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "108402824832712");
-        chatbox.setAttribute("attribution", "biz_inbox");
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml            : true,
-                version          : 'v11.0'
-            });
-        };
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        !function (w, d, s, ...args) {
+            var div = d.createElement('div');
+            div.id = 'aichatbot';
+            d.body.appendChild(div);
+            w.chatbotConfig = args;
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s);
+            j.defer = true;
+            j.type = 'module';
+            j.src = 'https://aichatbot.sendbird.com/index.js';
+            f.parentNode.insertBefore(j, f);
+        }(window, document, 'script', '0476BB3A-5D11-4DEF-B76A-5F6622EB60A1', 'Qo8Itv3wwl4k2V8bI4rUk', {
+            apiHost: 'https://api-cf-ap-5.sendbird.com',
+        });
     </script>
+
+<!-- Messenger Plugin chat Code -->
+{{--    <div id="fb-root"></div>--}}
+
+<!-- Your Plugin chat code -->
+{{--    <div id="fb-customer-chat" class="fb-customerchat"></div>--}}
+
+{{--    <script>--}}
+{{--        var chatbox = document.getElementById('fb-customer-chat');--}}
+{{--        chatbox.setAttribute("page_id", "108402824832712");--}}
+{{--        chatbox.setAttribute("attribution", "biz_inbox");--}}
+{{--        window.fbAsyncInit = function() {--}}
+{{--            FB.init({--}}
+{{--                xfbml            : true,--}}
+{{--                version          : 'v11.0'--}}
+{{--            });--}}
+{{--        };--}}
+
+{{--        (function(d, s, id) {--}}
+{{--            var js, fjs = d.getElementsByTagName(s)[0];--}}
+{{--            if (d.getElementById(id)) return;--}}
+{{--            js = d.createElement(s); js.id = id;--}}
+{{--            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';--}}
+{{--            fjs.parentNode.insertBefore(js, fjs);--}}
+{{--        }(document, 'script', 'facebook-jssdk'));--}}
+{{--    </script>--}}
 </body>
 </html>

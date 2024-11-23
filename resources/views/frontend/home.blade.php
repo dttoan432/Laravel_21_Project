@@ -13,68 +13,68 @@
         <div class="container">
             <div class="row">
                 <!--Slider Start-->
-                <div class="col-lg-9 col-md-9">
+                <div class="col-lg-12 col-md-12">
                     <div class="slider-wrapper theme-default">
                         <!--Slider Background Image Start-->
                         <div id="slider" class="nivoSlider">
-                            <img src="frontend/images/1_4.jpg" alt title="#htmlcaption" class="img-fluid">
-                            <img src="frontend/images/2_1.jpg" alt title="#htmlcaption2" class="img-fluid">
+                            <img src="frontend/images/bg-slide.png" alt title="#htmlcaption" class="img-fluid">
+{{--                            <img src="frontend/images/2_1.jpg" alt title="#htmlcaption2" class="img-fluid">--}}
                         </div>
                         <!--Slider Background Image End-->
                         <!--1st Slider Caption Start-->
                         <div id="htmlcaption" class="nivo-html-caption">
                             <div class="slider-caption">
                                 <div class="slider-text">
-                                    <h5 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                                        Xu hướng công nghệ </h5>
-                                    <h1 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                                        VR<br></h1>
-                                    <h4 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                        Chỉ từ <span>400.000 ₫</span></h4>
-                                    <div class="slider-button">
-                                        <a href="{{ route('frontend.category', 'kinh-thuc-te-ao') }}"
-                                           class="wow button animated fadeInLeft" data-text="Shop now"
-                                           data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>
-                                    </div>
+{{--                                    <h5 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">--}}
+{{--                                        Xu hướng công nghệ </h5>--}}
+{{--                                    <h1 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">--}}
+{{--                                        VR<br></h1>--}}
+{{--                                    <h4 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">--}}
+{{--                                        Chỉ từ <span>400.000 ₫</span></h4>--}}
+{{--                                    <div class="slider-button">--}}
+{{--                                        <a href="{{ route('frontend.category', 'kinh-thuc-te-ao') }}"--}}
+{{--                                           class="wow button animated fadeInLeft" data-text="Shop now"--}}
+{{--                                           data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
                         <!--1st Slider Caption End-->
                         <!--2nd Slider Caption Start-->
-                        <div id="htmlcaption2" class="nivo-html-caption">
-                            <div class="slider-caption">
-                                <div class="slider-text">
-                                    <h5 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                        Giảm giá sốc 40% </h5>
-                                    <h1 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                                        Gone <br>X7/X7 edge 2018</h1>
-                                    <h4 class="wow animated fadeInLeft" data-wow-duration="2s" data-wow-delay="0.5s">
-                                        Khởi điểm <span>400.000 ₫</span></h4>
-                                    <div class="slider-button">
-                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"
-                                           class="wow button animated fadeInLeft" data-text="Shop now"
-                                           data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div id="htmlcaption2" class="nivo-html-caption">--}}
+{{--                            <div class="slider-caption">--}}
+{{--                                <div class="slider-text">--}}
+{{--                                    <h5 class="wow animated fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">--}}
+{{--                                        Giảm giá sốc 40% </h5>--}}
+{{--                                    <h1 class="wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">--}}
+{{--                                        Gone <br>X7/X7 edge 2018</h1>--}}
+{{--                                    <h4 class="wow animated fadeInLeft" data-wow-duration="2s" data-wow-delay="0.5s">--}}
+{{--                                        Khởi điểm <span>400.000 ₫</span></h4>--}}
+{{--                                    <div class="slider-button">--}}
+{{--                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"--}}
+{{--                                           class="wow button animated fadeInLeft" data-text="Shop now"--}}
+{{--                                           data-wow-duration="2.5s" data-wow-delay="0.5s">Mua ngay</a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <!--2nd Slider Caption End-->
                     </div>
                 </div>
                 <!--Slider End-->
                 <!--Offer Image Start-->
-                <div class="col-lg-3 col-md-3">
-                    <div class="single-offer mb-20">
-                        <div class="offer-img img-full">
-                            <a href="{{ route('frontend.category', 'tay-cam-choi-game') }}"><img src="frontend/images/1_6.jpg" alt></a>
-                        </div>
-                    </div>
-                    <div class="offer">
-                        <div class="offer-img2 img-full">
-                            <a href="#"><img src="frontend/images/2.jpg" alt></a>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-lg-3 col-md-3">--}}
+{{--                    <div class="single-offer mb-20">--}}
+{{--                        <div class="offer-img img-full">--}}
+{{--                            <a href="{{ route('frontend.category', 'tay-cam-choi-game') }}"><img src="frontend/images/1_6.jpg" alt></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="offer">--}}
+{{--                        <div class="offer-img2 img-full">--}}
+{{--                            <a href="#"><img src="frontend/images/2.jpg" alt></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <!--Offer Image End-->
             </div>
         </div>
@@ -140,7 +140,7 @@
                                 <!--Section Title1 Start-->
                                 <div class="section-title1-border">
                                     <div class="section-title1">
-                                        <h3>Điện thoại</h3>
+                                        <h3>Đặc sản núi rừng</h3>
                                     </div>
                                 </div>
                                 <!--Section Title1 End-->
@@ -185,27 +185,27 @@
                         </div>
                         <!--Product Tab End-->
                         <!--Offer Image Start-->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="single-offer">
-                                    <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img
-                                                src="frontend/images/3_2.jpg" alt></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-12">--}}
+{{--                                <div class="single-offer">--}}
+{{--                                    <div class="offer-img img-full">--}}
+{{--                                        <a href="{{ route('frontend.category', 'dac-san-nui-rung') }}"><img--}}
+{{--                                                src="frontend/images/3_2.jpg" alt></a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <!--Offer Image End-->
                     </div>
                     <!--Desktop & Television Product End-->
                     <!--Smartphone & Tablet Product Start-->
-                    <div class="smartphone-tablet-product product_res pt-100">
+                    <div class="smartphone-tablet-product product_res">
                         <div class="row">
                             <div class="col-lg-12">
                                 <!--Section Title1 Start-->
                                 <div class="section-title1-border">
                                     <div class="section-title1">
-                                        <h3>Laptop</h3>
+                                        <h3>Đặc sản sông biển</h3>
                                     </div>
                                 </div>
                                 <!--Section Title1 End-->
@@ -250,27 +250,27 @@
                         </div>
                         <!--Product Tab End-->
                         <!--Offer Image Start-->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="single-offer">
-                                    <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'dien-thoai') }}"><img
-                                                src="frontend/images/4_1.jpg" alt></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-12">--}}
+{{--                                <div class="single-offer">--}}
+{{--                                    <div class="offer-img img-full">--}}
+{{--                                        <a href="{{ route('frontend.category', 'dac-san-nui-rung') }}"><img--}}
+{{--                                                src="frontend/images/4_1.jpg" alt></a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <!--Offer Image End-->
                     </div>
                     <!--Smartphone & Tablet Product End-->
                     <!--Electronics Product Start-->
-                    <div class="electronics-product product_res pt-100">
+                    <div class="electronics-product product_res">
                         <div class="row">
                             <div class="col-lg-12">
                                 <!--Section Title1 Start-->
                                 <div class="section-title1-border">
                                     <div class="section-title1">
-                                        <h3>Tablet</h3>
+                                        <h3>Nông sản</h3>
                                     </div>
                                 </div>
                                 <!--Section Title1 End-->
@@ -315,27 +315,27 @@
                         </div>
                         <!--Product Tab End-->
                         <!--Offer Image Start-->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="single-offer">
-                                    <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'tablet') }}"><img
-                                                src="frontend/images/5_1.jpg" alt></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-12">--}}
+{{--                                <div class="single-offer">--}}
+{{--                                    <div class="offer-img img-full">--}}
+{{--                                        <a href="{{ route('frontend.category', 'tablet') }}"><img--}}
+{{--                                                src="frontend/images/5_1.jpg" alt></a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <!--Offer Image End-->
                     </div>
                     <!--Electronics Product End-->
                     <!--Bestseller Product Start-->
-                    <div class="bestseller-product product_res pt-100 pb-85">
+                    <div class="bestseller-product product_res pb-85">
                         <div class="row">
                             <div class="col-lg-12">
                                 <!--Section Title1 Start-->
                                 <div class="section-title1-border">
                                     <div class="section-title1">
-                                        <h3>Đồng hồ thông minh</h3>
+                                        <h3>Ngũ cốc dinh dưỡng</h3>
                                     </div>
                                 </div>
                             </div>
@@ -429,59 +429,59 @@
                             </div>
                         </div>
                     </div>
-                    <div class="offer-img-area pb-50">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="single-offer mb-20">
-                                    <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'tablet') }}"><img
-                                                src="frontend/images/8_1.jpg" alt></a>
-                                    </div>
-                                </div>
-                                <div class="single-offer mb-20">
-                                    <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'dong-ho') }}"><img
-                                                src="frontend/images/9_1.jpg" alt></a>
-                                    </div>
-                                </div>
-                                <div class="single-offer">
-                                    <div class="offer-img img-full">
-                                        <a href="{{ route('frontend.category', 'tai-nghe') }}"><img
-                                                src="frontend/images/10.jpg" alt></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="offer-img-area pb-50">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-12">--}}
+{{--                                <div class="single-offer mb-20">--}}
+{{--                                    <div class="offer-img img-full">--}}
+{{--                                        <a href="{{ route('frontend.category', 'tablet') }}"><img--}}
+{{--                                                src="frontend/images/8_1.jpg" alt></a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="single-offer mb-20">--}}
+{{--                                    <div class="offer-img img-full">--}}
+{{--                                        <a href="{{ route('frontend.category', 'dong-ho') }}"><img--}}
+{{--                                                src="frontend/images/9_1.jpg" alt></a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="single-offer">--}}
+{{--                                    <div class="offer-img img-full">--}}
+{{--                                        <a href="{{ route('frontend.category', 'tai-nghe') }}"><img--}}
+{{--                                                src="frontend/images/10.jpg" alt></a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
     </section>
     <!--All Product Area End-->
     <!--Offer Image Area Start-->
-    <div class="offer-img-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-offer">
-                        <div class="offer-img img-full">
-                            <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/6_1.jpg"
-                                                                                        alt></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="single-offer">
-                        <div class="offer-img img-full">
-                            <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/7_1.jpg"
-                                                                                          alt></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <section class="all-slide-product product_res pt-100 white-bg">
+{{--    <div class="offer-img-area">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-6 col-md-6">--}}
+{{--                    <div class="single-offer">--}}
+{{--                        <div class="offer-img img-full">--}}
+{{--                            <a href="{{ route('frontend.category', 'tai-nghe') }}"><img src="frontend/images/6_1.jpg"--}}
+{{--                                                                                        alt></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-6 col-md-6">--}}
+{{--                    <div class="single-offer">--}}
+{{--                        <div class="offer-img img-full">--}}
+{{--                            <a href="{{ route('frontend.category', 'dien-thoai') }}"><img src="frontend/images/7_1.jpg"--}}
+{{--                                                                                          alt></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <section class="all-slide-product product_res">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4">
@@ -489,7 +489,7 @@
                         <div class="col-lg-12">
                             <!--Section Title2 Start-->
                             <div class="section-title2">
-                                <h3>Pin dự phòng</h3>
+                                <h3>Hải sản Bạch Long Vĩ</h3>
                             </div>
                             <!--Section Title2 End-->
                         </div>
@@ -537,7 +537,7 @@
                         <div class="col-lg-12">
                             <!--Section Title2 Start-->
                             <div class="section-title2">
-                                <h3>Cáp sạc</h3>
+                                <h3>Đặc sản bánh kẹo</h3>
                             </div>
                             <!--Section Title2 End-->
                         </div>
@@ -585,7 +585,7 @@
                         <div class="col-lg-12">
                             <!--Section Title2 Start-->
                             <div class="section-title2">
-                                <h3>Loa Bluetooth</h3>
+                                <h3>Thảo dược quý</h3>
                             </div>
                             <!--Section Title2 End-->
                         </div>
