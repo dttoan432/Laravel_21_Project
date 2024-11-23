@@ -84,7 +84,7 @@
                             <div class="discription-tab-menu">
                                 <ul class="nav">
                                     <li><a class="active" data-toggle="tab" href="#description">Mô tả sản phẩm</a></li>
-                                    <li><a data-toggle="tab" href="#specifications">Thông số kỹ thuật</a></li>
+{{--                                    <li><a data-toggle="tab" href="#specifications">Thông số kỹ thuật</a></li>--}}
                                 </ul>
                             </div>
                             <!--Discription Tab Menu End-->

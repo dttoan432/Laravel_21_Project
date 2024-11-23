@@ -120,7 +120,7 @@
                     <div class="col-lg-12">
                         <!--Logo Sticky Start-->
                         <div class="logo-sticky">
-                            <a href="{{ route('frontend.index') }}"><img src="frontend/images/logo.png" alt=""></a>
+{{--                            <a href="{{ route('frontend.index') }}"><img src="frontend/images/logo.png" alt=""></a>--}}
                         </div>
                         <!--Logo Sticky End-->
                         <!--Main Menu Area Start-->

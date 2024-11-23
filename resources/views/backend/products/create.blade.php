@@ -129,11 +129,10 @@
                                 </select>
                             </div>
 
-                            <div id="clone">
-                                <label for="">Thông số kỹ thuật</label>
-
-                            </div>
-                            <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
+{{--                            <div id="clone">--}}
+{{--                                <label for="">Thông số kỹ thuật</label>--}}
+{{--                            </div>--}}
+{{--                            <span id="tes" class="btn btn-sm btn-warning">Thêm</span>--}}
                         </div>
                         <!-- /.card-body -->
 

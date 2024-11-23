@@ -157,38 +157,38 @@
                                 </select>
                             </div>
 
-                            <div id="clone">
-                                <label for="">Thông số kỹ thuật</label>
-                                @if(!empty($product->content_more_json))
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach($product->content_more_json as $key => $value)
-                                        @php
-                                            $i++;
-                                        @endphp
-                                        <div class="row" id="row{{ $i }}">
-                                            <div class="col-4 col-lg-2">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="" name="key[]"
-                                                           value="{{ $key }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-8 col-lg-10">
-                                                <div class="form-group" style="position: relative;">
-                                                    <input type="text" class="form-control" id="" name="val[]"
-                                                           value="{{ $value }}">
-                                                    <span
-                                                        class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center"
-                                                        id="{{ $i }}"
-                                                        style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <span id="tes" class="btn btn-sm btn-warning">Thêm</span>
+{{--                            <div id="clone">--}}
+{{--                                <label for="">Thông số kỹ thuật</label>--}}
+{{--                                @if(!empty($product->content_more_json))--}}
+{{--                                    @php--}}
+{{--                                        $i = 0;--}}
+{{--                                    @endphp--}}
+{{--                                    @foreach($product->content_more_json as $key => $value)--}}
+{{--                                        @php--}}
+{{--                                            $i++;--}}
+{{--                                        @endphp--}}
+{{--                                        <div class="row" id="row{{ $i }}">--}}
+{{--                                            <div class="col-4 col-lg-2">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <input type="text" class="form-control" id="" name="key[]"--}}
+{{--                                                           value="{{ $key }}">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-8 col-lg-10">--}}
+{{--                                                <div class="form-group" style="position: relative;">--}}
+{{--                                                    <input type="text" class="form-control" id="" name="val[]"--}}
+{{--                                                           value="{{ $value }}">--}}
+{{--                                                    <span--}}
+{{--                                                        class="btn btn-sm btn-danger closee d-flex align-items-center justify-content-center"--}}
+{{--                                                        id="{{ $i }}"--}}
+{{--                                                        style="position: absolute; right: 0; top: 0; height: 100%; cursor: pointer;">Close</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endforeach--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                            <span id="tes" class="btn btn-sm btn-warning">Thêm</span>--}}
                         </div>
                         <!-- /.card-body -->
 

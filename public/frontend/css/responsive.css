@@ -6,8 +6,8 @@
 .main-menu li:last-child ul.dropdown {
 	left: auto;
     right: 0;
-}  
-    
+}
+
 }
 /* Normal desktop :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -108,7 +108,7 @@
 }
 .home-6 .slider-text > h4 > span {
 	font-size: 26px;
-}   
+}
 /*about page css*/
 .all-progressbar {
 	padding-left: 100px;
@@ -141,7 +141,7 @@
 }
 /*blog page css*/
 .entry-summary > p{
-    font-size: 12px; 
+    font-size: 12px;
     margin-bottom: 15px;
 }
 .sidebar-menu > li, .recent-menu > li, .archive-menu > li, .product-categories > li {
@@ -189,8 +189,8 @@
 }
 .review-comment > h2 {
 	font-size: 16px;
-}    
-} 
+}
+}
 /* Tablet desktop :768px. */
 @media (min-width: 768px) and (max-width: 991px) {
 
@@ -206,7 +206,7 @@
 }
 .search-box-area {
 	margin: 35px 0px 35px 0px;
-}  
+}
 .mini-cart-area {
 	margin-left: 20px;
 }
@@ -231,7 +231,7 @@
 }
 .main-menu > li > a,.mega-menu > li > ul > li > a {
 	font-size: 10px;
-} 
+}
 .mega-menu > li > ul > li > a {
 	line-height: 18px;
 }
@@ -307,7 +307,7 @@ a.button.add-btn.big {
 }
 .single-footer,.copyright-text,.payment-img.text-right {
 	text-align: left;
-} 
+}
 .footer-info > li > a {
 	line-height: 22px;
 }
@@ -348,7 +348,7 @@ a.button.add-btn.big {
 }
 .home-2 .blog-post-date {
 	float: none !important;
-	text-align: ;
+	/*text-align: ;*/
 	display: block;
 }
 .home-2 .our-blog {
@@ -414,7 +414,7 @@ a.button.add-btn.big {
 	font-size: 10px;
 	margin-bottom: 5px;
 	line-height: 16px;
-} 
+}
 .home-3 .single-count,.home-7 .single-count {
 	width: 40px;
 	height: 60px;
@@ -459,7 +459,7 @@ a.button.add-btn.big {
 }
 .counter-up-area .col-3 {
 	width: 50%;
-} 
+}
 .all-progressbar {
 	padding-left: 25px;
 	padding-right: 25px;
@@ -474,12 +474,12 @@ a.button.add-btn.big {
 .service-title > h4 {
 	font-size: 12px;
 	margin-bottom: 10px;
-}   
+}
 .unlimited-ideas-content {
 	padding-top: 30px;
     padding-left: 15px;
     padding-right: 15px;
-}  
+}
 .unlimited-ideas-description > p {
 	font-size: 12px;
 }
@@ -489,7 +489,7 @@ a.button.add-btn.big {
 /*frequently-questions page css*/
 .frequently-title > h4 {
 	font-size: 16px;
-}  
+}
 .frequently-title > p {
 	font-size: 12px;
 }
@@ -526,7 +526,7 @@ a.button.add-btn.big {
 /*shopping cart page css*/
 .shopping-cart-table table tr td,.wishlist-btn.shopping-btn,.update-btn,.shopping-cart-total > h2,.shop-table tr td,.shop-table tr td span,.proceed-to-checkout {
 	font-size: 12px;
-} 
+}
 /*contact page css*/
 .contact-form-title > h2,.your-order-title > h3,.checkout-title > h3  {
 	font-size: 18px;
@@ -537,7 +537,7 @@ a.button.add-btn.big {
 }
 /*blog page css*/
 .entry-summary > p{
-    font-size: 12px; 
+    font-size: 12px;
     margin-bottom: 15px;
 }
 .sidebar-menu > li, .recent-menu > li, .archive-menu > li, .product-categories > li {
@@ -554,7 +554,7 @@ a.button.add-btn.big {
 	margin: 25px 0 25px 0;
 }
 .relatedthumb:last-child{
-    margin-bottom: 10px;        
+    margin-bottom: 10px;
 }
 /*shop page css*/
 .item-col2 a.button.add-btn {
@@ -585,7 +585,7 @@ a.button.add-btn.big {
 }
 .review-comment > h2 {
 	font-size: 16px;
-}    
+}
 /*404 Error page css*/
 .search-form-wrapper > h1 {
 	font-size: 100px;
@@ -599,7 +599,7 @@ a.button.add-btn.big {
 }
 .form-input,.form-input > input {
 	width: 300px;
-}  
+}
 
 
 .category-menu-list > ul > li.right-menu > a:after {
@@ -672,7 +672,7 @@ li.right-menu .cat-mega-menu > li {
 	position: relative;
 }
 .cat-mega-menu > li.cat-mega-title > a:after{
-	display: none;        
+	display: none;
 }
 .cat-mega-menu > li.cat-mega-title > a,
 .cat-mega-menu > li > ul > li > a,
@@ -691,13 +691,13 @@ li.right-menu .cat-mega-menu > li {
 .cat-mega-menu > li.cat-mega-title:last-child > a,
 .cat-mega-menu > li > ul > li:last-child > a,
 .cat-dropdown > li:last-child > a{
-	border-bottom: 0;        
+	border-bottom: 0;
 }
 
 
 }
 
- 
+
 /* small mobile :320px. */
 @media (max-width: 767px) {
 
@@ -771,7 +771,7 @@ li.right-menu .cat-mega-menu > li {
 		position: relative;
 	}
 	.cat-mega-menu > li.cat-mega-title > a:after{
-		display: none;        
+		display: none;
 	}
 	.cat-mega-menu > li.cat-mega-title > a,
 	.cat-mega-menu > li > ul > li > a,
@@ -790,7 +790,7 @@ li.right-menu .cat-mega-menu > li {
 	.cat-mega-menu > li.cat-mega-title:last-child > a,
 	.cat-mega-menu > li > ul > li:last-child > a,
 	.cat-dropdown > li:last-child > a{
-		border-bottom: 0;        
+		border-bottom: 0;
 	}
 
 
@@ -828,7 +828,7 @@ li.right-menu .cat-mega-menu > li {
 	padding: 20px 0;
 }
 .search-box-area{
-    margin: 0;        
+    margin: 0;
 }
 .select-area,.main-menu-area,.header-sticky.sticky,.single-about::after,.single-categories::after {
 	display: none;
@@ -864,7 +864,7 @@ li.right-menu .cat-mega-menu > li {
     font-size: 12px;
 }
 .slider-text {
-	top: -15px; 
+	top: -15px;
 }
 .slider-text > h5 {
 	font-size: 8px;
@@ -892,10 +892,10 @@ a.button {
 	bottom: -8px;
 }
 .home-3 .slider-text > h5,.home-7 .slider-text > h5{
-     display: none;   
+     display: none;
 }
 .home-3 .slider-text,.home-7 .slider-text{
-   top: 0;     
+   top: 0;
 }
 .home-3 .nivo-controlNav,.home-7 .nivo-controlNav{
     bottom: 0;
@@ -972,7 +972,7 @@ a.button {
 	text-align: left;
 }
 .footer-info > li > a{
-    line-height: 20px;    
+    line-height: 20px;
 }
 .footer-title {
 	margin-bottom: 20px;
@@ -1037,10 +1037,10 @@ a.button {
 	border-top: 0;
 }
 .home-3 .slider-text > h5{
-     display: none;   
+     display: none;
 }
 .home-3 .slider-text{
-   top: 0;     
+   top: 0;
 }
 .home-3 .nivo-controlNav{
     bottom: 0;
@@ -1170,7 +1170,7 @@ a.button {
 }
 .counter-up-area .col-3 {
 	width: 100%;
-} 
+}
 .all-progressbar {
 	padding-left: 30px;
 	padding-right: 30px;
@@ -1208,14 +1208,14 @@ a.button {
 .unlimited-ideas-description {
 	margin: 30px 0;
 }
-/*frequently-questions page css*/  
+/*frequently-questions page css*/
 .frequently-title > h4 {
 	font-size: 14px;
 }
 .frequently-title > p {
 	font-size: 12px;
 	line-height: 20px;
-}  
+}
 .card-title {
 	font-size: 14px;
 }
@@ -1225,7 +1225,7 @@ a.button {
 /*protfolio page css*/
 .protfolio-menu > ul > li {
 	padding: 0 16px;
-} 
+}
 /*contact page css*/
 .first-name, .last-name, .email, .subject, .billing_phone {
 	width: 100%;
@@ -1256,7 +1256,7 @@ a.button {
 }
 .form-button, .readmore-button, .price-button, .compare-btn {
 	font-size: 12px;
-}    
+}
 /*wishlist page css*/
 .wishlist-table table thead th, .wishlist-table table tbody tr td,.wishlist-table table tbody tr td.product-remove {
 	width: 100%;
@@ -1292,7 +1292,7 @@ a.button {
     float: none;
 }
 .form-fild.company-name, .form-fild.country, .form-fild.billing_address_1, .form-fild.billing_address_2, .form-fild.billing_postcode, .form-fild.billing_city{
-    margin: 0 0 20px;    
+    margin: 0 0 20px;
 }
 .coupon .wishlist-btn.shopping-btn {
 	padding: 0 15px;
@@ -1382,7 +1382,7 @@ a.button {
 	line-height: 16px;
 }
 .contact-form p,.comment-form-comment label,.comment-input label {
-    font-size: 12px;        
+    font-size: 12px;
 }
 .comment-form-author, .comment-form-email, .comment-form-url {
 	float: none;
@@ -1407,7 +1407,7 @@ a.button {
 }
 .review-comment > h2 {
 	font-size: 16px;
-} 
+}
 .product-nav > a {
 	margin-right: 2px;
 }
@@ -1420,7 +1420,7 @@ a.button {
 }
 .product-comment-content p span {
 	font-size: 10px;
-}   
+}
 /*404 Error page css*/
 .search-form-wrapper > h1 {
 	font-size: 100px;
@@ -1442,7 +1442,7 @@ a.button {
 #scrollUp {
 	bottom: 30px !important;
 }
-} 
+}
 /* Large Mobile :480px. */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 .container {width:450px}
@@ -1506,10 +1506,10 @@ a.button {
 	line-height: 18px;
 }
 .home-7 .slider-text > h4{
-    font-size: 8px;        
+    font-size: 8px;
 }
 .news-latter-area {
 	padding: 40px 30px;
 }
 }
- 
+
